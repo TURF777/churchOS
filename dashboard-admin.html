@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Church Administrator Dashboard — Full system control for managing members, services, giving, user accounts, and church configuration.">
+  <title>Admin Dashboard — ChurchOS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body data-comm-role="admin">
+
+  <div class="dashboard">
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__header">
+        <a href="index.html" class="sidebar__logo">
+          <div class="sidebar__logo-icon"><i data-lucide="cross"></i></div>
+          ChurchOS
+        </a>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section">Main</div>
+        <a href="#" class="sidebar__link active" data-section="overview">
+          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> Overview
+        </a>
+        <a href="#" class="sidebar__link" data-section="members">
+          <span class="sidebar__link-icon"><i data-lucide="users"></i></span> Members
+        </a>
+        <a href="#" class="sidebar__link" data-section="services">
+          <span class="sidebar__link-icon"><i data-lucide="church"></i></span> Services & Attendance
+        </a>
+        <a href="#" class="sidebar__link" data-section="giving">
+          <span class="sidebar__link-icon"><i data-lucide="credit-card"></i></span> Giving Categories
+        </a>
+
+        <div class="sidebar__section">Administration</div>
+        <a href="#" class="sidebar__link" data-section="users">
+          <span class="sidebar__link-icon"><i data-lucide="user"></i></span> User Accounts
+        </a>
+        <a href="#" class="sidebar__link" data-section="custom-fields">
+          <span class="sidebar__link-icon"><i data-lucide="wrench"></i></span> Custom Fields
+        </a>
+        <a href="#" class="sidebar__link" data-section="templates">
+          <span class="sidebar__link-icon"><i data-lucide="message-square"></i></span> Notification Templates
+        </a>
+        <a href="#" class="sidebar__link" data-section="export">
+          <span class="sidebar__link-icon"><i data-lucide="hard-drive-download"></i></span> Data Export & Backup
+        </a>
+        <a href="#" class="sidebar__link" data-section="audit">
+          <span class="sidebar__link-icon"><i data-lucide="clipboard-list"></i></span> Audit Log
+        </a>
+        <a href="#" class="sidebar__link" data-section="settings">
+          <span class="sidebar__link-icon"><i data-lucide="settings"></i></span> Church Profile
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__avatar js-user-initials">AD</div>
+          <div>
+            <div class="sidebar__user-name js-user-name">Admin</div>
+            <div class="sidebar__user-role js-user-role">Church Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebar-toggle" aria-label="Toggle sidebar"><i data-lucide="menu"></i></button>
+          <div class="topbar__greeting">
+            <h2>Welcome, <span class="js-user-name">Admin</span></h2>
+            <p class="js-church-name">Grace Assembly International</p>
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="topbar__notification" title="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="topbar__notification-badge"></span>
+          </div>
+          <a href="#" class="btn btn--ghost btn--sm js-logout">Log Out</a>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+
+        <!-- ============================================================
+             SECTION 1: OVERVIEW
+             ============================================================ -->
+        <div class="dashboard-section active" id="section-overview">
+          <div class="grid grid--4" style="margin-bottom: var(--space-2xl);">
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="users"></i></div>
+              <div>
+                <div class="stat-card__value" id="stat-members">0</div>
+                <div class="stat-card__label">Total Members</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 12% this month</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--info"><i data-lucide="user-plus"></i></div>
+              <div>
+                <div class="stat-card__value" id="stat-visitors">0</div>
+                <div class="stat-card__label">Visitors This Month</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 5 new</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--success"><i data-lucide="church"></i></div>
+              <div>
+                <div class="stat-card__value" id="stat-services">0</div>
+                <div class="stat-card__label">Services Configured</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--warning"><i data-lucide="banknote"></i></div>
+              <div>
+                <div class="stat-card__value" id="stat-giving">GH₵ 0</div>
+                <div class="stat-card__label">Monthly Giving</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 8% vs last month</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="clipboard-list"></i></div>
+              <div>
+                <div class="stat-card__value" id="stat-attendance">0</div>
+                <div class="stat-card__label">Avg. Sunday Attendance</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 3% vs last month</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--success"><i data-lucide="key-round"></i></div>
+              <div>
+                <div class="stat-card__value" id="stat-accounts">0</div>
+                <div class="stat-card__label">Active User Accounts</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Audit Mini Feed -->
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">Recent Activity</h3>
+              <button class="btn btn--ghost btn--sm" data-goto="audit">View Full Log</button>
+            </div>
+            <div class="widget__body">
+              <div class="activity-list" id="overview-audit-feed">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2: MEMBERS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-members">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Members</h2>
+              <p class="section-header__subtitle">Manage all member profiles, visitors, and departments</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-add-member">+ Add Member</button>
+          </div>
+
+          <div class="filter-bar">
+            <input type="text" class="form-input form-input--search" id="member-search" placeholder="Search by name or phone...">
+            <select class="form-select" id="member-filter-status">
+              <option value="">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Visitor">Visitor</option>
+              <option value="Deleted"><i data-lucide="trash-2"></i> Deleted / Archived</option>
+            </select>
+            <select class="form-select" id="member-filter-dept">
+              <option value="">All Departments</option>
+            </select>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table" id="members-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>Status</th>
+                      <th>Department</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="members-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3: SERVICES & ATTENDANCE
+             ============================================================ -->
+        <div class="dashboard-section" id="section-services">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Services & Attendance</h2>
+              <p class="section-header__subtitle">Configure your church services and track attendance analytics</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-add-service">+ Add Service</button>
+          </div>
+
+          <div class="info-box">
+            <span><i data-lucide="info" style="width:16px;height:16px;"></i></span>
+            <span>Editing a service's schedule only affects future sessions. Past attendance records are preserved.</span>
+          </div>
+
+          <div class="widget" style="margin-bottom: var(--space-2xl);">
+            <div class="widget__header">
+              <h3 class="widget__title">Configured Services</h3>
+            </div>
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Service Name</th>
+                      <th>Day</th>
+                      <th>Time</th>
+                      <th>Frequency</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="services-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attendance Analytics Preview -->
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">Attendance Analytics</h3>
+              <select class="form-select" id="attendance-period" style="max-width: 180px; padding: 0.4rem 0.8rem; font-size: 0.8125rem;">
+                <option value="week">This Week</option>
+                <option value="month" selected>This Month</option>
+                <option value="quarter">This Quarter</option>
+              </select>
+            </div>
+            <div class="widget__body">
+              <div class="grid grid--3">
+                <div style="text-align: center;">
+                  <div style="font-size: 2rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-navy);" id="analytics-avg">892</div>
+                  <div style="font-size: 0.875rem; color: var(--color-gray-500);">Avg. Attendance</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 2rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-success);" id="analytics-trend">+5.2%</div>
+                  <div style="font-size: 0.875rem; color: var(--color-gray-500);">Trend</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 2rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-gold-dark);" id="analytics-retention">71%</div>
+                  <div style="font-size: 0.875rem; color: var(--color-gray-500);">Retention Rate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4: GIVING CATEGORIES
+             ============================================================ -->
+        <div class="dashboard-section" id="section-giving">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Giving Categories</h2>
+              <p class="section-header__subtitle">Set up and manage tithes, offerings, and other contribution types</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-add-category">+ Add Category</button>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Category Name</th>
+                      <th>Description</th>
+                      <th>Transactions</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="categories-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 5: USER ACCOUNTS & ROLES
+             ============================================================ -->
+        <div class="dashboard-section" id="section-users">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">User Accounts & Roles</h2>
+              <p class="section-header__subtitle">Manage system access, assign roles, and control permissions</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-create-account">+ Create Account</button>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone / Email</th>
+                      <th>Role</th>
+                      <th>Department</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="users-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 6: CUSTOM FIELDS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-custom-fields">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Custom Fields</h2>
+              <p class="section-header__subtitle">Define extra fields that appear on every member profile</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-add-field">+ Add Custom Field</button>
+          </div>
+
+          <div class="info-box">
+            <span><i data-lucide="info" style="width:16px;height:16px;"></i></span>
+            <span>Newly added fields will appear as blank on existing member profiles. Members can fill them in themselves or an admin can update them.</span>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Field Name</th>
+                      <th>Data Type</th>
+                      <th>Created</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="fields-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 7: NOTIFICATION TEMPLATES & COMMUNICATIONS (Shared Module)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-templates">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Communications & Notification Templates</h2>
+              <p class="section-header__subtitle">Compose broadcasts, manage automated messages, and edit system templates</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <!-- Compose Panel -->
+            <div id="comm-compose-container"></div>
+
+            <!-- Delivery Status + Sent History -->
+            <div>
+              <div id="comm-delivery-status" style="margin-bottom: var(--space-lg);"></div>
+              <div class="widget" style="margin-bottom: var(--space-lg);">
+                <div class="widget__header">
+                  <h3 class="widget__title">Sent History</h3>
+                </div>
+                <div class="widget__body" style="max-height: 400px; overflow-y: auto;">
+                  <div id="comm-history-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Automated Messages Panel -->
+          <div class="widget" style="margin-bottom: var(--space-2xl);">
+            <div class="widget__header">
+              <h3 class="widget__title"><i data-lucide="bot" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i> Automated System Messages</h3>
+            </div>
+            <div class="widget__body" id="comm-automated-container"></div>
+          </div>
+
+          <!-- Template Customizer -->
+          <h3 style="color: var(--color-navy); margin-bottom: var(--space-md);"><i data-lucide="pencil" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i> Message Template Editor</h3>
+          <div class="info-box" style="margin-bottom: var(--space-md);">
+            <span><i data-lucide="lightbulb" style="width:16px;height:16px;"></i></span>
+            <span>Use placeholders like <code>{{first_name}}</code> and <code>{{church_name}}</code> to personalise messages. Click a variable tag below each template to insert it.</span>
+          </div>
+
+          <div id="templates-container">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 8: DATA EXPORT & BACKUP
+             ============================================================ -->
+        <div class="dashboard-section" id="section-export">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Data Export & Backup</h2>
+              <p class="section-header__subtitle">Download your church data for reporting or safekeeping</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <div class="export-card" id="export-members-card">
+              <div class="export-card__icon"><i data-lucide="file-down"></i></div>
+              <h4 class="export-card__title">Export Members</h4>
+              <p class="export-card__desc">Download a CSV file containing all member profiles, contact details, and department assignments.</p>
+              <button class="btn btn--primary btn--sm" id="btn-export-members">Export Members CSV</button>
+              <div class="progress-bar-container" id="export-progress" style="display: none;">
+                <div class="progress-bar"><div class="progress-bar__fill" id="export-fill"></div></div>
+                <div class="progress-bar__label" id="export-label">Preparing export...</div>
+              </div>
+            </div>
+            <div class="export-card" id="export-backup-card">
+              <div class="export-card__icon"><i data-lucide="hard-drive-download"></i></div>
+              <h4 class="export-card__title">Full Data Backup</h4>
+              <p class="export-card__desc">Create a complete backup of all church data including members, attendance, giving, and settings.</p>
+              <button class="btn btn--secondary btn--sm" id="btn-full-backup">Create Full Backup</button>
+              <div class="progress-bar-container" id="backup-progress" style="display: none;">
+                <div class="progress-bar"><div class="progress-bar__fill" id="backup-fill"></div></div>
+                <div class="progress-bar__label" id="backup-label">Creating backup...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shared Reporting Module Catalogue & Generator -->
+          <div id="reporting-container"></div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 9: AUDIT LOG
+             ============================================================ -->
+        <div class="dashboard-section" id="section-audit">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Activity & Audit Log</h2>
+              <p class="section-header__subtitle">Church-wide real-time record of all system actions — searchable & exportable</p>
+            </div>
+          </div>
+
+          <div id="activity-log-admin"></div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 10: CHURCH PROFILE SETTINGS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-settings">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Church Profile</h2>
+              <p class="section-header__subtitle">Update your church's public information and branding</p>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body">
+              <form id="church-profile-form">
+                <div style="margin-bottom: var(--space-xl);">
+                  <label class="form-label">Church Logo</label>
+                  <div class="logo-upload" id="logo-upload" title="Click to upload logo"><i data-lucide="camera"></i></div>
+                  <p style="font-size: 0.75rem; color: var(--color-gray-500);">Click to upload. Recommended: 200×200px, PNG or JPG.</p>
+                </div>
+
+                <div class="settings-grid">
+                  <div class="form-group">
+                    <label for="church-name" class="form-label">Church Name <span class="required">*</span></label>
+                    <input type="text" id="church-name" class="form-input" placeholder="e.g. Grace Assembly International">
+                  </div>
+                  <div class="form-group">
+                    <label for="church-denomination" class="form-label">Denomination</label>
+                    <input type="text" id="church-denomination" class="form-input" placeholder="e.g. Pentecostal, Methodist">
+                  </div>
+                  <div class="form-group">
+                    <label for="church-address" class="form-label">Address <span class="required">*</span></label>
+                    <input type="text" id="church-address" class="form-input" placeholder="e.g. 15 Liberation Road, Accra">
+                  </div>
+                  <div class="form-group">
+                    <label for="church-city" class="form-label">City / Region</label>
+                    <input type="text" id="church-city" class="form-input" placeholder="e.g. Accra, Greater Accra">
+                  </div>
+                  <div class="form-group">
+                    <label for="church-phone" class="form-label">Contact Phone</label>
+                    <input type="tel" id="church-phone" class="form-input" placeholder="e.g. 030 200 0000">
+                  </div>
+                  <div class="form-group">
+                    <label for="church-email" class="form-label">Contact Email</label>
+                    <input type="email" id="church-email" class="form-input" placeholder="e.g. info@graceassembly.org">
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top: var(--space-lg);">
+                  <label for="church-description" class="form-label">About / Welcome Message</label>
+                  <textarea id="church-description" class="form-input" rows="4" placeholder="A brief description of your church..." style="resize: vertical;"></textarea>
+                </div>
+
+                <div style="margin-top: var(--space-xl);">
+                  <button type="submit" class="btn btn--primary">Save Changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end dashboard-content -->
+    </main>
+  </div>
+
+  <!-- ================================================================
+       MODALS
+       ================================================================ -->
+
+  <!-- ADD / EDIT MEMBER MODAL -->
+  <div class="modal-overlay" id="modal-member">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modal-member-title">Add Member</h3>
+        <button class="modal__close" data-close="modal-member" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-member">
+          <input type="hidden" id="member-edit-id">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="m-name" class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" id="m-name" class="form-input" placeholder="e.g. Kwame Asante" required>
+            </div>
+            <div class="form-group">
+              <label for="m-phone" class="form-label">Phone <span class="required">*</span></label>
+              <input type="tel" id="m-phone" class="form-input" placeholder="e.g. 024 123 4567" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="m-email" class="form-label">Email</label>
+              <input type="email" id="m-email" class="form-input" placeholder="e.g. kwame@email.com">
+            </div>
+            <div class="form-group">
+              <label for="m-dob" class="form-label">Date of Birth</label>
+              <input type="date" id="m-dob" class="form-input">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="m-address" class="form-label">Address</label>
+            <input type="text" id="m-address" class="form-input" placeholder="e.g. 5 Adjei Kojo Road, Tema">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="m-department" class="form-label">Department</label>
+              <select id="m-department" class="form-select">
+                <option value="">— Select —</option>
+                <option>Ushering</option>
+                <option>Choir</option>
+                <option>Youth Ministry</option>
+                <option>Media & Tech</option>
+                <option>Women's Ministry</option>
+                <option>Men's Fellowship</option>
+                <option>Children's Church</option>
+                <option>Prayer Ministry</option>
+                <option>Evangelism</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="m-status" class="form-label">Status</label>
+              <select id="m-status" class="form-select">
+                <option>Active</option>
+                <option>Inactive</option>
+                <option>Visitor</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="m-family" class="form-label">Household / Family Link</label>
+            <input type="text" id="m-family" class="form-input" placeholder="e.g. Asante Family">
+          </div>
+          <!-- Custom fields appended here by JS -->
+          <div id="member-custom-fields"></div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-member">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-member">Save Member</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW MEMBER MODAL -->
+  <div class="modal-overlay" id="modal-view-member">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title">Member Details</h3>
+        <button class="modal__close" data-close="modal-view-member" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body" id="view-member-body">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-view-member">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD SERVICE MODAL -->
+  <div class="modal-overlay" id="modal-service">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Add Service</h3>
+        <button class="modal__close" data-close="modal-service" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-service">
+          <input type="hidden" id="service-edit-id">
+          <div class="form-group">
+            <label for="s-name" class="form-label">Service Name <span class="required">*</span></label>
+            <input type="text" id="s-name" class="form-input" placeholder="e.g. 1st Service" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="s-day" class="form-label">Day <span class="required">*</span></label>
+              <select id="s-day" class="form-select" required>
+                <option value="">— Select —</option>
+                <option>Sunday</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="s-time" class="form-label">Time <span class="required">*</span></label>
+              <input type="time" id="s-time" class="form-input" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="s-frequency" class="form-label">Frequency</label>
+            <select id="s-frequency" class="form-select">
+              <option>Weekly</option>
+              <option>Bi-weekly</option>
+              <option>Monthly</option>
+            </select>
+          </div>
+          <div class="info-box" style="margin-top: var(--space-md);">
+            <span><i data-lucide="calendar" style="width:16px;height:16px;"></i></span>
+            <span>Adding a service will automatically generate recurring session entries for attendance tracking.</span>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-service">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-service">Save Service</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD GIVING CATEGORY MODAL -->
+  <div class="modal-overlay" id="modal-category">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Add Giving Category</h3>
+        <button class="modal__close" data-close="modal-category" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-category">
+          <div class="form-group">
+            <label for="cat-name" class="form-label">Category Name <span class="required">*</span></label>
+            <input type="text" id="cat-name" class="form-input" placeholder="e.g. Building Fund" required>
+          </div>
+          <div class="form-group">
+            <label for="cat-desc" class="form-label">Description</label>
+            <textarea id="cat-desc" class="form-input" rows="3" placeholder="Brief description of this category..." style="resize: vertical;"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-category">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-category">Save Category</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE USER ACCOUNT MODAL -->
+  <div class="modal-overlay" id="modal-user">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modal-user-title">Create User Account</h3>
+        <button class="modal__close" data-close="modal-user" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-user">
+          <input type="hidden" id="user-edit-id">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="u-name" class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" id="u-name" class="form-input" placeholder="e.g. Rev. Daniel Mensah" required>
+            </div>
+            <div class="form-group">
+              <label for="u-phone" class="form-label">Phone <span class="required">*</span></label>
+              <input type="tel" id="u-phone" class="form-input" placeholder="e.g. 024 123 4567" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="u-email" class="form-label">Email</label>
+              <input type="email" id="u-email" class="form-input" placeholder="e.g. daniel@church.org">
+            </div>
+            <div class="form-group">
+              <label for="u-role" class="form-label">Role <span class="required">*</span></label>
+              <select id="u-role" class="form-select" required>
+                <option value="">— Select Role —</option>
+                <option value="admin">Church Administrator</option>
+                <option value="pastor">Senior Pastor</option>
+                <option value="leader">Leader / Dept Head</option>
+                <option value="finance">Finance Team</option>
+                <option value="member">Member</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" id="user-dept-group" style="display: none;">
+            <label for="u-department" class="form-label">Department (scope access)</label>
+            <select id="u-department" class="form-select">
+              <option value="">All Departments</option>
+              <option>Ushering</option>
+              <option>Choir</option>
+              <option>Youth Ministry</option>
+              <option>Media & Tech</option>
+              <option>Women's Ministry</option>
+              <option>Men's Fellowship</option>
+              <option>Children's Church</option>
+              <option>Prayer Ministry</option>
+              <option>Evangelism</option>
+            </select>
+          </div>
+          <div class="form-group" id="user-password-group">
+            <label for="u-password" class="form-label">Temporary Password <span class="required">*</span></label>
+            <input type="text" id="u-password" class="form-input" placeholder="Set a temporary password">
+            <p class="form-hint">The user will be asked to change this on first login.</p>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn--ghost" data-close="modal-user">Cancel</button>
+        <button type="button" class="btn btn--primary" id="btn-save-user">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD CUSTOM FIELD MODAL -->
+  <div class="modal-overlay" id="modal-field">
+    <div class="modal modal--narrow">
+      <div class="modal__header">
+        <h3 class="modal__title">Add Custom Field</h3>
+        <button class="modal__close" data-close="modal-field" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-field">
+          <div class="form-group">
+            <label for="f-name" class="form-label">Field Name <span class="required">*</span></label>
+            <input type="text" id="f-name" class="form-input" placeholder="e.g. Water Baptism Date" required>
+          </div>
+          <div class="form-group">
+            <label for="f-type" class="form-label">Data Type <span class="required">*</span></label>
+            <select id="f-type" class="form-select" required>
+              <option value="text">Text</option>
+              <option value="number">Number</option>
+              <option value="date">Date</option>
+              <option value="dropdown">Dropdown</option>
+            </select>
+          </div>
+          <div class="form-group" id="dropdown-options-group" style="display: none;">
+            <label for="f-options" class="form-label">Options (comma-separated)</label>
+            <input type="text" id="f-options" class="form-input" placeholder="e.g. Yes, No, Pending">
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-field">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-field">Add Field</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION DIALOG -->
+  <div class="modal-overlay" id="modal-confirm">
+    <div class="modal modal--narrow">
+      <div class="confirm-dialog__icon" id="confirm-icon"><i data-lucide="alert-triangle"></i></div>
+      <h3 class="modal__title" style="text-align: center; margin-bottom: var(--space-md);" id="confirm-title">Are you sure?</h3>
+      <p class="confirm-dialog__text" id="confirm-text">This action cannot be undone.</p>
+      <div class="confirm-dialog__actions">
+        <button class="btn btn--ghost" data-close="modal-confirm">Cancel</button>
+        <button class="btn btn--danger" id="confirm-action-btn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat mode — no build step needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/communications.js"></script>
+  <script src="js/reporting.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/activityLog.js"></script>
+  <script src="js/dashboard-admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

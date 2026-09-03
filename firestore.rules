@@ -1,0 +1,171 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper: Get requesting user's document
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    // Helper: Check if user has a specific role
+    function hasRole(role) {
+      return isAuthenticated() && getUserData().role == role;
+    }
+
+    // Helper: Check if user is an admin or pastor
+    function isAdminOrPastor() {
+      return isAuthenticated() && (getUserData().role == 'admin' || getUserData().role == 'pastor');
+    }
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // ---------------------------------------------------
+    // Users Collection
+    // Document ID = Firebase Auth UID (or synthetic)
+    // ---------------------------------------------------
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdminOrPastor());
+      allow write: if isAuthenticated() && (request.auth.uid == userId || hasRole('admin'));
+    }
+
+    // ---------------------------------------------------
+    // Members Collection
+    // ---------------------------------------------------
+    match /members/{memberId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (isAdminOrPastor() || hasRole('leader'));
+    }
+
+    // ---------------------------------------------------
+    // Services / Attendance Sessions Collection
+    // ---------------------------------------------------
+    match /services/{serviceId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isAdminOrPastor();
+    }
+
+    // ---------------------------------------------------
+    // Attendance Records Collection
+    // ---------------------------------------------------
+    match /attendance/{attId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (isAdminOrPastor() || hasRole('leader'));
+    }
+
+    // ---------------------------------------------------
+    // Giving Categories & Transactions
+    // ---------------------------------------------------
+    match /givingCategories/{catId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (hasRole('admin') || hasRole('finance'));
+    }
+
+    match /givingTransactions/{txId} {
+      allow read: if isAuthenticated() && (isAdminOrPastor() || hasRole('finance') || resource.data.memberId == request.auth.uid);
+      allow write: if isAuthenticated() && (hasRole('admin') || hasRole('finance'));
+    }
+
+    match /givingBulkEntries/{entryId} {
+      allow read: if isAuthenticated() && (isAdminOrPastor() || hasRole('finance'));
+      allow write: if isAuthenticated() && (hasRole('admin') || hasRole('finance'));
+    }
+
+    match /givingReconciliation/{reconId} {
+      allow read: if isAuthenticated() && (isAdminOrPastor() || hasRole('finance'));
+      allow write: if isAuthenticated() && (hasRole('admin') || hasRole('finance'));
+    }
+
+    match /givingStatements/{stmtId} {
+      allow read: if isAuthenticated() && (isAdminOrPastor() || hasRole('finance') || resource.data.memberId == request.auth.uid);
+      allow write: if isAuthenticated() && (hasRole('admin') || hasRole('finance'));
+    }
+
+    // ---------------------------------------------------
+    // Pastoral & Care Tasks
+    // ---------------------------------------------------
+    match /pastoralNotes/{noteId} {
+      allow read, write: if isAdminOrPastor();
+    }
+
+    match /lifeEvents/{eventId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdminOrPastor();
+    }
+
+    match /followUpTasks/{taskId} {
+      allow read: if isAuthenticated() && (isAdminOrPastor() || hasRole('leader'));
+      allow write: if isAuthenticated() && (isAdminOrPastor() || hasRole('leader'));
+    }
+
+    match /prayerRequests/{requestId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && (isAdminOrPastor() || resource.data.memberId == request.auth.uid);
+    }
+
+    // ---------------------------------------------------
+    // Communications & Notifications
+    // ---------------------------------------------------
+    match /communications/{commId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (isAdminOrPastor() || hasRole('leader'));
+    }
+
+    match /notifications/{notifId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // ---------------------------------------------------
+    // Activity Log / Audit Log
+    // ---------------------------------------------------
+    match /activityLog/{logId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if hasRole('admin');
+    }
+
+    // ---------------------------------------------------
+    // Custom Fields & Templates & Church Profile
+    // ---------------------------------------------------
+    match /customFields/{fieldId} {
+      allow read: if isAuthenticated();
+      allow write: if hasRole('admin');
+    }
+
+    match /notificationTemplates/{templateId} {
+      allow read: if isAuthenticated();
+      allow write: if hasRole('admin');
+    }
+
+    match /churchProfile/{docId} {
+      allow read: if isAuthenticated();
+      allow write: if hasRole('admin');
+    }
+
+    // ---------------------------------------------------
+    // Pending Approvals (Pastor workflow)
+    // ---------------------------------------------------
+    match /pendingApprovals/{approvalId} {
+      allow read: if isAuthenticated() && isAdminOrPastor();
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdminOrPastor();
+    }
+
+    // ---------------------------------------------------
+    // Groups / Small Groups (Member self-service)
+    // ---------------------------------------------------
+    match /groups/{groupId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (isAdminOrPastor() || hasRole('leader'));
+    }
+  }
+}

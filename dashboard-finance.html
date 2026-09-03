@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Finance Team Dashboard — Record transactions, bulk offerings, review giving records, generate statements, and reconcile service totals.">
+  <title>Finance Dashboard — ChurchOS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+  <div class="dashboard">
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__header">
+        <a href="index.html" class="sidebar__logo">
+          <div class="sidebar__logo-icon"><i data-lucide="cross"></i></div>
+          ChurchOS
+        </a>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section">Financial Overview</div>
+        <a href="#" class="sidebar__link active" data-section="overview">
+          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> Overview
+        </a>
+        <a href="#" class="sidebar__link" data-section="record">
+          <span class="sidebar__link-icon"><i data-lucide="credit-card"></i></span> Record a Transaction
+        </a>
+        <a href="#" class="sidebar__link" data-section="bulk">
+          <span class="sidebar__link-icon"><i data-lucide="coins"></i></span> Bulk Offering Entry
+        </a>
+
+        <div class="sidebar__section">Records & Reports</div>
+        <a href="#" class="sidebar__link" data-section="giving-records">
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Member Giving Records
+        </a>
+        <a href="#" class="sidebar__link" data-section="reports">
+          <span class="sidebar__link-icon"><i data-lucide="trending-up"></i></span> Financial Reports
+        </a>
+        <a href="#" class="sidebar__link" data-section="statements">
+          <span class="sidebar__link-icon"><i data-lucide="file-text"></i></span> Annual Giving Statements
+        </a>
+
+        <div class="sidebar__section">Audit & Balancing</div>
+        <a href="#" class="sidebar__link" data-section="reconciliation">
+          <span class="sidebar__link-icon"><i data-lucide="scale"></i></span> Reconciliation
+        </a>
+        <a href="#" class="sidebar__link" data-section="activity-log">
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Financial Activity Log
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__avatar js-user-initials">AO</div>
+          <div>
+            <div class="sidebar__user-name js-user-name">Abena Osei</div>
+            <div class="sidebar__user-role js-user-role">Finance Team</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebar-toggle" aria-label="Toggle sidebar"><i data-lucide="menu"></i></button>
+          <div class="topbar__greeting">
+            <h2>Finance Dashboard</h2>
+            <p>Welcome, <span class="js-user-name">Abena Osei</span> • <span class="js-church-name">Grace Assembly International</span></p>
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="topbar__notification" title="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="topbar__notification-badge"></span>
+          </div>
+          <a href="#" class="btn btn--ghost btn--sm js-logout">Log Out</a>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+
+        <!-- ============================================================
+             SECTION 1: OVERVIEW
+             ============================================================ -->
+        <div class="dashboard-section active" id="section-overview">
+          <!-- Disputed Transactions Alert Banner -->
+          <div class="info-box info-box--warning" id="disputed-alert-banner" style="display: none;">
+            <span>⚠️</span>
+            <span><strong id="disputed-count-text">2 Member Disputed Transactions</strong> require review. <a href="#" style="color: var(--color-danger); text-decoration: underline;" data-goto="giving-records">Review Disputed Records →</a></span>
+          </div>
+
+          <div class="grid grid--4" style="margin-bottom: var(--space-2xl);">
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="banknote"></i></div>
+              <div>
+                <div class="stat-card__value" id="fin-stat-monthly">GH₵ 45.2K</div>
+                <div class="stat-card__label">Monthly Total Giving</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 8% vs last month</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--success"><i data-lucide="bar-chart-3"></i></div>
+              <div>
+                <div class="stat-card__value" id="fin-stat-weekly">GH₵ 12.4K</div>
+                <div class="stat-card__label">Last Sunday Total</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 3% vs prior week</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--info"><i data-lucide="receipt"></i></div>
+              <div>
+                <div class="stat-card__value" id="fin-stat-count">38</div>
+                <div class="stat-card__label">Transactions This Week</div>
+                <div class="stat-card__trend">Avg GH₵ 326 / tx</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--warning"><i data-lucide="alert-triangle"></i></div>
+              <div>
+                <div class="stat-card__value" id="fin-stat-disputed">2</div>
+                <div class="stat-card__label">Disputed Entries</div>
+                <div class="stat-card__trend stat-card__trend--down" style="cursor: pointer;" data-goto="giving-records">Needs Review →</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid--2">
+            <!-- Category Breakdown Mini Chart -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Giving Breakdown by Category</h3>
+              </div>
+              <div class="widget__body">
+                <div class="bar-chart" id="overview-finance-category-chart">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Cards -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Financial Quick Actions</h3>
+              </div>
+              <div class="widget__body">
+                <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+                  <div class="quick-action" data-goto="record">
+                    <div class="quick-action__icon" style="background: rgba(212,168,67,0.12); color: var(--color-gold-dark);">💳</div>
+                    <div>
+                      <div class="quick-action__title">Record Member Giving</div>
+                      <div class="quick-action__desc">Enter individual Tithe, Offering, or Seed</div>
+                    </div>
+                  </div>
+                  <div class="quick-action" data-goto="bulk">
+                    <div class="quick-action__icon" style="background: var(--color-success-bg); color: var(--color-success);">🪙</div>
+                    <div>
+                      <div class="quick-action__title">Record Service Bulk Offering</div>
+                      <div class="quick-action__desc">Log loose aggregate Sunday collection</div>
+                    </div>
+                  </div>
+                  <div class="quick-action" data-goto="reconciliation">
+                    <div class="quick-action__icon" style="background: var(--color-info-bg); color: var(--color-info);">⚖️</div>
+                    <div>
+                      <div class="quick-action__title">Service Count Reconciliation</div>
+                      <div class="quick-action__desc">Balance physical count against system total</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2: RECORD A TRANSACTION
+             ============================================================ -->
+        <div class="dashboard-section" id="section-record">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Record Individual Giving Transaction</h2>
+              <p class="section-header__subtitle">Enter tithes, offerings, pledges, and seeds against member profiles</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <!-- Record Form -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">New Giving Entry</h3>
+              </div>
+              <div class="widget__body">
+                <form id="form-record-tx">
+                  <div class="form-group">
+                    <label for="tx-member" class="form-label">Member <span class="required">*</span></label>
+                    <select id="tx-member" class="form-select" required>
+                      <option value="">— Select Member —</option>
+                    </select>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="tx-amount" class="form-label">Amount (GH₵) <span class="required">*</span></label>
+                      <input type="number" step="0.01" id="tx-amount" class="form-input" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="tx-category" class="form-label">Category <span class="required">*</span></label>
+                      <select id="tx-category" class="form-select" required>
+                        <option value="Tithe">Tithe</option>
+                        <option value="Offering">Offering</option>
+                        <option value="Building Fund">Building Fund</option>
+                        <option value="Missions">Missions</option>
+                        <option value="Special Seed">Special Seed</option>
+                        <option value="Welfare Fund">Welfare Fund</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="tx-date" class="form-label">Date Given <span class="required">*</span></label>
+                      <input type="date" id="tx-date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="tx-method" class="form-label">Payment Method <span class="required">*</span></label>
+                      <select id="tx-method" class="form-select" required>
+                        <option value="Cash">Cash</option>
+                        <option value="Mobile Money">Mobile Money (MoMo)</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Cheque">Cheque</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="tx-service" class="form-label">Service (Optional)</label>
+                      <select id="tx-service" class="form-select">
+                        <option value="1st Service">1st Service (7:00 AM)</option>
+                        <option value="2nd Service">2nd Service (9:30 AM)</option>
+                        <option value="3rd Service">3rd Service (12:00 PM)</option>
+                        <option value="Mid-Week Service">Mid-Week Service</option>
+                        <option value="Friday Prayer">Friday Prayer</option>
+                        <option value="None">None / Direct</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="tx-ref" class="form-label">Receipt / Ref #</label>
+                      <input type="text" id="tx-ref" class="form-input" placeholder="e.g. REC-99201">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Recorded By (Auto-filled)</label>
+                    <input type="text" class="form-input" value="Abena Osei (Finance Team)" readonly style="background: var(--color-gray-100); color: var(--color-navy); font-weight: 600;">
+                  </div>
+                  <button type="submit" class="btn btn--primary btn--block">💾 Save Transaction</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Recent Recorded Transactions -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Recent Recorded Entries</h3>
+              </div>
+              <div class="widget__body widget__body--flush" style="max-height: 480px; overflow-y: auto;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Member</th>
+                      <th>Category</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-tx-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3: BULK OFFERING ENTRY
+             ============================================================ -->
+        <div class="dashboard-section" id="section-bulk">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Bulk Offering Entry</h2>
+              <p class="section-header__subtitle">Record loose Sunday service collection and aggregate offerings</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2">
+            <!-- Bulk Entry Form -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">New Bulk Collection Entry</h3>
+              </div>
+              <div class="widget__body">
+                <form id="form-bulk-entry">
+                  <div class="form-group">
+                    <label for="bulk-service" class="form-label">Service Session <span class="required">*</span></label>
+                    <select id="bulk-service" class="form-select" required>
+                      <option value="1st Service">1st Service (7:00 AM)</option>
+                      <option value="2nd Service">2nd Service (9:30 AM)</option>
+                      <option value="3rd Service">3rd Service (12:00 PM)</option>
+                      <option value="Mid-Week Service">Mid-Week Service</option>
+                      <option value="Friday Prayer">Friday Prayer</option>
+                    </select>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="bulk-amount" class="form-label">Aggregate Amount (GH₵) <span class="required">*</span></label>
+                      <input type="number" step="0.01" id="bulk-amount" class="form-input" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="bulk-category" class="form-label">Category <span class="required">*</span></label>
+                      <select id="bulk-category" class="form-select" required>
+                        <option value="Offering">Offering (Loose Collection)</option>
+                        <option value="Building Fund">Building Fund</option>
+                        <option value="Missions">Missions Collection</option>
+                        <option value="Special Seed">Special Seed</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="bulk-date" class="form-label">Date <span class="required">*</span></label>
+                    <input type="date" id="bulk-date" class="form-input" required>
+                  </div>
+                  <div class="info-box">
+                    <span><i data-lucide="info"></i></span>
+                    <span>Bulk entries are recorded against service totals rather than individual members for financial auditing.</span>
+                  </div>
+                  <button type="submit" class="btn btn--primary btn--block">Save Bulk Entry</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Previous Bulk Entries List -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Bulk Entries History</h3>
+              </div>
+              <div class="widget__body widget__body--flush">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Category</th>
+                        <th>Aggregate Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bulk-history-tbody">
+                      <!-- Populated by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4: MEMBER GIVING RECORDS (Reverse Chronological)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-giving-records">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Member Giving Records</h2>
+              <p class="section-header__subtitle">Search members, view complete giving history, and resolve disputed transactions</p>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <input type="text" class="form-input form-input--search" id="giving-member-search" placeholder="Search member by name or phone...">
+            <label class="form-checkbox" style="margin: 0; align-self: center;">
+              <input type="checkbox" id="filter-disputed-only">
+              <span>Show Disputed Entries Only</span>
+            </label>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Member Name</th>
+                      <th>Phone</th>
+                      <th>Total YTD Giving</th>
+                      <th>Disputed Entries</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="giving-members-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 5: FINANCIAL REPORTS (Shared Module)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-reports">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Financial Reports Generator</h2>
+              <p class="section-header__subtitle">Comprehensive giving analysis, individual member statements, and category breakdowns</p>
+            </div>
+          </div>
+
+          <!-- Shared Reporting Module Catalogue, Preview & Exporter -->
+          <div id="reporting-container"></div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 6: ANNUAL GIVING STATEMENTS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-statements">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Annual Giving Statements</h2>
+              <p class="section-header__subtitle">Generate official tax/record contribution statements for members</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <!-- Statement Generator Card -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Generate Member Statement</h3>
+              </div>
+              <div class="widget__body">
+                <form id="form-generate-statement">
+                  <div class="form-group">
+                    <label for="stmt-member" class="form-label">Member <span class="required">*</span></label>
+                    <select id="stmt-member" class="form-select" required>
+                      <option value="">— Select Member —</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="stmt-year" class="form-label">Tax / Giving Year <span class="required">*</span></label>
+                    <select id="stmt-year" class="form-select" required>
+                      <option value="2025" selected>2025 Tax Year</option>
+                      <option value="2026">2026 Year to Date</option>
+                      <option value="2024">2024 Tax Year</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn--primary btn--block">📄 Generate Annual Statement</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Previously Generated Statements List -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Recent Statements Generated</h3>
+              </div>
+              <div class="widget__body widget__body--flush">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Member</th>
+                        <th>Year</th>
+                        <th>Grand Total</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="statements-history-tbody">
+                      <!-- Populated by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 7: RECONCILIATION (Balancing Tool)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-reconciliation">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Service Cash Reconciliation</h2>
+              <p class="section-header__subtitle">Balance physical count against system total for each service session</p>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">Sunday Sessions Balancing — July 19, 2026</h3>
+            </div>
+            <div class="widget__body" id="reconciliation-cards-container">
+              <!-- Reconcile Cards populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 8: FINANCIAL ACTIVITY LOG
+             ============================================================ -->
+        <div class="dashboard-section" id="section-activity-log">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Financial Activity Log</h2>
+              <p class="section-header__subtitle">Real-time audit log of all tithe entries, offering batches, category changes, and reconciliation actions</p>
+            </div>
+          </div>
+
+          <div id="activity-log-finance"></div>
+        </div>
+
+      </div><!-- end dashboard-content -->
+    </main>
+  </div>
+
+  <!-- ================================================================
+       MODALS
+       ================================================================ -->
+
+  <!-- MEMBER FULL GIVING HISTORY MODAL (With Dispute Resolution) -->
+  <div class="modal-overlay" id="modal-member-giving">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modal-giving-title">Member Giving History</h3>
+        <button class="modal__close" data-close="modal-member-giving" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body" id="modal-giving-body">
+        <!-- Populated by JS in reverse-chronological order -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-member-giving">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNUAL STATEMENT PREVIEW MODAL -->
+  <div class="modal-overlay" id="modal-statement-preview">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title">Annual Contribution Statement</h3>
+        <button class="modal__close" data-close="modal-statement-preview" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body" id="modal-statement-body">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-statement-preview">Close</button>
+        <button class="btn btn--primary" id="btn-export-statement-pdf">Export as PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat mode — no build step needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/reporting.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/activityLog.js"></script>
+  <script src="js/dashboard-finance.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

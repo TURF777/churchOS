@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Senior Pastor Dashboard — Church health overview, member care, financial/attendance insights, and congregation communication.">
+  <title>Senior Pastor Dashboard — ChurchOS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body data-comm-role="pastor">
+
+  <div class="dashboard">
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__header">
+        <a href="index.html" class="sidebar__logo">
+          <div class="sidebar__logo-icon"><i data-lucide="cross"></i></div>
+          ChurchOS
+        </a>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section">Overview</div>
+        <a href="#" class="sidebar__link active" data-section="overview">
+          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> Overview
+        </a>
+        <a href="#" class="sidebar__link" data-section="members">
+          <span class="sidebar__link-icon"><i data-lucide="users"></i></span> Members & Pastoral Notes
+        </a>
+
+        <div class="sidebar__section">Analytics & Reports</div>
+        <a href="#" class="sidebar__link" data-section="attendance-reports">
+          <span class="sidebar__link-icon"><i data-lucide="church"></i></span> Attendance Reports
+        </a>
+        <a href="#" class="sidebar__link" data-section="giving-reports">
+          <span class="sidebar__link-icon"><i data-lucide="credit-card"></i></span> Giving & Financials
+        </a>
+        <a href="#" class="sidebar__link" data-section="standard-reports">
+          <span class="sidebar__link-icon"><i data-lucide="clipboard-list"></i></span> Standard Reports
+        </a>
+
+        <div class="sidebar__section">Pastoral Care</div>
+        <a href="#" class="sidebar__link" data-section="pastoral-care">
+          <span class="sidebar__link-icon"><i data-lucide="flag"></i></span> Care & Follow-Up
+        </a>
+        <a href="#" class="sidebar__link" data-section="communication">
+          <span class="sidebar__link-icon"><i data-lucide="message-square"></i></span> Communication
+        </a>
+        <a href="#" class="sidebar__link" data-section="weekly-summary">
+          <span class="sidebar__link-icon"><i data-lucide="calendar-days"></i></span> My Weekly Summary
+        </a>
+        <a href="#" class="sidebar__link" data-section="activity-log">
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Church Activity Feed
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__avatar js-user-initials">SP</div>
+          <div>
+            <div class="sidebar__user-name js-user-name">Rev. Daniel Mensah</div>
+            <div class="sidebar__user-role js-user-role">Senior Pastor</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebar-toggle" aria-label="Toggle sidebar"><i data-lucide="menu"></i></button>
+          <div class="topbar__greeting">
+            <h2>Welcome, <span class="js-user-name">Rev. Daniel Mensah</span></h2>
+            <p class="js-church-name">Grace Assembly International</p>
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="topbar__notification" title="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="topbar__notification-badge"></span>
+          </div>
+          <a href="#" class="btn btn--ghost btn--sm js-logout">Log Out</a>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+
+        <!-- ============================================================
+             SECTION 1: OVERVIEW (Church Health at a Glance)
+             ============================================================ -->
+        <div class="dashboard-section active" id="section-overview">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Church Health Overview</h2>
+              <p class="section-header__subtitle">Real-time attendance, giving trends, and pastoral care status</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-sm);">
+              <span style="font-size: 0.75rem; color: var(--color-gray-500);">Last updated: <span id="refresh-time">Just now</span></span>
+              <button class="btn btn--ghost btn--sm" id="btn-manual-refresh"><i data-lucide="refresh-cw" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Refresh Data</button>
+            </div>
+          </div>
+
+          <div class="grid grid--4" style="margin-bottom: var(--space-2xl);">
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="church"></i></div>
+              <div>
+                <div class="stat-card__value" id="pastor-stat-attendance">892</div>
+                <div class="stat-card__label">Last Sunday Attendance</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 5.2% vs prior week</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--info"><i data-lucide="user-plus"></i></div>
+              <div>
+                <div class="stat-card__value" id="pastor-stat-visitors">3</div>
+                <div class="stat-card__label">Visitors This Month</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 2 converted</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--warning"><i data-lucide="banknote"></i></div>
+              <div>
+                <div class="stat-card__value" id="pastor-stat-giving">GH₵ 45.2K</div>
+                <div class="stat-card__label">Giving This Month</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 8% vs last month</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--success"><i data-lucide="flag"></i></div>
+              <div>
+                <div class="stat-card__value" id="pastor-stat-flagged">4</div>
+                <div class="stat-card__label">Flagged for Follow-Up</div>
+                <div class="stat-card__trend stat-card__trend--down" style="cursor: pointer;" data-goto="pastoral-care">View Care Tasks →</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <!-- Attendance Summary chart -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Recent Sunday Attendance</h3>
+                <button class="btn btn--ghost btn--sm" data-goto="attendance-reports">Full Report</button>
+              </div>
+              <div class="widget__body">
+                <div class="bar-chart" id="overview-attendance-chart">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Giving Summary chart -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Recent Weekly Giving (GH₵)</h3>
+                <button class="btn btn--ghost btn--sm" data-goto="giving-reports">Financial Insights</button>
+              </div>
+              <div class="widget__body">
+                <div class="bar-chart" id="overview-giving-chart">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2: MEMBERS & PASTORAL NOTES (Read-only + Confidential)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-members">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Congregation Directory</h2>
+              <p class="section-header__subtitle">Browse members, review full giving history, and record confidential pastoral care notes</p>
+            </div>
+            <div class="confidential-badge">
+              <span>🔒</span> Pastoral Access Only
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <input type="text" class="form-input form-input--search" id="pastor-member-search" placeholder="Search member by name or phone...">
+            <select class="form-select" id="pastor-member-filter-status">
+              <option value="">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Visitor">Visitor</option>
+            </select>
+            <select class="form-select" id="pastor-member-filter-dept">
+              <option value="">All Departments</option>
+            </select>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>Status</th>
+                      <th>Department</th>
+                      <th>Pastoral Notes</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pastor-members-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3: ATTENDANCE REPORTS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-attendance-reports">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Attendance Analytics & Absence Reports</h2>
+              <p class="section-header__subtitle">Identify inactive members, track weekly trends, and assign follow-up tasks</p>
+            </div>
+          </div>
+
+          <!-- Inactive Members Report (4+ weeks) -->
+          <div class="widget" style="margin-bottom: var(--space-2xl);">
+            <div class="widget__header">
+              <h3 class="widget__title">⚠️ Inactive Members (No Attendance 4+ Weeks)</h3>
+              <span class="badge badge--warning" id="inactive-count-badge">0 Members</span>
+            </div>
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Member Name</th>
+                      <th>Phone</th>
+                      <th>Department</th>
+                      <th>Last Attended</th>
+                      <th>Weeks Absent</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inactive-members-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attendance Trends Breakdown -->
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">Service Attendance Breakdown</h3>
+              <select class="form-select" id="pastor-attendance-service-filter" style="max-width: 200px; padding: 0.4rem 0.8rem; font-size: 0.8125rem;">
+                <option value="">All Services</option>
+                <option value="1st Service">1st Service (7:00 AM)</option>
+                <option value="2nd Service">2nd Service (9:30 AM)</option>
+                <option value="3rd Service">3rd Service (12:00 PM)</option>
+                <option value="Mid-Week Service">Mid-Week Service</option>
+              </select>
+            </div>
+            <div class="widget__body">
+              <div class="bar-chart" id="detailed-attendance-chart">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4: GIVING & FINANCIAL REPORTS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-giving-reports">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Giving & Financial Insights</h2>
+              <p class="section-header__subtitle">12-month category trends, giving summaries, and financial reports</p>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <label class="form-label" style="margin: 0; align-self: center;">Date Range:</label>
+            <select class="form-select" id="giving-range-filter">
+              <option value="6m">Last 6 Months</option>
+              <option value="12m" selected>Last 12 Months</option>
+              <option value="ytd">Year to Date (2026)</option>
+            </select>
+          </div>
+
+          <!-- 12-Month Giving Chart -->
+          <div class="widget" style="margin-bottom: var(--space-2xl);">
+            <div class="widget__header">
+              <h3 class="widget__title">Monthly Giving Trend (12-Month View)</h3>
+              <span class="badge badge--success">GH₵ Total</span>
+            </div>
+            <div class="widget__body">
+              <div class="bar-chart" id="giving-12month-chart">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Breakdown Table -->
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">Giving Summary by Category</h3>
+            </div>
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Total Collected</th>
+                      <th>% of Total</th>
+                      <th>Transactions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pastor-giving-categories-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 5: PASTORAL CARE & FOLLOW-UP
+             ============================================================ -->
+        <div class="dashboard-section" id="section-pastoral-care">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Pastoral Care & Follow-Up Tasks</h2>
+              <p class="section-header__subtitle">Manage care assignments, prayer requests, and member registration approvals</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-flag-member">+ Flag Member for Care</button>
+          </div>
+
+          <!-- Care Task List -->
+          <div class="widget" style="margin-bottom: var(--space-2xl);">
+            <div class="widget__header">
+              <h3 class="widget__title">Follow-Up Task Board</h3>
+              <select class="form-select" id="care-task-filter-status" style="max-width: 180px; padding: 0.4rem 0.8rem; font-size: 0.8125rem;">
+                <option value="">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Reason / Note</th>
+                      <th>Assigned Leader</th>
+                      <th>Due Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="care-tasks-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid--2">
+            <!-- Prayer Requests Feed -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Member Prayer Requests</h3>
+                <span class="badge badge--info" id="prayer-count-badge">0 Active</span>
+              </div>
+              <div class="widget__body" id="prayer-requests-container" style="max-height: 400px; overflow-y: auto;">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Pending Registration Approvals -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Pending Registration Approvals</h3>
+              </div>
+              <div class="widget__body" id="approvals-container" style="max-height: 400px; overflow-y: auto;">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 6: CONGREGATION COMMUNICATION (Shared Module)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-communication">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Congregation Communication</h2>
+              <p class="section-header__subtitle">Broadcast SMS and push notifications to your entire church family or specific departments</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <!-- Compose Panel (populated by communications.js) -->
+            <div id="comm-compose-container"></div>
+
+            <!-- Delivery Status + Sent History -->
+            <div>
+              <div id="comm-delivery-status" style="margin-bottom: var(--space-lg);"></div>
+              <div class="widget">
+                <div class="widget__header">
+                  <h3 class="widget__title">Sent History</h3>
+                </div>
+                <div class="widget__body" style="max-height: 500px; overflow-y: auto;">
+                  <div id="comm-history-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 7: STANDARD REPORTS LIBRARY (Shared Module)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-standard-reports">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Standard Reports Library</h2>
+              <p class="section-header__subtitle">Generate official reports with inline filters and export to PDF or CSV</p>
+            </div>
+          </div>
+
+          <!-- Shared Reporting Module Catalogue, Preview & Exporter -->
+          <div id="reporting-container"></div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 8: MY WEEKLY SUMMARY
+             ============================================================ -->
+        <div class="dashboard-section" id="section-weekly-summary">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">My Weekly Summary Settings</h2>
+              <p class="section-header__subtitle">Configure automated executive health reports delivered straight to your inbox</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2">
+            <div class="summary-config-card">
+              <h4 style="margin-bottom: var(--space-md);">Delivery Preferences</h4>
+              <form id="form-summary-config">
+                <div class="form-group">
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="summary-enable-email" checked>
+                    <span>Receive Weekly Executive Summary via Email</span>
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="summary-enable-app" checked>
+                    <span>Receive In-App Notification Summary</span>
+                  </label>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="summary-day" class="form-label">Delivery Day</label>
+                    <select id="summary-day" class="form-select">
+                      <option value="Monday" selected>Monday Morning</option>
+                      <option value="Sunday">Sunday Evening</option>
+                      <option value="Friday">Friday Afternoon</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="summary-time" class="form-label">Delivery Time</label>
+                    <input type="time" id="summary-time" class="form-input" value="07:00">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn--primary">Save Preferences</button>
+              </form>
+            </div>
+
+            <!-- Summary Content Preview -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Weekly Summary Content Preview</h3>
+                <span class="badge badge--navy">Sample Email Layout</span>
+              </div>
+              <div class="widget__body">
+                <div style="background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); padding: var(--space-lg); font-size: var(--fs-sm);">
+                  <div style="font-weight: 700; font-size: var(--fs-md); color: var(--color-navy); margin-bottom: var(--space-xs);">✝️ ChurchOS Executive Summary</div>
+                  <div style="font-size: var(--fs-xs); color: var(--color-gray-500); margin-bottom: var(--space-md);">Week of July 20, 2026 — Grace Assembly International</div>
+                  
+                  <div style="margin-bottom: var(--space-md);">
+                    <strong>Attendance:</strong> 892 attended across 3 Sunday services (+5.2% vs last week).
+                  </div>
+                  <div style="margin-bottom: var(--space-md);">
+                    <strong>Giving:</strong> GH₵ 12.4K collected (Tithe: 65%, Offering: 25%, Missions: 10%).
+                  </div>
+                  <div style="margin-bottom: var(--space-md);">
+                    <strong>Pastoral Care:</strong> 4 members currently flagged. 2 care tasks completed by leaders.
+                  </div>
+                  <div>
+                    <strong>Upcoming:</strong> 5 birthdays celebrating in the next 7 days.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 8: CHURCH ACTIVITY FEED
+             ============================================================ -->
+        <div class="dashboard-section" id="section-activity-log">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Church Activity Feed</h2>
+              <p class="section-header__subtitle">Church-wide activity stream across all ministries and administrative actions</p>
+            </div>
+          </div>
+          <div id="activity-log-pastor"></div>
+        </div>
+
+      </div><!-- end dashboard-content -->
+    </main>
+  </div>
+
+  <!-- ================================================================
+       MODALS
+       ================================================================ -->
+
+  <!-- PASTOR MEMBER DETAIL MODAL (With Confidential Notes & Life Events) -->
+  <div class="modal-overlay" id="modal-pastor-member">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title">Member Profile & Pastoral Care</h3>
+        <button class="modal__close" data-close="modal-pastor-member" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body" id="pastor-member-modal-body">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-pastor-member">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSIGN FOLLOW-UP TASK MODAL -->
+  <div class="modal-overlay" id="modal-assign-task">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Assign Follow-Up Task</h3>
+        <button class="modal__close" data-close="modal-assign-task" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-assign-task">
+          <input type="hidden" id="task-member-id">
+          <div class="form-group">
+            <label for="task-member-name" class="form-label">Member</label>
+            <input type="text" id="task-member-name" class="form-input" readonly>
+          </div>
+          <div class="form-group">
+            <label for="task-assignee" class="form-label">Assign To Leader / Dept Head <span class="required">*</span></label>
+            <select id="task-assignee" class="form-select" required>
+              <option value="">— Select Leader —</option>
+              <option value="Kofi Darko (Youth Leader)">Kofi Darko (Youth Leader)</option>
+              <option value="Akosua Mensah (Women's Leader)">Akosua Mensah (Women's Leader)</option>
+              <option value="Kwame Asante (Ushering Head)">Kwame Asante (Ushering Head)</option>
+              <option value="Abena Osei (Finance Team)">Abena Osei (Finance Team)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task-reason" class="form-label">Reason / Instructions <span class="required">*</span></label>
+            <textarea id="task-reason" class="form-input" rows="3" placeholder="e.g. Absent 4 weeks, please call or visit to check on family." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="task-due-date" class="form-label">Due Date <span class="required">*</span></label>
+            <input type="date" id="task-due-date" class="form-input" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-assign-task">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-assign-task">Assign Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD LIFE EVENT MODAL -->
+  <div class="modal-overlay" id="modal-life-event">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Record Life Event</h3>
+        <button class="modal__close" data-close="modal-life-event" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-life-event">
+          <input type="hidden" id="event-member-id">
+          <div class="form-group">
+            <label for="event-type" class="form-label">Event Type <span class="required">*</span></label>
+            <select id="event-type" class="form-select" required>
+              <option value="">— Select Type —</option>
+              <option value="Water Baptism">Water Baptism</option>
+              <option value="Baby Dedication">Baby Dedication</option>
+              <option value="Marriage">Marriage</option>
+              <option value="Bereavement">Bereavement</option>
+              <option value="Hospital Admission">Hospital Admission</option>
+              <option value="Graduation">Graduation / Milestone</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="event-date" class="form-label">Date <span class="required">*</span></label>
+            <input type="date" id="event-date" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="event-notes" class="form-label">Notes / Details</label>
+            <textarea id="event-notes" class="form-input" rows="3" placeholder="e.g. Officiated by Senior Pastor, witnessed by congregation."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-life-event">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-life-event">Save Life Event</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat mode — no build step needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/communications.js"></script>
+  <script src="js/reporting.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/activityLog.js"></script>
+  <script src="js/dashboard-pastor.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

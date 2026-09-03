@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My ChurchOS — View your profile, attendance, giving history, announcements, and prayer requests.">
+  <title>My Dashboard — ChurchOS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="member-dashboard" data-comm-role="member">
+
+  <div class="dashboard">
+    <!-- ========== SIDEBAR (Desktop Only) ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__header">
+        <a href="index.html" class="sidebar__logo">
+          <div class="sidebar__logo-icon"><i data-lucide="cross"></i></div>
+          ChurchOS
+        </a>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section">My Church</div>
+        <a href="#" class="sidebar__link active" data-section="home">
+          <span class="sidebar__link-icon"><i data-lucide="home"></i></span> Home
+        </a>
+        <a href="#" class="sidebar__link" data-section="profile">
+          <span class="sidebar__link-icon"><i data-lucide="user"></i></span> My Profile
+        </a>
+        <a href="#" class="sidebar__link" data-section="attendance">
+          <span class="sidebar__link-icon"><i data-lucide="calendar-check"></i></span> My Attendance
+        </a>
+        <a href="#" class="sidebar__link" data-section="giving">
+          <span class="sidebar__link-icon"><i data-lucide="heart-handshake"></i></span> My Giving
+        </a>
+
+        <div class="sidebar__section">Community</div>
+        <a href="#" class="sidebar__link" data-section="announcements">
+          <span class="sidebar__link-icon"><i data-lucide="megaphone"></i></span> Announcements
+        </a>
+        <a href="#" class="sidebar__link" data-section="prayer">
+          <span class="sidebar__link-icon"><i data-lucide="hand-heart"></i></span> Prayer Requests
+        </a>
+        <a href="#" class="sidebar__link" data-section="groups">
+          <span class="sidebar__link-icon"><i data-lucide="users"></i></span> My Groups
+        </a>
+        <a href="#" class="sidebar__link" data-section="activity-log">
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Church Activity & Updates
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__avatar js-user-initials">EA</div>
+          <div>
+            <div class="sidebar__user-name js-user-name">Efua Amoako</div>
+            <div class="sidebar__user-role js-user-role">Church Member</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebar-toggle" aria-label="Toggle sidebar"><i data-lucide="menu"></i></button>
+          <div class="topbar__greeting">
+            <h2 id="topbar-greeting">Welcome back, Efua</h2>
+            <p><span class="js-church-name">Grace Assembly International</span></p>
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="topbar__notification" title="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="topbar__notification-badge" id="notif-badge"></span>
+          </div>
+          <a href="#" class="btn btn--ghost btn--sm js-logout">Log Out</a>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+
+        <!-- ============================================================
+             SECTION 1: HOME (Warm Welcome Landing View)
+             ============================================================ -->
+        <div class="dashboard-section active" id="section-home">
+          <!-- Greeting & Streak -->
+          <div style="margin-bottom: var(--space-2xl);">
+            <h1 style="font-family: var(--font-heading); color: var(--color-navy); font-size: var(--fs-2xl); margin-bottom: var(--space-xs);" id="home-greeting">
+              Welcome back, Efua!
+            </h1>
+            <p style="color: var(--color-gray-500); font-size: var(--fs-sm);">Here's a quick look at your church life this week.</p>
+          </div>
+
+          <!-- Quick Stats Row -->
+          <div class="grid grid--3" style="margin-bottom: var(--space-2xl);">
+            <div class="member-stat" data-goto="attendance">
+              <div class="member-stat__icon"><i data-lucide="calendar-check"></i></div>
+              <div class="member-stat__value" id="home-stat-streak">6 weeks</div>
+              <div class="member-stat__label">Attendance Streak</div>
+            </div>
+            <div class="member-stat" data-goto="giving">
+              <div class="member-stat__icon"><i data-lucide="heart-handshake"></i></div>
+              <div class="member-stat__value" id="home-stat-giving">GH₵ 3,450</div>
+              <div class="member-stat__label">Giving This Year</div>
+            </div>
+            <div class="member-stat" data-goto="announcements">
+              <div class="member-stat__icon"><i data-lucide="megaphone"></i></div>
+              <div class="member-stat__value" id="home-stat-unread">3</div>
+              <div class="member-stat__label">Unread Announcements</div>
+            </div>
+          </div>
+
+          <div class="grid grid--2">
+            <!-- Latest Announcement Preview -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Latest Announcement</h3>
+                <a href="#" class="btn btn--ghost btn--sm" data-goto="announcements">View All →</a>
+              </div>
+              <div class="widget__body" id="home-latest-announcement">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Quick Links</h3>
+              </div>
+              <div class="widget__body">
+                <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+                  <div class="quick-action" data-goto="profile">
+                    <div class="quick-action__icon" style="background: rgba(212,168,67,0.12); color: var(--color-gold-dark);"><i data-lucide="user"></i></div>
+                    <div>
+                      <div class="quick-action__title">Update My Profile</div>
+                      <div class="quick-action__desc">Edit your phone, email, or address</div>
+                    </div>
+                  </div>
+                  <div class="quick-action" data-goto="giving">
+                    <div class="quick-action__icon" style="background: var(--color-success-bg); color: var(--color-success);"><i data-lucide="heart-handshake"></i></div>
+                    <div>
+                      <div class="quick-action__title">My Giving History</div>
+                      <div class="quick-action__desc">View all your contributions</div>
+                    </div>
+                  </div>
+                  <div class="quick-action" data-goto="prayer">
+                    <div class="quick-action__icon" style="background: var(--color-info-bg); color: var(--color-info);"><i data-lucide="hand-heart"></i></div>
+                    <div>
+                      <div class="quick-action__title">Submit a Prayer Request</div>
+                      <div class="quick-action__desc">Share a need with the pastoral team</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2: MY PROFILE
+             ============================================================ -->
+        <div class="dashboard-section" id="section-profile">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">My Profile</h2>
+              <p class="section-header__subtitle">View and update your personal information</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-edit-profile" style="display: none;"><i data-lucide="pencil" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Edit My Info</button>
+            <button class="btn btn--primary btn--sm" id="btn-save-profile" style="display: none;"><i data-lucide="save" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Save Changes</button>
+            <button class="btn btn--ghost btn--sm" id="btn-cancel-profile" style="display: none;">Cancel</button>
+          </div>
+
+          <!-- Profile Header -->
+          <div class="profile-card">
+            <div class="profile-card__header">
+              <div class="profile-card__avatar" id="profile-avatar">EA</div>
+              <div>
+                <h3 style="color: var(--color-navy); margin-bottom: 4px;" id="profile-full-name">Efua Amoako</h3>
+                <div style="font-size: var(--fs-xs); color: var(--color-gray-500);" id="profile-preferred">"Efua"</div>
+                <span class="badge badge--navy" style="margin-top: 6px;">Active Member</span>
+              </div>
+            </div>
+
+            <!-- Editable Fields -->
+            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="phone" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Contact Information <span style="font-size: var(--fs-xs); color: var(--color-gray-400); font-weight: 400;">— You can edit these</span></h4>
+            <div class="grid grid--2" style="margin-bottom: var(--space-xl);">
+              <div class="profile-field" id="field-phone">
+                <span class="profile-field__label">Phone Number</span>
+                <span class="profile-field__value">024 555 0188</span>
+              </div>
+              <div class="profile-field" id="field-email">
+                <span class="profile-field__label">Email Address</span>
+                <span class="profile-field__value">efua.amoako@gmail.com</span>
+              </div>
+              <div class="profile-field" id="field-address">
+                <span class="profile-field__label">Address / Neighbourhood</span>
+                <span class="profile-field__value">East Legon, Accra</span>
+              </div>
+              <div class="profile-field" id="field-occupation">
+                <span class="profile-field__label">Occupation</span>
+                <span class="profile-field__value">Graphic Designer</span>
+              </div>
+              <div class="profile-field" id="field-emergency">
+                <span class="profile-field__label">Emergency Contact</span>
+                <span class="profile-field__value">Kwame Amoako — 024 555 0199</span>
+              </div>
+            </div>
+
+            <!-- Personal Details (Read-Only Display) -->
+            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="clipboard-list" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Personal Details</h4>
+            <div class="grid grid--3" style="margin-bottom: var(--space-xl);">
+              <div class="profile-field">
+                <span class="profile-field__label">Date of Birth</span>
+                <span class="profile-field__value">15 Mar 1994</span>
+              </div>
+              <div class="profile-field">
+                <span class="profile-field__label">Gender</span>
+                <span class="profile-field__value">Female</span>
+              </div>
+              <div class="profile-field">
+                <span class="profile-field__label">Marital Status</span>
+                <span class="profile-field__value">Single</span>
+              </div>
+            </div>
+
+            <!-- Church Info (Locked / Read-Only — requires leader to update) -->
+            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="church" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Church Information <span style="font-size: var(--fs-xs); color: var(--color-gray-400); font-weight: 400;">— Managed by church leadership</span></h4>
+            <div class="grid grid--2" style="margin-bottom: var(--space-xl);">
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Membership Status</span>
+                <span class="profile-field__value">Active Member</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Date of First Attendance</span>
+                <span class="profile-field__value">12 Jan 2019</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Water Baptism</span>
+                <span class="profile-field__value">Baptised — 25 Dec 2019</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Holy Spirit Baptism</span>
+                <span class="profile-field__value">Received — 14 Feb 2020</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Membership Class</span>
+                <span class="profile-field__value">Completed — May 2019</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Department / Group</span>
+                <span class="profile-field__value">Choir, Young Adults</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Church Role / Title</span>
+                <span class="profile-field__value">Member</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Preferred Service</span>
+                <span class="profile-field__value">2nd Service (9:30 AM)</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+            </div>
+
+            <!-- Family Linkages -->
+            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="users" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Family Linkages</h4>
+            <div class="grid grid--2">
+              <div class="profile-field profile-field--locked">
+                <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Family Members (Linked)</span>
+                <span class="profile-field__value">Kwame Amoako (Father), Abena Amoako (Mother)</span>
+                <span class="profile-field__hint">Contact your leader to update this</span>
+              </div>
+            </div>
+
+            <!-- Member Notification Preferences (PRD 10.3) -->
+            <div id="member-notif-prefs"></div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3: MY ATTENDANCE
+             ============================================================ -->
+        <div class="dashboard-section" id="section-attendance">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">My Attendance</h2>
+              <p class="section-header__subtitle">Your personal attendance record & consistency journey — keep up the great work!</p>
+            </div>
+          </div>
+
+          <!-- Attendance Journey Consistency Grid Container -->
+          <div id="member-journey-chart" style="margin-bottom: var(--space-xl);"></div>
+
+          <div class="filter-bar">
+            <input type="date" class="form-input" id="att-filter-from" style="max-width: 170px;">
+            <span style="color: var(--color-gray-400);">to</span>
+            <input type="date" class="form-input" id="att-filter-to" style="max-width: 170px;">
+            <button class="btn btn--primary btn--sm" id="btn-filter-attendance">Apply Filter</button>
+            <button class="btn btn--ghost btn--sm" id="btn-clear-att-filter">Clear</button>
+          </div>
+
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">Services You Attended</h3>
+              <span style="font-size: var(--fs-xs); color: var(--color-gray-500);" id="att-summary-text">Showing all records</span>
+            </div>
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Service</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="attendance-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4: MY GIVING
+             ============================================================ -->
+        <div class="dashboard-section" id="section-giving">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">My Giving History</h2>
+              <p class="section-header__subtitle">Every contribution you've made — thank you for your generosity</p>
+            </div>
+          </div>
+
+          <!-- Annual Statement Generator -->
+          <div class="widget" style="margin-bottom: var(--space-2xl);">
+            <div class="widget__header">
+              <h3 class="widget__title"><i data-lucide="file-text" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i> Annual Giving Statement</h3>
+            </div>
+            <div class="widget__body">
+              <div style="display: flex; gap: var(--space-md); align-items: flex-end; flex-wrap: wrap;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label for="my-stmt-year" class="form-label">Year</label>
+                  <select id="my-stmt-year" class="form-select">
+                    <option value="2026">2026 (Year to Date)</option>
+                    <option value="2025" selected>2025</option>
+                    <option value="2024">2024</option>
+                  </select>
+                </div>
+                <button class="btn btn--primary btn--sm" id="btn-my-generate-stmt">Generate Statement</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Giving Transactions -->
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">All Giving Transactions</h3>
+            </div>
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Category</th>
+                      <th>Amount</th>
+                      <th>Method</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="giving-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 5: ANNOUNCEMENTS (Shared Module Feed)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-announcements">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Church Announcements</h2>
+              <p class="section-header__subtitle">Stay in the loop with the latest from Grace Assembly</p>
+            </div>
+            <button class="btn btn--ghost btn--sm" onclick="ChurchComms.markAllRead()">Mark All as Read</button>
+          </div>
+
+          <div id="comm-announcements-feed">
+            <!-- Populated by communications.js -->
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 6: PRAYER REQUESTS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-prayer">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Prayer Requests</h2>
+              <p class="section-header__subtitle">Share your needs — our pastoral team is praying with you</p>
+            </div>
+          </div>
+
+          <!-- Submit Prayer Request Form -->
+          <div class="widget" style="margin-bottom: var(--space-2xl);">
+            <div class="widget__header">
+              <h3 class="widget__title">Submit a New Prayer Request</h3>
+            </div>
+            <div class="widget__body">
+              <form id="form-prayer-request">
+                <div class="form-group">
+                  <label for="prayer-description" class="form-label">What would you like prayer for?</label>
+                  <textarea id="prayer-description" class="form-input" rows="3" placeholder="Share your prayer need here — this will only be seen by the pastoral team..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary"><i data-lucide="hand-heart" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Submit Prayer Request</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- My Submitted Prayer Requests -->
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">My Prayer Requests</h3>
+            </div>
+            <div class="widget__body" id="prayer-requests-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 7: MY GROUPS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-groups">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">My Groups & Departments</h2>
+              <p class="section-header__subtitle">The groups you belong to at Grace Assembly</p>
+            </div>
+          </div>
+
+          <div id="groups-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 8: CHURCH ACTIVITY & COMMUNITY UPDATES
+             ============================================================ -->
+        <div class="dashboard-section" id="section-activity-log">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Church Activity & Community Updates</h2>
+              <p class="section-header__subtitle">Warm updates, announcements, group milestones, and prayer request updates</p>
+            </div>
+          </div>
+
+          <div id="activity-log-member"></div>
+        </div>
+
+      </div><!-- end dashboard-content -->
+    </main>
+  </div>
+
+  <!-- ========== MOBILE BOTTOM NAV ========== -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <ul class="bottom-nav__list">
+      <li class="bottom-nav__item">
+        <a href="#" class="bottom-nav__link active" data-section="home">
+          <span class="bottom-nav__icon"><i data-lucide="home"></i></span>
+          Home
+        </a>
+      </li>
+      <li class="bottom-nav__item">
+        <a href="#" class="bottom-nav__link" data-section="profile">
+          <span class="bottom-nav__icon"><i data-lucide="user"></i></span>
+          Profile
+        </a>
+      </li>
+      <li class="bottom-nav__item">
+        <a href="#" class="bottom-nav__link" data-section="giving">
+          <span class="bottom-nav__icon"><i data-lucide="heart-handshake"></i></span>
+          Giving
+        </a>
+      </li>
+      <li class="bottom-nav__item">
+        <a href="#" class="bottom-nav__link" data-section="announcements">
+          <span class="bottom-nav__icon"><i data-lucide="megaphone"></i></span>
+          News
+        </a>
+      </li>
+      <li class="bottom-nav__item">
+        <a href="#" class="bottom-nav__link" data-section="prayer">
+          <span class="bottom-nav__icon"><i data-lucide="hand-heart"></i></span>
+          Prayer
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ================================================================
+       MODALS
+       ================================================================ -->
+
+  <!-- MY ANNUAL GIVING STATEMENT MODAL -->
+  <div class="modal-overlay" id="modal-my-statement">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title">My Annual Giving Statement</h3>
+        <button class="modal__close" data-close="modal-my-statement" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body" id="modal-my-statement-body">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-my-statement">Close</button>
+        <button class="btn btn--primary" id="btn-download-my-stmt">Download PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat mode — no build step needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/communications.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/activityLog.js"></script>
+  <script src="js/dashboard-member.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

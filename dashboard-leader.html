@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leader / Department Head Dashboard — Scoped access for managing group roster, attendance, care tasks, visitors, and department communication.">
+  <title>Leader Dashboard — ChurchOS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body data-comm-role="leader">
+
+  <div class="dashboard">
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__header">
+        <a href="index.html" class="sidebar__logo">
+          <div class="sidebar__logo-icon"><i data-lucide="cross"></i></div>
+          ChurchOS
+        </a>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section">Department Scope</div>
+        <a href="#" class="sidebar__link active" data-section="overview">
+          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> Overview
+        </a>
+        <a href="#" class="sidebar__link" data-section="roster">
+          <span class="sidebar__link-icon"><i data-lucide="users"></i></span> My Roster
+        </a>
+        <a href="#" class="sidebar__link" data-section="attendance">
+          <span class="sidebar__link-icon"><i data-lucide="check-circle"></i></span> Attendance
+        </a>
+
+        <div class="sidebar__section">Follow-Up & Visitors</div>
+        <a href="#" class="sidebar__link" data-section="followup">
+          <span class="sidebar__link-icon"><i data-lucide="flag"></i></span> Follow-Up & Flags
+        </a>
+        <a href="#" class="sidebar__link" data-section="visitors">
+          <span class="sidebar__link-icon"><i data-lucide="user-plus"></i></span> Visitor Registration
+        </a>
+        <a href="#" class="sidebar__link" data-section="communication">
+          <span class="sidebar__link-icon"><i data-lucide="message-square"></i></span> Group Communication
+        </a>
+
+        <div class="sidebar__section">Accountability</div>
+        <a href="#" class="sidebar__link" data-section="reports">
+          <span class="sidebar__link-icon"><i data-lucide="trending-up"></i></span> My Reports
+        </a>
+        <a href="#" class="sidebar__link" data-section="activity-log">
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Department Activity
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__avatar js-user-initials">KD</div>
+          <div>
+            <div class="sidebar__user-name js-user-name">Kofi Darko</div>
+            <div class="sidebar__user-role js-user-role">Youth Ministry Leader</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebar-toggle" aria-label="Toggle sidebar"><i data-lucide="menu"></i></button>
+          <div class="topbar__greeting">
+            <div style="display: flex; align-items: center; gap: var(--space-sm);">
+              <h2>Hello, <span class="js-user-name">Kofi Darko</span></h2>
+              <span class="dept-badge">Youth Ministry</span>
+            </div>
+            <p>Department Head Dashboard — Scoped Access</p>
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="topbar__notification" title="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="topbar__notification-badge"></span>
+          </div>
+          <a href="#" class="btn btn--ghost btn--sm js-logout">Log Out</a>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+
+        <!-- ============================================================
+             SECTION 1: OVERVIEW (Scoped to Youth Ministry)
+             ============================================================ -->
+        <div class="dashboard-section active" id="section-overview">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Youth Ministry Overview</h2>
+              <p class="section-header__subtitle">Group membership, recent meeting attendance, and open follow-up tasks</p>
+            </div>
+            <button class="btn btn--primary btn--sm" data-goto="attendance">✅ Take Attendance Now</button>
+          </div>
+
+          <div class="grid grid--4" style="margin-bottom: var(--space-2xl);">
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="users"></i></div>
+              <div>
+                <div class="stat-card__value" id="leader-stat-members">15</div>
+                <div class="stat-card__label">Group Members</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 2 new this month</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--success"><i data-lucide="check-circle"></i></div>
+              <div>
+                <div class="stat-card__value" id="leader-stat-attendance">12</div>
+                <div class="stat-card__label">Last Meeting Attendance</div>
+                <div class="stat-card__trend stat-card__trend--up">80% attendance rate</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--info"><i data-lucide="user-plus"></i></div>
+              <div>
+                <div class="stat-card__value" id="leader-stat-visitors">3</div>
+                <div class="stat-card__label">Group Visitors</div>
+                <div class="stat-card__trend stat-card__trend--up">↑ 1 converted</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__icon stat-card__icon--warning"><i data-lucide="flag"></i></div>
+              <div>
+                <div class="stat-card__value" id="leader-stat-tasks">2</div>
+                <div class="stat-card__label">Assigned Care Tasks</div>
+                <div class="stat-card__trend stat-card__trend--down" style="cursor: pointer;" data-goto="followup">View Tasks →</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid--2">
+            <!-- Recent Attendance Summary -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Recent Meeting Attendance</h3>
+                <button class="btn btn--ghost btn--sm" data-goto="attendance">Full Log</button>
+              </div>
+              <div class="widget__body">
+                <div class="bar-chart" id="leader-overview-chart">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Cards -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Quick Group Actions</h3>
+              </div>
+              <div class="widget__body">
+                <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+                  <div class="quick-action" data-goto="attendance">
+                    <div class="quick-action__icon" style="background: var(--color-success-bg); color: var(--color-success);">✅</div>
+                    <div>
+                      <div class="quick-action__title">Record Today's Attendance</div>
+                      <div class="quick-action__desc">Mark roster members Present / Absent</div>
+                    </div>
+                  </div>
+                  <div class="quick-action" data-goto="visitors">
+                    <div class="quick-action__icon" style="background: var(--color-info-bg); color: var(--color-info);">🙋</div>
+                    <div>
+                      <div class="quick-action__title">Register New Group Visitor</div>
+                      <div class="quick-action__desc">Add first-time visitors and trigger follow-up</div>
+                    </div>
+                  </div>
+                  <div class="quick-action" data-goto="communication">
+                    <div class="quick-action__icon" style="background: rgba(212,168,67,0.12); color: var(--color-gold-dark);">📱</div>
+                    <div>
+                      <div class="quick-action__title">Message Youth Ministry</div>
+                      <div class="quick-action__desc">Send SMS / push notification to group</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2: MY ROSTER (Scoped to Youth Ministry)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-roster">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Youth Ministry Roster</h2>
+              <p class="section-header__subtitle">Manage roster members assigned to your department</p>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <input type="text" class="form-input form-input--search" id="leader-roster-search" placeholder="Search roster member by name or phone...">
+            <select class="form-select" id="leader-roster-filter-status">
+              <option value="">All Statuses</option>
+              <option value="Active">Active Member</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Visitor">Visitor</option>
+            </select>
+          </div>
+
+          <div class="widget">
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>Status</th>
+                      <th>Last Attended Group</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="leader-roster-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3: ATTENDANCE (Shared Module with Offline Queue & Sync)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-attendance">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Attendance Recorder & Offline Sync</h2>
+              <p class="section-header__subtitle">Multi-method attendance recording, real-time offline queueing, and absenteeism tracking</p>
+            </div>
+          </div>
+
+          <!-- Shared Attendance Module Container -->
+          <div id="attendance-module-container"></div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4: FOLLOW-UP & FLAGS
+             ============================================================ -->
+        <div class="dashboard-section" id="section-followup">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Follow-Up & Care Tasks</h2>
+              <p class="section-header__subtitle">Manage tasks assigned to you and flag group members requiring pastoral attention</p>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btn-flag-group-member">+ Flag Member</button>
+          </div>
+
+          <div class="info-box">
+            <span>🔒</span>
+            <span>Member Privacy Guaranteed: Members will never see flags or follow-up notes on their own profiles.</span>
+          </div>
+
+          <div class="widget">
+            <div class="widget__header">
+              <h3 class="widget__title">My Assigned Care Tasks</h3>
+            </div>
+            <div class="widget__body widget__body--flush">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Reason / Note</th>
+                      <th>Due Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="leader-tasks-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 5: VISITOR REGISTRATION
+             ============================================================ -->
+        <div class="dashboard-section" id="section-visitors">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Visitor Registration</h2>
+              <p class="section-header__subtitle">Register first-time visitors and automatically initiate follow-up</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
+            <!-- Register Form -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Register New Group Visitor</h3>
+              </div>
+              <div class="widget__body">
+                <form id="form-register-visitor">
+                  <div class="form-group">
+                    <label for="vis-name" class="form-label">Full Name <span class="required">*</span></label>
+                    <input type="text" id="vis-name" class="form-input" placeholder="e.g. Justice Amponsah" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="vis-phone" class="form-label">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="vis-phone" class="form-input" placeholder="e.g. 055 555 0119" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="vis-how" class="form-label">How did they hear about us?</label>
+                    <select id="vis-how" class="form-select">
+                      <option value="Friend/Family Invitation">Friend / Family Invitation</option>
+                      <option value="Social Media">Social Media</option>
+                      <option value="Church Flyer">Church Flyer</option>
+                      <option value="Walk-in">Walk-in</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn--primary btn--block">Save Visitor & Create Follow-Up</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Group Visitor Directory -->
+            <div class="widget">
+              <div class="widget__header">
+                <h3 class="widget__title">Group Visitors</h3>
+              </div>
+              <div class="widget__body widget__body--flush">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Visitor Name</th>
+                        <th>Phone</th>
+                        <th>Initial Visit Date</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="leader-visitors-tbody">
+                      <!-- Populated by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 6: GROUP COMMUNICATION (Shared Module)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-communication">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Group Communication</h2>
+              <p class="section-header__subtitle">Send broadcast announcements to your Youth Ministry members</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2">
+            <!-- Compose Panel (populated by communications.js) -->
+            <div id="comm-compose-container"></div>
+
+            <!-- Delivery Status + Sent History -->
+            <div>
+              <div id="comm-delivery-status" style="margin-bottom: var(--space-lg);"></div>
+              <div class="widget">
+                <div class="widget__header">
+                  <h3 class="widget__title">Sent Group Messages</h3>
+                </div>
+                <div class="widget__body" style="max-height: 400px; overflow-y: auto;">
+                  <div id="comm-history-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 7: MY REPORTS (Shared Module)
+             ============================================================ -->
+        <div class="dashboard-section" id="section-reports">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Monthly Department Activity & Accountability Reports</h2>
+              <p class="section-header__subtitle">Generate Youth Ministry activity reports and schedule automatic submission to Senior Pastor</p>
+            </div>
+          </div>
+
+          <!-- Shared Reporting Module Catalogue, Preview & Exporter (Locked to Youth Ministry) -->
+          <div id="reporting-container"></div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 8: DEPARTMENT ACTIVITY LOG
+             ============================================================ -->
+        <div class="dashboard-section" id="section-activity-log">
+          <div class="section-header">
+            <div>
+              <h2 class="section-header__title">Department Activity Log</h2>
+              <p class="section-header__subtitle">Activity history scoped to Youth Ministry roster, attendance, and team communications</p>
+            </div>
+          </div>
+
+          <div id="activity-log-leader"></div>
+        </div>
+
+      </div><!-- end dashboard-content -->
+    </main>
+  </div>
+
+  <!-- ================================================================
+       MODALS
+       ================================================================ -->
+
+  <!-- LIMITED MEMBER PROFILE MODAL (With Restricted Access Banners) -->
+  <div class="modal-overlay" id="modal-limited-member">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title">Member Profile</h3>
+        <button class="modal__close" data-close="modal-limited-member" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body" id="limited-member-modal-body">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-limited-member">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLAG GROUP MEMBER MODAL -->
+  <div class="modal-overlay" id="modal-flag-group-member">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Flag Member for Follow-Up</h3>
+        <button class="modal__close" data-close="modal-flag-group-member" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal__body">
+        <form id="form-flag-member">
+          <div class="form-group">
+            <label for="flag-member-select" class="form-label">Select Group Member <span class="required">*</span></label>
+            <select id="flag-member-select" class="form-select" required>
+              <option value="">— Select Member —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="flag-reason" class="form-label">Reason / Care Note <span class="required">*</span></label>
+            <textarea id="flag-reason" class="form-input" rows="3" placeholder="e.g. Absent 3 meetings, needs a friendly check-in call." required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" data-close="modal-flag-group-member">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-flag-member">Create Care Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat mode — no build step needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/communications.js"></script>
+  <script src="js/reporting.js"></script>
+  <script src="js/attendance.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/activityLog.js"></script>
+  <script src="js/dashboard-leader.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your ChurchOS account — choose your role and get started in minutes.">
+  <title>Sign Up — ChurchOS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="auth-page" id="signup-page">
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <div class="navbar__logo-icon"><i data-lucide="cross"></i></div>
+        ChurchOS
+      </a>
+      <div class="navbar__actions">
+        <a href="login.html" class="btn btn--ghost btn--sm">Log In</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== SIGNUP CONTAINER ========== -->
+  <div class="auth-container">
+    <div class="auth-card auth-card--wide">
+
+      <!-- Step Progress -->
+      <div class="signup-steps">
+        <div class="signup-step active" id="step-indicator-1">
+          <div class="signup-step__dot">1</div>
+          <span class="signup-step__label">Choose Role</span>
+        </div>
+        <div class="signup-step__line" id="step-line-1"></div>
+        <div class="signup-step" id="step-indicator-2">
+          <div class="signup-step__dot">2</div>
+          <span class="signup-step__label">Your Details</span>
+        </div>
+        <div class="signup-step__line" id="step-line-2"></div>
+        <div class="signup-step" id="step-indicator-3">
+          <div class="signup-step__dot">3</div>
+          <span class="signup-step__label">Welcome</span>
+        </div>
+      </div>
+
+      <!-- ===== STEP 1: Role Selection ===== -->
+      <div class="step-panel active" id="step-1">
+        <div class="auth-header">
+          <h2 class="auth-header__title">Join ChurchOS</h2>
+          <p class="auth-header__subtitle">Select your role to get started</p>
+        </div>
+
+        <div class="role-selector">
+          <div class="role-option" data-role="admin">
+            <div class="role-option__icon"><img src="assets/icons/icon_administrator.png" alt="Church Administrator" class="icon-img icon-img--round"></div>
+            <div class="role-option__name">Church Administrator</div>
+            <div class="role-option__desc">Set up &amp; manage your church</div>
+          </div>
+          <div class="role-option" data-role="pastor">
+            <div class="role-option__icon"><img src="assets/icons/icon_senior_pastor.png" alt="Senior Pastor" class="icon-img icon-img--round"></div>
+            <div class="role-option__name">Senior Pastor</div>
+            <div class="role-option__desc">Oversee church health</div>
+          </div>
+          <div class="role-option" data-role="leader">
+            <div class="role-option__icon"><img src="assets/icons/icon_leader.png" alt="Leader / Dept Head" class="icon-img icon-img--round"></div>
+            <div class="role-option__name">Leader / Dept Head</div>
+            <div class="role-option__desc">Lead your department</div>
+          </div>
+          <div class="role-option" data-role="finance">
+            <div class="role-option__icon"><img src="assets/icons/icon_finance_team.svg" alt="Finance Team" class="icon-img icon-img--round"></div>
+            <div class="role-option__name">Finance Team</div>
+            <div class="role-option__desc">Manage giving &amp; reports</div>
+          </div>
+          <div class="role-option" data-role="member">
+            <div class="role-option__icon"><img src="assets/icons/icon_member.svg" alt="Member" class="icon-img icon-img--round"></div>
+            <div class="role-option__name">Member</div>
+            <div class="role-option__desc">Join your church community</div>
+          </div>
+        </div>
+
+        <button class="btn btn--primary btn--block btn--lg" id="btn-continue-role" disabled>
+          Continue →
+        </button>
+
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Log in</a>
+        </div>
+      </div>
+
+      <!-- ===== STEP 2: Registration Form ===== -->
+      <div class="step-panel" id="step-2">
+        <div class="auth-header">
+          <h2 class="auth-header__title">Create your account</h2>
+          <p class="auth-header__subtitle">Fill in your details below</p>
+        </div>
+
+        <div id="signup-alert" class="alert" role="alert"></div>
+
+        <form id="signup-form" novalidate>
+          <!-- Shared fields -->
+          <div class="form-group">
+            <label for="signup-name" class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" id="signup-name" class="form-input" placeholder="e.g. Kwame Asante" required>
+            <div class="form-error" id="error-name"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="signup-phone" class="form-label">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="signup-phone" class="form-input" placeholder="e.g. 024 123 4567" required>
+              <div class="form-hint">Your primary login identifier</div>
+              <div class="form-error" id="error-phone"></div>
+            </div>
+            <div class="form-group">
+              <label for="signup-email" class="form-label">Email Address <span class="required" style="display:inline">*</span></label>
+              <input type="email" id="signup-email" class="form-input" placeholder="e.g. kwame@email.com">
+              <div class="form-error" id="error-email"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="signup-password" class="form-label">Password <span class="required">*</span></label>
+              <div class="password-wrapper">
+                <input type="password" id="signup-password" class="form-input" placeholder="Min. 6 characters" required>
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
+              </div>
+              <div class="form-error" id="error-password"></div>
+            </div>
+            <div class="form-group">
+              <label for="signup-confirm" class="form-label">Confirm Password <span class="required">*</span></label>
+              <div class="password-wrapper">
+                <input type="password" id="signup-confirm" class="form-input" placeholder="Re-enter password" required>
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
+              </div>
+              <div class="form-error" id="error-confirm"></div>
+            </div>
+          </div>
+
+          <!-- ===== Role-specific fields ===== -->
+
+          <!-- Admin fields -->
+          <div class="role-fields" id="fields-admin" style="display:none;">
+            <div class="auth-divider">Church Information</div>
+            <div class="form-group">
+              <label for="admin-church-name" class="form-label">Church Name <span class="required">*</span></label>
+              <input type="text" id="admin-church-name" class="form-input" placeholder="e.g. Grace Assembly">
+              <div class="form-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="admin-church-address" class="form-label">Church Address <span class="required">*</span></label>
+              <input type="text" id="admin-church-address" class="form-input" placeholder="e.g. 15 Independence Ave, Accra">
+              <div class="form-error"></div>
+            </div>
+          </div>
+
+          <!-- Pastor fields -->
+          <div class="role-fields" id="fields-pastor" style="display:none;">
+            <div class="auth-divider">Church Information</div>
+            <div class="form-group">
+              <label for="pastor-church-name" class="form-label">Church Name <span class="required">*</span></label>
+              <input type="text" id="pastor-church-name" class="form-input" placeholder="Enter or select your church name">
+              <div class="form-hint">If your church is already on ChurchOS, select it. Otherwise, type a new name.</div>
+              <div class="form-error"></div>
+            </div>
+          </div>
+
+          <!-- Leader fields -->
+          <div class="role-fields" id="fields-leader" style="display:none;">
+            <div class="auth-divider">Department Information</div>
+            <div class="form-group">
+              <label for="leader-department" class="form-label">Department / Group Name</label>
+              <input type="text" id="leader-department" class="form-input" placeholder="e.g. Youth Ministry, Choir">
+              <div class="form-hint">You can leave this blank — it can be assigned later.</div>
+            </div>
+          </div>
+
+          <!-- Finance fields -->
+          <div class="role-fields" id="fields-finance" style="display:none;">
+            <div class="auth-divider">Church Information</div>
+            <div class="form-group">
+              <label for="finance-church-name" class="form-label">Church Name <span class="required">*</span></label>
+              <input type="text" id="finance-church-name" class="form-input" placeholder="Select your church">
+              <div class="form-error"></div>
+            </div>
+          </div>
+
+          <!-- Member fields -->
+          <div class="role-fields" id="fields-member" style="display:none;">
+            <div class="auth-divider">Additional Information</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="member-service" class="form-label">Preferred Service</label>
+                <select id="member-service" class="form-select">
+                  <option value="">Select a service</option>
+                  <option value="1st Service">1st Service (7:00 AM)</option>
+                  <option value="2nd Service">2nd Service (9:30 AM)</option>
+                  <option value="3rd Service">3rd Service (12:00 PM)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="member-referral" class="form-label">How did you hear about us?</label>
+                <input type="text" id="member-referral" class="form-input" placeholder="Optional">
+              </div>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="signup-terms">
+              <span>I agree to ChurchOS's <a href="#" style="color: var(--color-gold-dark); font-weight: 600;">Terms of Service</a> and <a href="#" style="color: var(--color-gold-dark); font-weight: 600;">Privacy Policy</a></span>
+            </label>
+          </div>
+
+          <div style="display: flex; gap: var(--space-md);">
+            <button type="button" class="btn btn--outline btn--lg" id="btn-back-role" style="flex: 0 0 auto;">
+              ← Back
+            </button>
+            <button type="submit" class="btn btn--primary btn--block btn--lg">
+              Create Account
+            </button>
+          </div>
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Log in</a>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3: Success ===== -->
+      <div class="step-panel" id="step-3">
+        <div class="success-state">
+          <div class="success-state__icon"><i data-lucide="check"></i></div>
+          <h3 class="success-state__title">Welcome to ChurchOS!</h3>
+          <p class="success-state__text">
+            Your account has been created. You'll be redirected to your dashboard in a moment.
+            This is step 1 of onboarding — you'll complete your full profile next.
+          </p>
+          <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-sm); color: var(--color-gray-400); font-size: var(--fs-sm);">
+            <span class="hero__badge-dot"></span>
+            Redirecting to your dashboard…
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat mode — no build step needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
