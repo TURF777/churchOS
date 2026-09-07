@@ -213,20 +213,22 @@
         const confirm = document.getElementById('signup-confirm');
         const terms = document.getElementById('signup-terms');
 
+        const _t = window.t || ((k) => k);
+
         let valid = true;
 
-        if (!name.value.trim()) { showError(name, 'Full name is required'); valid = false; }
-        if (!validatePhone(phone.value)) { showError(phone, 'Enter a valid Ghanaian phone number'); valid = false; }
+        if (!name.value.trim()) { showError(name, _t('errors.required_field')); valid = false; }
+        if (!validatePhone(phone.value)) { showError(phone, _t('errors.invalid_phone')); valid = false; }
         if (selectedRole !== 'member' && email.value && !validateEmail(email.value)) {
-          showError(email, 'Enter a valid email address'); valid = false;
+          showError(email, _t('errors.invalid_email')); valid = false;
         }
         if (selectedRole !== 'member' && !email.value.trim()) {
-          showError(email, 'Email is required for this role'); valid = false;
+          showError(email, _t('errors.required_field')); valid = false;
         }
-        if (!validatePassword(password.value)) { showError(password, 'Password must be at least 6 characters'); valid = false; }
-        if (password.value !== confirm.value) { showError(confirm, 'Passwords do not match'); valid = false; }
+        if (!validatePassword(password.value)) { showError(password, _t('errors.password_too_short')); valid = false; }
+        if (password.value !== confirm.value) { showError(confirm, _t('errors.passwords_no_match')); valid = false; }
         if (!terms.checked) {
-          showAlert('signup-alert', 'You must accept the Terms & Conditions', 'error');
+          showAlert('signup-alert', _t('errors.accept_terms'), 'error');
           valid = false;
         }
 
@@ -234,18 +236,18 @@
         if (selectedRole === 'admin') {
           const cn = document.getElementById('admin-church-name');
           const ca = document.getElementById('admin-church-address');
-          if (cn && !cn.value.trim()) { showError(cn, 'Church name is required'); valid = false; }
-          if (ca && !ca.value.trim()) { showError(ca, 'Church address is required'); valid = false; }
+          if (cn && !cn.value.trim()) { showError(cn, _t('errors.required_field')); valid = false; }
+          if (ca && !ca.value.trim()) { showError(ca, _t('errors.required_field')); valid = false; }
         }
 
         if (selectedRole === 'pastor') {
           const cn = document.getElementById('pastor-church-name');
-          if (cn && !cn.value.trim()) { showError(cn, 'Church name is required'); valid = false; }
+          if (cn && !cn.value.trim()) { showError(cn, _t('errors.required_field')); valid = false; }
         }
 
         if (selectedRole === 'finance') {
           const cn = document.getElementById('finance-church-name');
-          if (cn && !cn.value.trim()) { showError(cn, 'Church name is required'); valid = false; }
+          if (cn && !cn.value.trim()) { showError(cn, _t('errors.required_field')); valid = false; }
         }
 
         if (!valid) return;
@@ -317,31 +319,31 @@
 
           // Map Firebase error codes to user-friendly messages
           const errorMessages = {
-            'auth/email-already-in-use':      'This phone number is already registered. Please log in instead.',
-            'auth/weak-password':             'Password is too weak. Use at least 6 characters.',
-            'auth/invalid-email':             'Invalid phone number format. Please check and try again.',
-            'auth/network-request-failed':    'Network error. Please check your internet connection and try again.',
-            'auth/unauthorized-domain':       'This website domain is not authorized for sign-up. Please contact the administrator.',
-            'auth/operation-not-allowed':     'Email/Password sign-in is not enabled. Please contact the administrator.',
-            'auth/configuration-not-found':   'Firebase is not configured correctly. Please contact the administrator.',
-            'auth/too-many-requests':         'Too many attempts. Please wait a few minutes and try again.',
-            'auth/internal-error':            'An internal error occurred. Please try again later.',
+            'auth/email-already-in-use':      _t('errors.auth.email_in_use'),
+            'auth/weak-password':             _t('errors.auth.weak_password'),
+            'auth/invalid-email':             _t('errors.auth.invalid_email'),
+            'auth/network-request-failed':    _t('errors.auth.network'),
+            'auth/unauthorized-domain':       _t('errors.auth.unauthorized_domain'),
+            'auth/operation-not-allowed':     _t('errors.auth.operation_not_allowed'),
+            'auth/configuration-not-found':   _t('errors.auth.config_not_found'),
+            'auth/too-many-requests':         _t('errors.auth.too_many_requests'),
+            'auth/internal-error':            _t('errors.auth.internal'),
           };
 
           let message = errorMessages[err.code];
           if (!message) {
             // Check for Firestore permission errors (from dbSet)
             if (err.code === 'permission-denied' || (err.message && err.message.includes('Missing or insufficient permissions'))) {
-              message = 'Account created but profile could not be saved (permission error). Please contact the administrator.';
+              message = _t('errors.auth.permission_denied');
             } else {
-              message = `Registration failed: ${err.code || err.message || 'Unknown error'}. Please try again.`;
+              message = _t('errors.auth.generic_signup', { code: err.code || err.message || 'Unknown error' });
             }
           }
 
           showAlert('signup-alert', message, 'error');
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Create Account';
+            submitBtn.textContent = _t('signup.step2.submit');
           }
         }
       });
@@ -363,18 +365,19 @@
       clearAllErrors(form);
       hideAlert('login-alert');
 
+      const _t = window.t || ((k) => k);
       const identifier = document.getElementById('login-identifier');
       const password = document.getElementById('login-password');
 
       let valid = true;
 
       if (!identifier.value.trim()) {
-        showError(identifier, 'Phone number or email is required');
+        showError(identifier, _t('errors.required_field'));
         valid = false;
       }
 
       if (!password.value) {
-        showError(password, 'Password is required');
+        showError(password, _t('errors.required_field'));
         valid = false;
       }
 
@@ -427,7 +430,7 @@
         // Cache user locally for immediate use
         localStorage.setItem('churchos_current_user', JSON.stringify(userProfile));
 
-        showAlert('login-alert', 'Login successful! Redirecting...', 'success');
+        showAlert('login-alert', _t('success.login'), 'success');
         setTimeout(() => {
           redirectToDashboard(userProfile.role);
         }, 1000);
@@ -437,28 +440,28 @@
 
         // Map Firebase error codes to user-friendly messages
         const errorMessages = {
-          'auth/user-not-found':           'No account found with this phone number or email. Please sign up first.',
-          'auth/invalid-credential':       'No account found with this phone number or email. Please sign up first.',
-          'auth/wrong-password':           'Invalid password. Please try again.',
-          'auth/too-many-requests':        'Too many failed attempts. Please wait a few minutes and try again.',
-          'auth/network-request-failed':   'Network error. Please check your internet connection.',
-          'auth/unauthorized-domain':      'This website domain is not authorized for login. Please contact the administrator.',
-          'auth/operation-not-allowed':    'Email/Password sign-in is not enabled. Please contact the administrator.',
-          'auth/configuration-not-found':  'Firebase is not configured correctly. Please contact the administrator.',
-          'auth/user-disabled':            'This account has been disabled. Please contact the administrator.',
-          'auth/internal-error':           'An internal error occurred. Please try again later.',
+          'auth/user-not-found':           _t('errors.auth.user_not_found'),
+          'auth/invalid-credential':       _t('errors.auth.user_not_found'),
+          'auth/wrong-password':           _t('errors.auth.wrong_password'),
+          'auth/too-many-requests':        _t('errors.auth.too_many_requests'),
+          'auth/network-request-failed':   _t('errors.auth.network'),
+          'auth/unauthorized-domain':      _t('errors.auth.unauthorized_domain'),
+          'auth/operation-not-allowed':    _t('errors.auth.operation_not_allowed'),
+          'auth/configuration-not-found':  _t('errors.auth.config_not_found'),
+          'auth/user-disabled':            _t('errors.auth.user_disabled'),
+          'auth/internal-error':           _t('errors.auth.internal'),
         };
 
         let message = errorMessages[err.code];
         if (!message) {
           // Include the actual error for debugging but keep it user-readable
-          message = `Login failed: ${err.code || err.message || 'Unknown error'}. Please try again.`;
+          message = _t('errors.auth.generic_login', { code: err.code || err.message || 'Unknown error' });
         }
 
         showAlert('login-alert', message, 'error');
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Sign In';
+          submitBtn.textContent = _t('login.submit');
         }
       }
     });
@@ -562,7 +565,9 @@
         el.textContent = u.name || 'User';
       });
       document.querySelectorAll('.js-user-role').forEach(el => {
-        el.textContent = u.roleLabel || u.role;
+        const _t = window.t || ((k) => k);
+        const translated = _t(`signup.role.${u.role}_name`);
+        el.textContent = (translated && translated !== `signup.role.${u.role}_name`) ? translated : (u.roleLabel || u.role);
       });
       document.querySelectorAll('.js-user-initials').forEach(el => {
         const names = (u.name || 'U').split(' ');
@@ -584,6 +589,10 @@
         el.textContent = u.preferredService || 'Not set';
       });
     }
+
+    document.addEventListener('languageChanged', () => {
+      if (user) populateUserInfo(user);
+    });
 
     // Sidebar toggle (mobile)
     const sidebarToggle = document.querySelector('.topbar__toggle');

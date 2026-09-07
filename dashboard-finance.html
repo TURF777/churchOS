@@ -21,34 +21,34 @@
       </div>
 
       <nav class="sidebar__nav">
-        <div class="sidebar__section">Financial Overview</div>
+        <div class="sidebar__section" data-i18n="dashboard.sidebar.overview">Financial Overview</div>
         <a href="#" class="sidebar__link active" data-section="overview">
-          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> Overview
+          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> <span data-i18n="dashboard.sidebar.overview">Overview</span>
         </a>
         <a href="#" class="sidebar__link" data-section="record">
-          <span class="sidebar__link-icon"><i data-lucide="credit-card"></i></span> Record a Transaction
+          <span class="sidebar__link-icon"><i data-lucide="credit-card"></i></span> <span data-i18n="dashboard.sidebar.record_giving">Record a Transaction</span>
         </a>
         <a href="#" class="sidebar__link" data-section="bulk">
-          <span class="sidebar__link-icon"><i data-lucide="coins"></i></span> Bulk Offering Entry
+          <span class="sidebar__link-icon"><i data-lucide="coins"></i></span> <span data-i18n="dashboard.sidebar.record_giving">Bulk Offering Entry</span>
         </a>
 
-        <div class="sidebar__section">Records & Reports</div>
+        <div class="sidebar__section" data-i18n="dashboard.sidebar.reports">Records & Reports</div>
         <a href="#" class="sidebar__link" data-section="giving-records">
-          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Member Giving Records
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> <span data-i18n="dashboard.sidebar.transactions">Member Giving Records</span>
         </a>
         <a href="#" class="sidebar__link" data-section="reports">
-          <span class="sidebar__link-icon"><i data-lucide="trending-up"></i></span> Financial Reports
+          <span class="sidebar__link-icon"><i data-lucide="trending-up"></i></span> <span data-i18n="dashboard.sidebar.finance_reports">Financial Reports</span>
         </a>
         <a href="#" class="sidebar__link" data-section="statements">
-          <span class="sidebar__link-icon"><i data-lucide="file-text"></i></span> Annual Giving Statements
+          <span class="sidebar__link-icon"><i data-lucide="file-text"></i></span> <span data-i18n="dashboard.sidebar.statements">Annual Giving Statements</span>
         </a>
 
-        <div class="sidebar__section">Audit & Balancing</div>
+        <div class="sidebar__section" data-i18n="dashboard.sidebar.audit">Audit & Balancing</div>
         <a href="#" class="sidebar__link" data-section="reconciliation">
-          <span class="sidebar__link-icon"><i data-lucide="scale"></i></span> Reconciliation
+          <span class="sidebar__link-icon"><i data-lucide="scale"></i></span> <span data-i18n="dashboard.sidebar.reconciliation">Reconciliation</span>
         </a>
         <a href="#" class="sidebar__link" data-section="activity-log">
-          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Financial Activity Log
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> <span data-i18n="dashboard.sidebar.activity">Financial Activity Log</span>
         </a>
       </nav>
 
@@ -76,11 +76,30 @@
           </div>
         </div>
         <div class="topbar__right">
+          <div class="lang-switcher" id="lang-switcher">
+            <button class="lang-switcher__toggle" type="button" aria-label="Change language">
+              <i data-lucide="globe"></i>
+              <span class="lang-switcher__current">EN</span>
+            </button>
+            <div class="lang-switcher__dropdown">
+              <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
+              <button type="button" data-lang="en">English</button>
+              <button type="button" data-lang="fr">Français</button>
+              <button type="button" data-lang="es">Español</button>
+              <button type="button" data-lang="pt">Português</button>
+              <button type="button" data-lang="zh">中文</button>
+              <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
+              <button type="button" data-lang="tw">Twi</button>
+              <button type="button" data-lang="ga">Ga</button>
+              <button type="button" data-lang="ee">Eʋegbe</button>
+              <button type="button" data-lang="fat">Mfantse</button>
+            </div>
+          </div>
           <div class="topbar__notification" title="Notifications">
             <i data-lucide="bell"></i>
             <span class="topbar__notification-badge"></span>
           </div>
-          <a href="#" class="btn btn--ghost btn--sm js-logout">Log Out</a>
+          <a href="#" class="btn btn--ghost btn--sm js-logout" data-i18n="nav.logout">Log Out</a>
         </div>
       </header>
 
@@ -570,6 +589,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/db.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script src="js/reporting.js"></script>
   <script src="js/charts.js"></script>

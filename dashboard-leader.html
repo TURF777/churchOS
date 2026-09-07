@@ -21,34 +21,34 @@
       </div>
 
       <nav class="sidebar__nav">
-        <div class="sidebar__section">Department Scope</div>
+        <div class="sidebar__section" data-i18n="dashboard.sidebar.overview">Department Scope</div>
         <a href="#" class="sidebar__link active" data-section="overview">
-          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> Overview
+          <span class="sidebar__link-icon"><i data-lucide="layout-dashboard"></i></span> <span data-i18n="dashboard.sidebar.overview">Overview</span>
         </a>
         <a href="#" class="sidebar__link" data-section="roster">
-          <span class="sidebar__link-icon"><i data-lucide="users"></i></span> My Roster
+          <span class="sidebar__link-icon"><i data-lucide="users"></i></span> <span data-i18n="dashboard.sidebar.dept_members">My Roster</span>
         </a>
         <a href="#" class="sidebar__link" data-section="attendance">
-          <span class="sidebar__link-icon"><i data-lucide="check-circle"></i></span> Attendance
+          <span class="sidebar__link-icon"><i data-lucide="check-circle"></i></span> <span data-i18n="dashboard.sidebar.dept_attendance">Attendance</span>
         </a>
 
-        <div class="sidebar__section">Follow-Up & Visitors</div>
+        <div class="sidebar__section" data-i18n="dashboard.sidebar.pastoral_care">Follow-Up & Visitors</div>
         <a href="#" class="sidebar__link" data-section="followup">
-          <span class="sidebar__link-icon"><i data-lucide="flag"></i></span> Follow-Up & Flags
+          <span class="sidebar__link-icon"><i data-lucide="flag"></i></span> <span data-i18n="dashboard.sidebar.dept_follow_up">Follow-Up & Flags</span>
         </a>
         <a href="#" class="sidebar__link" data-section="visitors">
-          <span class="sidebar__link-icon"><i data-lucide="user-plus"></i></span> Visitor Registration
+          <span class="sidebar__link-icon"><i data-lucide="user-plus"></i></span> <span data-i18n="dashboard.sidebar.members">Visitor Registration</span>
         </a>
         <a href="#" class="sidebar__link" data-section="communication">
-          <span class="sidebar__link-icon"><i data-lucide="message-square"></i></span> Group Communication
+          <span class="sidebar__link-icon"><i data-lucide="message-square"></i></span> <span data-i18n="dashboard.sidebar.communications">Group Communication</span>
         </a>
 
-        <div class="sidebar__section">Accountability</div>
+        <div class="sidebar__section" data-i18n="dashboard.sidebar.reports">Accountability</div>
         <a href="#" class="sidebar__link" data-section="reports">
-          <span class="sidebar__link-icon"><i data-lucide="trending-up"></i></span> My Reports
+          <span class="sidebar__link-icon"><i data-lucide="trending-up"></i></span> <span data-i18n="dashboard.sidebar.reports">My Reports</span>
         </a>
         <a href="#" class="sidebar__link" data-section="activity-log">
-          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> Department Activity
+          <span class="sidebar__link-icon"><i data-lucide="scroll-text"></i></span> <span data-i18n="dashboard.sidebar.dept_activity">Department Activity</span>
         </a>
       </nav>
 
@@ -79,11 +79,30 @@
           </div>
         </div>
         <div class="topbar__right">
+          <div class="lang-switcher" id="lang-switcher">
+            <button class="lang-switcher__toggle" type="button" aria-label="Change language">
+              <i data-lucide="globe"></i>
+              <span class="lang-switcher__current">EN</span>
+            </button>
+            <div class="lang-switcher__dropdown">
+              <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
+              <button type="button" data-lang="en">English</button>
+              <button type="button" data-lang="fr">Français</button>
+              <button type="button" data-lang="es">Español</button>
+              <button type="button" data-lang="pt">Português</button>
+              <button type="button" data-lang="zh">中文</button>
+              <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
+              <button type="button" data-lang="tw">Twi</button>
+              <button type="button" data-lang="ga">Ga</button>
+              <button type="button" data-lang="ee">Eʋegbe</button>
+              <button type="button" data-lang="fat">Mfantse</button>
+            </div>
+          </div>
           <div class="topbar__notification" title="Notifications">
             <i data-lucide="bell"></i>
             <span class="topbar__notification-badge"></span>
           </div>
-          <a href="#" class="btn btn--ghost btn--sm js-logout">Log Out</a>
+          <a href="#" class="btn btn--ghost btn--sm js-logout" data-i18n="nav.logout">Log Out</a>
         </div>
       </header>
 
@@ -468,6 +487,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/db.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script src="js/communications.js"></script>
   <script src="js/reporting.js"></script>

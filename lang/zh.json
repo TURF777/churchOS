@@ -1,0 +1,19 @@
+{
+  "nav.features": "功能",
+  "nav.who_its_for": "适用人群",
+  "nav.contact": "联系我们",
+  "nav.login": "登录",
+  "nav.signup": "注册",
+  "nav.logout": "退出",
+  "landing.hero.cta_primary": "免费开始",
+  "login.title": "欢迎回来",
+  "login.submit": "登录",
+  "signup.step1.title": "加入 ChurchOS",
+  "common.save": "保存",
+  "common.cancel": "取消",
+  "common.delete": "删除",
+  "common.search": "搜索",
+  "dashboard.welcome": "欢迎，{name}",
+  "lang_switcher.international": "国际语言",
+  "lang_switcher.ghanaian": "加纳语言"
+}

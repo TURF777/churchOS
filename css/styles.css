@@ -4803,3 +4803,160 @@ svg.lucide {
   height: 20px;
   stroke-width: 2px;
 }
+
+/* ===================================================
+   Language Switcher Component
+   Globe icon + dropdown with International / Ghanaian groups
+   =================================================== */
+.lang-switcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-switcher__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-gray-200, #E2E8F0);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-gray-600, #475569);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.lang-switcher__toggle:hover {
+  background: var(--color-gray-100, #F1F5F9);
+  border-color: var(--color-gray-300, #CBD5E1);
+}
+
+.lang-switcher__toggle .lucide,
+.lang-switcher__toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2px;
+  flex-shrink: 0;
+}
+
+.lang-switcher__current {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Dropdown panel */
+.lang-switcher__dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid var(--color-gray-200, #E2E8F0);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+  z-index: 9999;
+  padding: 6px;
+  overflow: hidden;
+}
+
+.lang-switcher.open .lang-switcher__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Group labels */
+.lang-switcher__group-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-gray-400, #94A3B8);
+  padding: 8px 12px 4px;
+  pointer-events: none;
+}
+
+/* Language buttons */
+.lang-switcher__dropdown button[data-lang] {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-gray-700, #334155);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.lang-switcher__dropdown button[data-lang]:hover {
+  background: var(--color-gray-100, #F1F5F9);
+}
+
+.lang-switcher__dropdown button[data-lang].active {
+  background: var(--color-navy, #1B2A4A);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Divider between groups */
+.lang-switcher__dropdown .lang-switcher__group-label + .lang-switcher__group-label {
+  margin-top: 4px;
+}
+
+.lang-switcher__dropdown .lang-switcher__group-label:not(:first-child) {
+  border-top: 1px solid var(--color-gray-100, #F1F5F9);
+  margin-top: 4px;
+  padding-top: 10px;
+}
+
+/* ── Navbar variant (landing/auth pages) ── */
+.navbar__actions .lang-switcher {
+  margin-right: 8px;
+}
+
+.navbar__actions .lang-switcher__toggle {
+  border-color: transparent;
+  color: var(--color-navy, #1B2A4A);
+}
+
+.navbar__actions .lang-switcher__toggle:hover {
+  background: rgba(27, 42, 74, 0.06);
+}
+
+/* ── Dark variant (dashboard topbar) ── */
+.topbar .lang-switcher__toggle {
+  border-color: var(--color-gray-200, #E2E8F0);
+  color: var(--color-gray-600, #475569);
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  .lang-switcher__dropdown {
+    min-width: 160px;
+    right: -8px;
+  }
+
+  .lang-switcher__toggle {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .lang-switcher__current {
+    font-size: 11px;
+  }
+}

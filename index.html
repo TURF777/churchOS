@@ -24,13 +24,32 @@
 
       <div class="navbar__menu" id="nav-menu">
         <div class="navbar__links">
-          <a href="#features" class="navbar__link">Features</a>
-          <a href="#roles" class="navbar__link">Who It's For</a>
-          <a href="#footer" class="navbar__link">Contact</a>
+          <a href="#features" class="navbar__link" data-i18n="nav.features">Features</a>
+          <a href="#roles" class="navbar__link" data-i18n="nav.who_its_for">Who It's For</a>
+          <a href="#footer" class="navbar__link" data-i18n="nav.contact">Contact</a>
         </div>
         <div class="navbar__actions">
-          <a href="login.html" class="btn btn--ghost">Log In</a>
-          <a href="signup.html" class="btn btn--primary btn--sm">Sign Up Free</a>
+          <div class="lang-switcher" id="lang-switcher">
+            <button class="lang-switcher__toggle" type="button" aria-label="Change language">
+              <i data-lucide="globe"></i>
+              <span class="lang-switcher__current">EN</span>
+            </button>
+            <div class="lang-switcher__dropdown">
+              <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
+              <button type="button" data-lang="en">English</button>
+              <button type="button" data-lang="fr">Français</button>
+              <button type="button" data-lang="es">Español</button>
+              <button type="button" data-lang="pt">Português</button>
+              <button type="button" data-lang="zh">中文</button>
+              <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
+              <button type="button" data-lang="tw">Twi</button>
+              <button type="button" data-lang="ga">Ga</button>
+              <button type="button" data-lang="ee">Eʋegbe</button>
+              <button type="button" data-lang="fat">Mfantse</button>
+            </div>
+          </div>
+          <a href="login.html" class="btn btn--ghost" data-i18n="nav.login">Log In</a>
+          <a href="signup.html" class="btn btn--primary btn--sm" data-i18n="nav.signup">Sign Up Free</a>
         </div>
       </div>
     </div>
@@ -43,30 +62,30 @@
         <span class="hero__badge-dot"></span>
         Built for Ghanaian churches
       </div> -->
-      <h1 class="hero__title">
+      <h1 class="hero__title" data-i18n-html="landing.hero.title">
         One platform for your<br>
         whole <span>church family</span>
       </h1>
-      <p class="hero__subtitle">
+      <p class="hero__subtitle" data-i18n="landing.hero.subtitle">
         Manage members, track attendance across multiple services, record tithes &amp; offerings,
         send SMS updates, and follow up with your flock all in one simple, mobile-friendly system.
       </p>
       <div class="hero__actions">
-        <a href="signup.html" class="btn btn--primary btn--lg">Get Started It's Free</a>
-        <a href="#features" class="btn btn--outline btn--lg">See Features</a>
+        <a href="signup.html" class="btn btn--primary btn--lg" data-i18n="landing.hero.cta_primary">Get Started It's Free</a>
+        <a href="#features" class="btn btn--outline btn--lg" data-i18n="landing.hero.cta_secondary">See Features</a>
       </div>
       <div class="hero__stats">
         <div class="hero__stat">
           <div class="hero__stat-value">500+</div>
-          <div class="hero__stat-label">Churches</div>
+          <div class="hero__stat-label" data-i18n="landing.hero.stat_churches">Churches</div>
         </div>
         <div class="hero__stat">
           <div class="hero__stat-value">50K+</div>
-          <div class="hero__stat-label">Members Managed</div>
+          <div class="hero__stat-label" data-i18n="landing.hero.stat_members">Members Managed</div>
         </div>
         <div class="hero__stat">
           <div class="hero__stat-value">99.9%</div>
-          <div class="hero__stat-label">Uptime</div>
+          <div class="hero__stat-label" data-i18n="landing.hero.stat_uptime">Uptime</div>
         </div>
       </div>
     </div>
@@ -76,32 +95,32 @@
   <section class="section section--cream" id="problems">
     <div class="container">
       <div class="text-center">
-        <span class="section-label">The Challenge</span>
-        <h2 class="section-title">Sound familiar?</h2>
-        <p class="section-subtitle">
+        <span class="section-label" data-i18n="landing.problems.label">The Challenge</span>
+        <h2 class="section-title" data-i18n="landing.problems.title">Sound familiar?</h2>
+        <p class="section-subtitle" data-i18n="landing.problems.subtitle">
           Many churches struggle with disconnected processes that make it hard to truly know and serve their congregation.
         </p>
       </div>
       <div class="problems__grid">
         <div class="problem-card animate-on-scroll">
           <div class="problem-card__icon"><img src="assets/icons/icon_scattered_data.png" alt="Scattered Member Data" class="icon-img"></div>
-          <h4 class="problem-card__title">Scattered Member Data</h4>
-          <p class="problem-card__text">Notebooks, spreadsheets, WhatsApp groups — member information is everywhere except where you need it.</p>
+          <h4 class="problem-card__title" data-i18n="landing.problems.scattered_title">Scattered Member Data</h4>
+          <p class="problem-card__text" data-i18n="landing.problems.scattered_text">Notebooks, spreadsheets, WhatsApp groups — member information is everywhere except where you need it.</p>
         </div>
         <div class="problem-card animate-on-scroll">
           <div class="problem-card__icon"><img src="assets/icons/icon_untracked_attendance.png" alt="Untracked Attendance" class="icon-img"></div>
-          <h4 class="problem-card__title">Untracked Attendance</h4>
-          <p class="problem-card__text">Multiple services, mid-week fellowships, and special events — but no clear picture of who's showing up.</p>
+          <h4 class="problem-card__title" data-i18n="landing.problems.attendance_title">Untracked Attendance</h4>
+          <p class="problem-card__text" data-i18n="landing.problems.attendance_text">Multiple services, mid-week fellowships, and special events — but no clear picture of who's showing up.</p>
         </div>
         <div class="problem-card animate-on-scroll">
           <div class="problem-card__icon"><img src="assets/icons/icon_opaque_giving.png" alt="Opaque Giving Records" class="icon-img"></div>
-          <h4 class="problem-card__title">Opaque Giving Records</h4>
-          <p class="problem-card__text">Tithes and offerings collected manually with limited transparency, making accountability difficult.</p>
+          <h4 class="problem-card__title" data-i18n="landing.problems.giving_title">Opaque Giving Records</h4>
+          <p class="problem-card__text" data-i18n="landing.problems.giving_text">Tithes and offerings collected manually with limited transparency, making accountability difficult.</p>
         </div>
         <div class="problem-card animate-on-scroll">
           <div class="problem-card__icon"><img src="assets/icons/icon_disconnected_followup.png" alt="Disconnected Follow-Up" class="icon-img"></div>
-          <h4 class="problem-card__title">Disconnected Follow-Up</h4>
-          <p class="problem-card__text">New members, absentees, and those in need slip through the cracks without a system to flag and track pastoral care.</p>
+          <h4 class="problem-card__title" data-i18n="landing.problems.followup_title">Disconnected Follow-Up</h4>
+          <p class="problem-card__text" data-i18n="landing.problems.followup_text">New members, absentees, and those in need slip through the cracks without a system to flag and track pastoral care.</p>
         </div>
       </div>
     </div>
@@ -111,42 +130,42 @@
   <section class="section" id="features">
     <div class="container">
       <div class="text-center">
-        <span class="section-label">Core Modules</span>
-        <h2 class="section-title">Everything your church needs</h2>
-        <p class="section-subtitle">
+        <span class="section-label" data-i18n="landing.features.label">Core Modules</span>
+        <h2 class="section-title" data-i18n="landing.features.title">Everything your church needs</h2>
+        <p class="section-subtitle" data-i18n="landing.features.subtitle">
           Six powerful modules working together to help your church run smoothly and care for every member.
         </p>
       </div>
       <div class="features__grid">
         <div class="card animate-on-scroll">
           <div class="card__icon"><img src="assets/icons/icon_member_management.png" alt="Member Management" class="icon-img"></div>
-          <h4 class="card__title">Member Management</h4>
-          <p class="card__text">Complete member profiles with family links, contact info, ministry involvement, and a self-service profile completion flow for new members.</p>
+          <h4 class="card__title" data-i18n="landing.features.members_title">Member Management</h4>
+          <p class="card__text" data-i18n="landing.features.members_text">Complete member profiles with family links, contact info, ministry involvement, and a self-service profile completion flow for new members.</p>
         </div>
         <div class="card animate-on-scroll">
           <div class="card__icon"><img src="assets/icons/icon_attendance_tracking.png" alt="Attendance Tracking" class="icon-img"></div>
-          <h4 class="card__title">Attendance Tracking</h4>
-          <p class="card__text">Record attendance for Sunday services (1st, 2nd, 3rd), mid-week meetings, and special events. View trends per service and per member.</p>
+          <h4 class="card__title" data-i18n="landing.features.attendance_title">Attendance Tracking</h4>
+          <p class="card__text" data-i18n="landing.features.attendance_text">Record attendance for Sunday services (1st, 2nd, 3rd), mid-week meetings, and special events. View trends per service and per member.</p>
         </div>
         <div class="card animate-on-scroll">
           <div class="card__icon"><img src="assets/icons/icon_tithes_offerings.png" alt="Tithes & Offerings" class="icon-img"></div>
-          <h4 class="card__title">Tithes &amp; Offerings</h4>
-          <p class="card__text">Log every contribution by category — tithes, offerings, pledges, special seeds. Members can view their own giving history.</p>
+          <h4 class="card__title" data-i18n="landing.features.giving_title">Tithes &amp; Offerings</h4>
+          <p class="card__text" data-i18n="landing.features.giving_text">Log every contribution by category — tithes, offerings, pledges, special seeds. Members can view their own giving history.</p>
         </div>
         <div class="card animate-on-scroll">
           <div class="card__icon"><img src="assets/icons/icon_communication.png" alt="Communication" class="icon-img"></div>
-          <h4 class="card__title">Communication</h4>
-          <p class="card__text">Bulk SMS, targeted messages by group or department, birthday greetings, and push notifications — reach your congregation wherever they are.</p>
+          <h4 class="card__title" data-i18n="landing.features.comms_title">Communication</h4>
+          <p class="card__text" data-i18n="landing.features.comms_text">Bulk SMS, targeted messages by group or department, birthday greetings, and push notifications — reach your congregation wherever they are.</p>
         </div>
         <div class="card animate-on-scroll">
           <div class="card__icon"><img src="assets/icons/icon_pastoral_care.png" alt="Pastoral Care" class="icon-img"></div>
-          <h4 class="card__title">Pastoral Care</h4>
-          <p class="card__text">Flag members for follow-up, track visitations, log counselling notes, and ensure no one falls through the cracks.</p>
+          <h4 class="card__title" data-i18n="landing.features.pastoral_title">Pastoral Care</h4>
+          <p class="card__text" data-i18n="landing.features.pastoral_text">Flag members for follow-up, track visitations, log counselling notes, and ensure no one falls through the cracks.</p>
         </div>
         <div class="card animate-on-scroll">
           <div class="card__icon"><img src="assets/icons/icon_reporting.png" alt="Reporting & Accountability" class="icon-img"></div>
-          <h4 class="card__title">Reporting &amp; Accountability</h4>
-          <p class="card__text">Generate attendance, financial, and growth reports. Audit trails keep everything transparent and trustworthy.</p>
+          <h4 class="card__title" data-i18n="landing.features.reporting_title">Reporting &amp; Accountability</h4>
+          <p class="card__text" data-i18n="landing.features.reporting_text">Generate attendance, financial, and growth reports. Audit trails keep everything transparent and trustworthy.</p>
         </div>
       </div>
     </div>
@@ -156,37 +175,37 @@
   <section class="section section--gray" id="roles">
     <div class="container">
       <div class="text-center">
-        <span class="section-label">Built for Everyone</span>
-        <h2 class="section-title">Who is ChurchOS for?</h2>
-        <p class="section-subtitle">
+        <span class="section-label" data-i18n="landing.roles.label">Built for Everyone</span>
+        <h2 class="section-title" data-i18n="landing.roles.title">Who is ChurchOS for?</h2>
+        <p class="section-subtitle" data-i18n="landing.roles.subtitle">
           Five distinct roles, each with their own tailored dashboard and access level.
         </p>
       </div>
       <div class="roles__grid">
         <div class="role-card animate-on-scroll">
           <div class="role-card__avatar"><img src="assets/icons/icon_administrator.png" alt="Church Administrator" class="icon-img icon-img--round"></div>
-          <h5 class="role-card__name">Church Administrator</h5>
-          <p class="role-card__desc">Full system control — manage users, configure settings, and oversee all church operations.</p>
+          <h5 class="role-card__name" data-i18n="landing.roles.admin_name">Church Administrator</h5>
+          <p class="role-card__desc" data-i18n="landing.roles.admin_desc">Full system control — manage users, configure settings, and oversee all church operations.</p>
         </div>
         <div class="role-card animate-on-scroll">
           <div class="role-card__avatar"><img src="assets/icons/icon_senior_pastor.png" alt="Senior Pastor" class="icon-img icon-img--round"></div>
-          <h5 class="role-card__name">Senior Pastor</h5>
-          <p class="role-card__desc">Bird's-eye view of church health — attendance trends, giving patterns, and flagged members.</p>
+          <h5 class="role-card__name" data-i18n="landing.roles.pastor_name">Senior Pastor</h5>
+          <p class="role-card__desc" data-i18n="landing.roles.pastor_desc">Bird's-eye view of church health — attendance trends, giving patterns, and flagged members.</p>
         </div>
         <div class="role-card animate-on-scroll">
           <div class="role-card__avatar"><img src="assets/icons/icon_leader.png" alt="Leader / Dept Head" class="icon-img icon-img--round"></div>
-          <h5 class="role-card__name">Leader / Dept Head</h5>
-          <p class="role-card__desc">Manage your department's roster, record attendance, and track follow-ups for your group.</p>
+          <h5 class="role-card__name" data-i18n="landing.roles.leader_name">Leader / Dept Head</h5>
+          <p class="role-card__desc" data-i18n="landing.roles.leader_desc">Manage your department's roster, record attendance, and track follow-ups for your group.</p>
         </div>
         <div class="role-card animate-on-scroll">
           <div class="role-card__avatar"><img src="assets/icons/icon_finance_team.svg" alt="Finance Team" class="icon-img icon-img--round"></div>
-          <h5 class="role-card__name">Finance Team</h5>
-          <p class="role-card__desc">Record and categorise giving, generate financial reports, and maintain accountability.</p>
+          <h5 class="role-card__name" data-i18n="landing.roles.finance_name">Finance Team</h5>
+          <p class="role-card__desc" data-i18n="landing.roles.finance_desc">Record and categorise giving, generate financial reports, and maintain accountability.</p>
         </div>
         <div class="role-card animate-on-scroll">
           <div class="role-card__avatar"><img src="assets/icons/icon_member.svg" alt="Member" class="icon-img icon-img--round"></div>
-          <h5 class="role-card__name">Member</h5>
-          <p class="role-card__desc">View your own profile, track attendance, see giving history, and stay updated with announcements.</p>
+          <h5 class="role-card__name" data-i18n="landing.roles.member_name">Member</h5>
+          <p class="role-card__desc" data-i18n="landing.roles.member_desc">View your own profile, track attendance, see giving history, and stay updated with announcements.</p>
         </div>
       </div>
     </div>
@@ -195,13 +214,13 @@
   <!-- ========== CTA ========== -->
   <section class="section section--navy">
     <div class="container text-center">
-      <h2 style="color: var(--color-white); margin-bottom: var(--space-md);">Ready to bring your church together?</h2>
-      <p style="color: var(--color-gray-400); max-width: 520px; margin: 0 auto var(--space-2xl); font-size: var(--fs-md); line-height: 1.7;">
+      <h2 style="color: var(--color-white); margin-bottom: var(--space-md);" data-i18n="landing.cta.title">Ready to bring your church together?</h2>
+      <p style="color: var(--color-gray-400); max-width: 520px; margin: 0 auto var(--space-2xl); font-size: var(--fs-md); line-height: 1.7;" data-i18n="landing.cta.subtitle">
         Join hundreds of Ghanaian churches already using ChurchOS to manage their congregation with clarity and care.
       </p>
       <div class="hero__actions">
-        <a href="signup.html" class="btn btn--primary btn--lg">Create Free Account</a>
-        <a href="login.html" class="btn btn--outline-white btn--lg">Log In</a>
+        <a href="signup.html" class="btn btn--primary btn--lg" data-i18n="landing.cta.primary">Create Free Account</a>
+        <a href="login.html" class="btn btn--outline-white btn--lg" data-i18n="landing.cta.secondary">Log In</a>
       </div>
     </div>
   </section>
@@ -212,7 +231,7 @@
 
       <!-- ── Top Tier: Connect With Us ── -->
       <div class="footer__connect">
-        <h6 class="footer__connect-heading">Connect with us</h6>
+        <h6 class="footer__connect-heading" data-i18n="landing.footer.connect">Connect with us</h6>
         <div class="footer__socials">
 
           <!-- TODO: replace with real church social links -->
@@ -265,8 +284,8 @@
           &copy; <span id="footer-year"></span> ChurchOS. All rights reserved.
         </span>
         <nav class="footer__legal" aria-label="Legal links">
-          <a href="privacy-policy.html" class="footer__legal-link">Privacy Policy</a>
-          <a href="#" class="footer__legal-link">Terms of Use</a>
+          <a href="privacy-policy.html" class="footer__legal-link" data-i18n="landing.footer.privacy">Privacy Policy</a>
+          <a href="#" class="footer__legal-link" data-i18n="landing.footer.terms">Terms of Use</a>
         </nav>
       </div>
 
@@ -284,6 +303,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/db.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>lucide.createIcons();</script>
 </body>

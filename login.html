@@ -18,7 +18,26 @@
         ChurchOS
       </a>
       <div class="navbar__actions">
-        <a href="signup.html" class="btn btn--primary btn--sm">Sign Up Free</a>
+        <div class="lang-switcher" id="lang-switcher">
+          <button class="lang-switcher__toggle" type="button" aria-label="Change language">
+            <i data-lucide="globe"></i>
+            <span class="lang-switcher__current">EN</span>
+          </button>
+          <div class="lang-switcher__dropdown">
+            <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
+            <button type="button" data-lang="en">English</button>
+            <button type="button" data-lang="fr">Français</button>
+            <button type="button" data-lang="es">Español</button>
+            <button type="button" data-lang="pt">Português</button>
+            <button type="button" data-lang="zh">中文</button>
+            <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
+            <button type="button" data-lang="tw">Twi</button>
+            <button type="button" data-lang="ga">Ga</button>
+            <button type="button" data-lang="ee">Eʋegbe</button>
+            <button type="button" data-lang="fat">Mfantse</button>
+          </div>
+        </div>
+        <a href="signup.html" class="btn btn--primary btn--sm" data-i18n="nav.signup">Sign Up Free</a>
       </div>
     </div>
   </nav>
@@ -27,39 +46,39 @@
   <div class="auth-container">
     <div class="auth-card">
       <div class="auth-header">
-        <h2 class="auth-header__title">Welcome back</h2>
-        <p class="auth-header__subtitle">Sign in to access your dashboard</p>
+        <h2 class="auth-header__title" data-i18n="login.title">Welcome back</h2>
+        <p class="auth-header__subtitle" data-i18n="login.subtitle">Sign in to access your dashboard</p>
       </div>
 
       <div id="login-alert" class="alert" role="alert"></div>
 
       <form id="login-form" novalidate>
         <div class="form-group">
-          <label for="login-identifier" class="form-label">Phone Number or Email <span class="required">*</span></label>
-          <input type="text" id="login-identifier" class="form-input" placeholder="e.g. 024 123 4567 or kwame@email.com" required>
+          <label for="login-identifier" class="form-label"><span data-i18n="login.identifier_label">Phone Number or Email</span> <span class="required">*</span></label>
+          <input type="text" id="login-identifier" class="form-input" placeholder="e.g. 024 123 4567 or kwame@email.com" data-i18n-placeholder="login.identifier_placeholder" required>
           <div class="form-error"></div>
         </div>
 
         <div class="form-group">
-          <label for="login-password" class="form-label">Password <span class="required">*</span></label>
+          <label for="login-password" class="form-label"><span data-i18n="login.password_label">Password</span> <span class="required">*</span></label>
           <div class="password-wrapper">
-            <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+            <input type="password" id="login-password" class="form-input" placeholder="Enter your password" data-i18n-placeholder="login.password_placeholder" required>
             <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
           </div>
           <div class="form-error"></div>
         </div>
 
         <div style="display: flex; justify-content: flex-end; margin-bottom: var(--space-lg);">
-          <a href="#" id="forgot-password-link" style="font-size: var(--fs-sm); color: var(--color-gold-dark); font-weight: 500;">Forgot password?</a>
+          <a href="#" id="forgot-password-link" style="font-size: var(--fs-sm); color: var(--color-gold-dark); font-weight: 500;" data-i18n="login.forgot_password">Forgot password?</a>
         </div>
 
-        <button type="submit" class="btn btn--primary btn--block btn--lg">
+        <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="login.submit">
           Sign In
         </button>
       </form>
 
       <div class="auth-footer">
-        Don't have an account? <a href="signup.html">Sign up</a>
+        <span data-i18n="login.no_account">Don't have an account?</span> <a href="signup.html" data-i18n="login.no_account_link">Sign up</a>
       </div>
     </div>
   </div>
@@ -68,22 +87,22 @@
   <div class="modal-overlay" id="forgot-password-modal">
     <div class="modal">
       <div class="modal__header">
-        <h3 class="modal__title">Reset Password</h3>
+        <h3 class="modal__title" data-i18n="login.forgot.title">Reset Password</h3>
         <button class="modal__close" id="forgot-modal-close" aria-label="Close modal"><i data-lucide="x"></i></button>
       </div>
 
       <!-- Step 1: Enter phone -->
       <div id="forgot-step-1">
-        <p style="color: var(--color-gray-500); font-size: var(--fs-sm); margin-bottom: var(--space-lg); line-height: 1.6;">
+        <p style="color: var(--color-gray-500); font-size: var(--fs-sm); margin-bottom: var(--space-lg); line-height: 1.6;" data-i18n="login.forgot.description">
           Enter your registered phone number and we'll send you an SMS with a verification code to reset your password.
         </p>
         <form id="forgot-password-form" novalidate>
           <div class="form-group">
-            <label for="forgot-phone" class="form-label">Phone Number <span class="required">*</span></label>
-            <input type="tel" id="forgot-phone" class="form-input" placeholder="e.g. 024 123 4567" required>
+            <label for="forgot-phone" class="form-label"><span data-i18n="login.forgot.phone_label">Phone Number</span> <span class="required">*</span></label>
+            <input type="tel" id="forgot-phone" class="form-input" placeholder="e.g. 024 123 4567" data-i18n-placeholder="login.forgot.phone_placeholder" required>
             <div class="form-error"></div>
           </div>
-          <button type="submit" class="btn btn--primary btn--block">Send Reset Code</button>
+          <button type="submit" class="btn btn--primary btn--block" data-i18n="login.forgot.submit">Send Reset Code</button>
         </form>
       </div>
 
@@ -91,15 +110,15 @@
       <div id="forgot-step-2" style="display: none;">
         <div class="success-state" style="padding: var(--space-lg) 0;">
           <div class="success-state__icon" style="width: 60px; height: 60px;"><i data-lucide="smartphone"></i></div>
-          <h4 class="success-state__title">Code Sent!</h4>
-          <p class="success-state__text" style="font-size: var(--fs-sm);">
+          <h4 class="success-state__title" data-i18n="login.forgot.sent_title">Code Sent!</h4>
+          <p class="success-state__text" style="font-size: var(--fs-sm);" data-i18n="login.forgot.sent_text">
             We've sent a 6-digit verification code to your phone via SMS. 
             Enter it below to reset your password.
           </p>
           <div class="form-group" style="max-width: 200px; margin: 0 auto var(--space-lg);">
             <input type="text" class="form-input" placeholder="● ● ● ● ● ●" maxlength="6" style="text-align: center; letter-spacing: 8px; font-size: var(--fs-lg);">
           </div>
-          <button class="btn btn--primary btn--block" onclick="this.textContent='Verified! ✓'; this.disabled=true;">Verify Code</button>
+          <button class="btn btn--primary btn--block" onclick="this.textContent=window.t ? t('login.forgot.verified') : 'Verified! ✓'; this.disabled=true;" data-i18n="login.forgot.verify">Verify Code</button>
         </div>
       </div>
     </div>
@@ -111,6 +130,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/db.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>lucide.createIcons();</script>
 </body>

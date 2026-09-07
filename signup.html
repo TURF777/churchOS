@@ -18,7 +18,26 @@
         ChurchOS
       </a>
       <div class="navbar__actions">
-        <a href="login.html" class="btn btn--ghost btn--sm">Log In</a>
+        <div class="lang-switcher" id="lang-switcher">
+          <button class="lang-switcher__toggle" type="button" aria-label="Change language">
+            <i data-lucide="globe"></i>
+            <span class="lang-switcher__current">EN</span>
+          </button>
+          <div class="lang-switcher__dropdown">
+            <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
+            <button type="button" data-lang="en">English</button>
+            <button type="button" data-lang="fr">Français</button>
+            <button type="button" data-lang="es">Español</button>
+            <button type="button" data-lang="pt">Português</button>
+            <button type="button" data-lang="zh">中文</button>
+            <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
+            <button type="button" data-lang="tw">Twi</button>
+            <button type="button" data-lang="ga">Ga</button>
+            <button type="button" data-lang="ee">Eʋegbe</button>
+            <button type="button" data-lang="fat">Mfantse</button>
+          </div>
+        </div>
+        <a href="login.html" class="btn btn--ghost btn--sm" data-i18n="nav.login">Log In</a>
       </div>
     </div>
   </nav>
@@ -31,69 +50,69 @@
       <div class="signup-steps">
         <div class="signup-step active" id="step-indicator-1">
           <div class="signup-step__dot">1</div>
-          <span class="signup-step__label">Choose Role</span>
+          <span class="signup-step__label" data-i18n="signup.step1_label">Choose Role</span>
         </div>
         <div class="signup-step__line" id="step-line-1"></div>
         <div class="signup-step" id="step-indicator-2">
           <div class="signup-step__dot">2</div>
-          <span class="signup-step__label">Your Details</span>
+          <span class="signup-step__label" data-i18n="signup.step2_label">Your Details</span>
         </div>
         <div class="signup-step__line" id="step-line-2"></div>
         <div class="signup-step" id="step-indicator-3">
           <div class="signup-step__dot">3</div>
-          <span class="signup-step__label">Welcome</span>
+          <span class="signup-step__label" data-i18n="signup.step3_label">Welcome</span>
         </div>
       </div>
 
       <!-- ===== STEP 1: Role Selection ===== -->
       <div class="step-panel active" id="step-1">
         <div class="auth-header">
-          <h2 class="auth-header__title">Join ChurchOS</h2>
-          <p class="auth-header__subtitle">Select your role to get started</p>
+          <h2 class="auth-header__title" data-i18n="signup.step1.title">Join ChurchOS</h2>
+          <p class="auth-header__subtitle" data-i18n="signup.step1.subtitle">Select your role to get started</p>
         </div>
 
         <div class="role-selector">
           <div class="role-option" data-role="admin">
             <div class="role-option__icon"><img src="assets/icons/icon_administrator.png" alt="Church Administrator" class="icon-img icon-img--round"></div>
-            <div class="role-option__name">Church Administrator</div>
-            <div class="role-option__desc">Set up &amp; manage your church</div>
+            <div class="role-option__name" data-i18n="signup.role.admin_name">Church Administrator</div>
+            <div class="role-option__desc" data-i18n="signup.role.admin_desc">Set up &amp; manage your church</div>
           </div>
           <div class="role-option" data-role="pastor">
             <div class="role-option__icon"><img src="assets/icons/icon_senior_pastor.png" alt="Senior Pastor" class="icon-img icon-img--round"></div>
-            <div class="role-option__name">Senior Pastor</div>
-            <div class="role-option__desc">Oversee church health</div>
+            <div class="role-option__name" data-i18n="signup.role.pastor_name">Senior Pastor</div>
+            <div class="role-option__desc" data-i18n="signup.role.pastor_desc">Oversee church health</div>
           </div>
           <div class="role-option" data-role="leader">
             <div class="role-option__icon"><img src="assets/icons/icon_leader.png" alt="Leader / Dept Head" class="icon-img icon-img--round"></div>
-            <div class="role-option__name">Leader / Dept Head</div>
-            <div class="role-option__desc">Lead your department</div>
+            <div class="role-option__name" data-i18n="signup.role.leader_name">Leader / Dept Head</div>
+            <div class="role-option__desc" data-i18n="signup.role.leader_desc">Lead your department</div>
           </div>
           <div class="role-option" data-role="finance">
             <div class="role-option__icon"><img src="assets/icons/icon_finance_team.svg" alt="Finance Team" class="icon-img icon-img--round"></div>
-            <div class="role-option__name">Finance Team</div>
-            <div class="role-option__desc">Manage giving &amp; reports</div>
+            <div class="role-option__name" data-i18n="signup.role.finance_name">Finance Team</div>
+            <div class="role-option__desc" data-i18n="signup.role.finance_desc">Manage giving &amp; reports</div>
           </div>
           <div class="role-option" data-role="member">
             <div class="role-option__icon"><img src="assets/icons/icon_member.svg" alt="Member" class="icon-img icon-img--round"></div>
-            <div class="role-option__name">Member</div>
-            <div class="role-option__desc">Join your church community</div>
+            <div class="role-option__name" data-i18n="signup.role.member_name">Member</div>
+            <div class="role-option__desc" data-i18n="signup.role.member_desc">Join your church community</div>
           </div>
         </div>
 
-        <button class="btn btn--primary btn--block btn--lg" id="btn-continue-role" disabled>
+        <button class="btn btn--primary btn--block btn--lg" id="btn-continue-role" data-i18n="signup.step1.continue" disabled>
           Continue →
         </button>
 
         <div class="auth-footer">
-          Already have an account? <a href="login.html">Log in</a>
+          <span data-i18n="signup.step1.has_account">Already have an account?</span> <a href="login.html" data-i18n="signup.step1.has_account_link">Log in</a>
         </div>
       </div>
 
       <!-- ===== STEP 2: Registration Form ===== -->
       <div class="step-panel" id="step-2">
         <div class="auth-header">
-          <h2 class="auth-header__title">Create your account</h2>
-          <p class="auth-header__subtitle">Fill in your details below</p>
+          <h2 class="auth-header__title" data-i18n="signup.step2.title">Create your account</h2>
+          <p class="auth-header__subtitle" data-i18n="signup.step2.subtitle">Fill in your details below</p>
         </div>
 
         <div id="signup-alert" class="alert" role="alert"></div>
@@ -101,38 +120,38 @@
         <form id="signup-form" novalidate>
           <!-- Shared fields -->
           <div class="form-group">
-            <label for="signup-name" class="form-label">Full Name <span class="required">*</span></label>
-            <input type="text" id="signup-name" class="form-input" placeholder="e.g. Kwame Asante" required>
+            <label for="signup-name" class="form-label"><span data-i18n="signup.step2.name_label">Full Name</span> <span class="required">*</span></label>
+            <input type="text" id="signup-name" class="form-input" placeholder="e.g. Kwame Asante" data-i18n-placeholder="signup.step2.name_placeholder" required>
             <div class="form-error" id="error-name"></div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="signup-phone" class="form-label">Phone Number <span class="required">*</span></label>
-              <input type="tel" id="signup-phone" class="form-input" placeholder="e.g. 024 123 4567" required>
-              <div class="form-hint">Your primary login identifier</div>
+              <label for="signup-phone" class="form-label"><span data-i18n="signup.step2.phone_label">Phone Number</span> <span class="required">*</span></label>
+              <input type="tel" id="signup-phone" class="form-input" placeholder="e.g. 024 123 4567" data-i18n-placeholder="signup.step2.phone_placeholder" required>
+              <div class="form-hint" data-i18n="signup.step2.phone_hint">Your primary login identifier</div>
               <div class="form-error" id="error-phone"></div>
             </div>
             <div class="form-group">
-              <label for="signup-email" class="form-label">Email Address <span class="required" style="display:inline">*</span></label>
-              <input type="email" id="signup-email" class="form-input" placeholder="e.g. kwame@email.com">
+              <label for="signup-email" class="form-label"><span data-i18n="signup.step2.email_label">Email Address</span> <span class="required" style="display:inline">*</span></label>
+              <input type="email" id="signup-email" class="form-input" placeholder="e.g. kwame@email.com" data-i18n-placeholder="signup.step2.email_placeholder">
               <div class="form-error" id="error-email"></div>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="signup-password" class="form-label">Password <span class="required">*</span></label>
+              <label for="signup-password" class="form-label"><span data-i18n="signup.step2.password_label">Password</span> <span class="required">*</span></label>
               <div class="password-wrapper">
-                <input type="password" id="signup-password" class="form-input" placeholder="Min. 6 characters" required>
+                <input type="password" id="signup-password" class="form-input" placeholder="Min. 6 characters" data-i18n-placeholder="signup.step2.password_placeholder" required>
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
               </div>
               <div class="form-error" id="error-password"></div>
             </div>
             <div class="form-group">
-              <label for="signup-confirm" class="form-label">Confirm Password <span class="required">*</span></label>
+              <label for="signup-confirm" class="form-label"><span data-i18n="signup.step2.confirm_label">Confirm Password</span> <span class="required">*</span></label>
               <div class="password-wrapper">
-                <input type="password" id="signup-confirm" class="form-input" placeholder="Re-enter password" required>
+                <input type="password" id="signup-confirm" class="form-input" placeholder="Re-enter password" data-i18n-placeholder="signup.step2.confirm_placeholder" required>
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
               </div>
               <div class="form-error" id="error-confirm"></div>
@@ -143,66 +162,66 @@
 
           <!-- Admin fields -->
           <div class="role-fields" id="fields-admin" style="display:none;">
-            <div class="auth-divider">Church Information</div>
+            <div class="auth-divider" data-i18n="signup.step2.church_info">Church Information</div>
             <div class="form-group">
-              <label for="admin-church-name" class="form-label">Church Name <span class="required">*</span></label>
-              <input type="text" id="admin-church-name" class="form-input" placeholder="e.g. Grace Assembly">
+              <label for="admin-church-name" class="form-label"><span data-i18n="signup.step2.church_name_label">Church Name</span> <span class="required">*</span></label>
+              <input type="text" id="admin-church-name" class="form-input" placeholder="e.g. Grace Assembly" data-i18n-placeholder="signup.step2.church_name_placeholder_admin">
               <div class="form-error"></div>
             </div>
             <div class="form-group">
-              <label for="admin-church-address" class="form-label">Church Address <span class="required">*</span></label>
-              <input type="text" id="admin-church-address" class="form-input" placeholder="e.g. 15 Independence Ave, Accra">
+              <label for="admin-church-address" class="form-label"><span data-i18n="signup.step2.church_address_label">Church Address</span> <span class="required">*</span></label>
+              <input type="text" id="admin-church-address" class="form-input" placeholder="e.g. 15 Independence Ave, Accra" data-i18n-placeholder="signup.step2.church_address_placeholder">
               <div class="form-error"></div>
             </div>
           </div>
 
           <!-- Pastor fields -->
           <div class="role-fields" id="fields-pastor" style="display:none;">
-            <div class="auth-divider">Church Information</div>
+            <div class="auth-divider" data-i18n="signup.step2.church_info">Church Information</div>
             <div class="form-group">
-              <label for="pastor-church-name" class="form-label">Church Name <span class="required">*</span></label>
-              <input type="text" id="pastor-church-name" class="form-input" placeholder="Enter or select your church name">
-              <div class="form-hint">If your church is already on ChurchOS, select it. Otherwise, type a new name.</div>
+              <label for="pastor-church-name" class="form-label"><span data-i18n="signup.step2.church_name_label">Church Name</span> <span class="required">*</span></label>
+              <input type="text" id="pastor-church-name" class="form-input" placeholder="Enter or select your church name" data-i18n-placeholder="signup.step2.church_name_placeholder_pastor">
+              <div class="form-hint" data-i18n="signup.step2.church_name_hint_pastor">If your church is already on ChurchOS, select it. Otherwise, type a new name.</div>
               <div class="form-error"></div>
             </div>
           </div>
 
           <!-- Leader fields -->
           <div class="role-fields" id="fields-leader" style="display:none;">
-            <div class="auth-divider">Department Information</div>
+            <div class="auth-divider" data-i18n="signup.step2.dept_info">Department Information</div>
             <div class="form-group">
-              <label for="leader-department" class="form-label">Department / Group Name</label>
-              <input type="text" id="leader-department" class="form-input" placeholder="e.g. Youth Ministry, Choir">
-              <div class="form-hint">You can leave this blank — it can be assigned later.</div>
+              <label for="leader-department" class="form-label" data-i18n="signup.step2.dept_label">Department / Group Name</label>
+              <input type="text" id="leader-department" class="form-input" placeholder="e.g. Youth Ministry, Choir" data-i18n-placeholder="signup.step2.dept_placeholder">
+              <div class="form-hint" data-i18n="signup.step2.dept_hint">You can leave this blank — it can be assigned later.</div>
             </div>
           </div>
 
           <!-- Finance fields -->
           <div class="role-fields" id="fields-finance" style="display:none;">
-            <div class="auth-divider">Church Information</div>
+            <div class="auth-divider" data-i18n="signup.step2.church_info">Church Information</div>
             <div class="form-group">
-              <label for="finance-church-name" class="form-label">Church Name <span class="required">*</span></label>
-              <input type="text" id="finance-church-name" class="form-input" placeholder="Select your church">
+              <label for="finance-church-name" class="form-label"><span data-i18n="signup.step2.church_name_label">Church Name</span> <span class="required">*</span></label>
+              <input type="text" id="finance-church-name" class="form-input" placeholder="Select your church" data-i18n-placeholder="signup.step2.church_name_placeholder_finance">
               <div class="form-error"></div>
             </div>
           </div>
 
           <!-- Member fields -->
           <div class="role-fields" id="fields-member" style="display:none;">
-            <div class="auth-divider">Additional Information</div>
+            <div class="auth-divider" data-i18n="signup.step2.additional_info">Additional Information</div>
             <div class="form-row">
               <div class="form-group">
-                <label for="member-service" class="form-label">Preferred Service</label>
+                <label for="member-service" class="form-label" data-i18n="signup.step2.service_label">Preferred Service</label>
                 <select id="member-service" class="form-select">
-                  <option value="">Select a service</option>
-                  <option value="1st Service">1st Service (7:00 AM)</option>
-                  <option value="2nd Service">2nd Service (9:30 AM)</option>
-                  <option value="3rd Service">3rd Service (12:00 PM)</option>
+                  <option value="" data-i18n="signup.step2.service_placeholder">Select a service</option>
+                  <option value="1st Service" data-i18n="signup.step2.service_1st">1st Service (7:00 AM)</option>
+                  <option value="2nd Service" data-i18n="signup.step2.service_2nd">2nd Service (9:30 AM)</option>
+                  <option value="3rd Service" data-i18n="signup.step2.service_3rd">3rd Service (12:00 PM)</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="member-referral" class="form-label">How did you hear about us?</label>
-                <input type="text" id="member-referral" class="form-input" placeholder="Optional">
+                <label for="member-referral" class="form-label" data-i18n="signup.step2.referral_label">How did you hear about us?</label>
+                <input type="text" id="member-referral" class="form-input" placeholder="Optional" data-i18n-placeholder="signup.step2.referral_placeholder">
               </div>
             </div>
           </div>
@@ -211,22 +230,22 @@
           <div class="form-group">
             <label class="form-checkbox">
               <input type="checkbox" id="signup-terms">
-              <span>I agree to ChurchOS's <a href="#" style="color: var(--color-gold-dark); font-weight: 600;">Terms of Service</a> and <a href="#" style="color: var(--color-gold-dark); font-weight: 600;">Privacy Policy</a></span>
+              <span data-i18n-html="signup.step2.terms">I agree to ChurchOS's <a href="#" style="color: var(--color-gold-dark); font-weight: 600;">Terms of Service</a> and <a href="#" style="color: var(--color-gold-dark); font-weight: 600;">Privacy Policy</a></span>
             </label>
           </div>
 
           <div style="display: flex; gap: var(--space-md);">
-            <button type="button" class="btn btn--outline btn--lg" id="btn-back-role" style="flex: 0 0 auto;">
+            <button type="button" class="btn btn--outline btn--lg" id="btn-back-role" style="flex: 0 0 auto;" data-i18n="signup.step2.back">
               ← Back
             </button>
-            <button type="submit" class="btn btn--primary btn--block btn--lg">
+            <button type="submit" class="btn btn--primary btn--block btn--lg" data-i18n="signup.step2.submit">
               Create Account
             </button>
           </div>
         </form>
 
         <div class="auth-footer">
-          Already have an account? <a href="login.html">Log in</a>
+          <span data-i18n="signup.step2.has_account">Already have an account?</span> <a href="login.html" data-i18n="signup.step2.has_account_link">Log in</a>
         </div>
       </div>
 
@@ -234,14 +253,14 @@
       <div class="step-panel" id="step-3">
         <div class="success-state">
           <div class="success-state__icon"><i data-lucide="check"></i></div>
-          <h3 class="success-state__title">Welcome to ChurchOS!</h3>
-          <p class="success-state__text">
+          <h3 class="success-state__title" data-i18n="signup.step3.title">Welcome to ChurchOS!</h3>
+          <p class="success-state__text" data-i18n="signup.step3.text">
             Your account has been created. You'll be redirected to your dashboard in a moment.
             This is step 1 of onboarding — you'll complete your full profile next.
           </p>
           <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-sm); color: var(--color-gray-400); font-size: var(--fs-sm);">
             <span class="hero__badge-dot"></span>
-            Redirecting to your dashboard…
+            <span data-i18n="signup.step3.redirecting">Redirecting to your dashboard…</span>
           </div>
         </div>
       </div>
@@ -255,6 +274,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/db.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script>lucide.createIcons();</script>
 </body>

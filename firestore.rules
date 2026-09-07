@@ -7,6 +7,11 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // Helper: Check if user profile document exists
+    function userExists() {
+      return isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
     // Helper: Get requesting user's document
     function getUserData() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
@@ -14,12 +19,12 @@ service cloud.firestore {
 
     // Helper: Check if user has a specific role
     function hasRole(role) {
-      return isAuthenticated() && getUserData().role == role;
+      return userExists() && getUserData().role == role;
     }
 
     // Helper: Check if user is an admin or pastor
     function isAdminOrPastor() {
-      return isAuthenticated() && (getUserData().role == 'admin' || getUserData().role == 'pastor');
+      return userExists() && (getUserData().role == 'admin' || getUserData().role == 'pastor');
     }
 
     // Default deny all
@@ -32,8 +37,10 @@ service cloud.firestore {
     // Document ID = Firebase Auth UID (or synthetic)
     // ---------------------------------------------------
     match /users/{userId} {
+      allow create: if isAuthenticated() && request.auth.uid == userId;
       allow read: if isAuthenticated() && (request.auth.uid == userId || isAdminOrPastor());
-      allow write: if isAuthenticated() && (request.auth.uid == userId || hasRole('admin'));
+      allow update: if isAuthenticated() && (request.auth.uid == userId || hasRole('admin'));
+      allow delete: if isAuthenticated() && hasRole('admin');
     }
 
     // ---------------------------------------------------

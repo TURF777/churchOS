@@ -1,0 +1,19 @@
+{
+  "nav.features": "Características",
+  "nav.who_its_for": "¿Para quién?",
+  "nav.contact": "Contacto",
+  "nav.login": "Iniciar sesión",
+  "nav.signup": "Registrarse",
+  "nav.logout": "Cerrar sesión",
+  "landing.hero.cta_primary": "Comenzar — Es gratis",
+  "login.title": "Bienvenido de nuevo",
+  "login.submit": "Iniciar sesión",
+  "signup.step1.title": "Únete a ChurchOS",
+  "common.save": "Guardar",
+  "common.cancel": "Cancelar",
+  "common.delete": "Eliminar",
+  "common.search": "Buscar",
+  "dashboard.welcome": "Bienvenido, {name}",
+  "lang_switcher.international": "Internacional",
+  "lang_switcher.ghanaian": "Idiomas ghaneses"
+}
