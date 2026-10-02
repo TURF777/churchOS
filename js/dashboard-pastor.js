@@ -34,10 +34,12 @@
   function today() { return new Date().toISOString().slice(0, 10); }
   function now() { return new Date().toISOString().replace('T', ' ').slice(0, 19); }
 
-  function toast(message, type = 'success') {
+  function toast(message, type = 'success', params) {
+    const _t = window.t || ((k) => k);
+    const text = typeof message === 'string' && _t(message, params) !== message ? _t(message, params) : message;
     const el = document.createElement('div');
     el.className = `toast toast--${type}`;
-    el.textContent = message;
+    el.textContent = text;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3200);
   }
@@ -252,7 +254,7 @@
     const timeEl = document.getElementById('refresh-time');
     if (timeEl) timeEl.textContent = new Date().toLocaleTimeString();
     renderOverview();
-    toast('Church health data refreshed live ✓');
+    const _t = window.t || ((k) => k); toast(_t('pastor.toast.refreshed'));
   });
 
   /* ---------------------------------------------------
@@ -404,7 +406,7 @@
 
     addAuditEntry('Rev. Daniel Mensah', 'create', `Recorded pastoral care note for member`);
     persistAll();
-    toast('Confidential pastoral note saved ✓');
+    const _t = window.t || ((k) => k); toast(_t('pastor.toast.note_saved'));
     openMemberCareModal(memberId);
     renderPastorMembers();
   }
@@ -433,7 +435,7 @@
     addAuditEntry('Rev. Daniel Mensah', 'create', `Logged life event (${type}) for member`);
     persistAll();
     closeModal('modal-life-event');
-    toast('Life event recorded ✓');
+    const _t = window.t || ((k) => k); toast(_t('pastor.toast.life_event_saved'));
     if (memberId) openMemberCareModal(memberId);
   });
 
@@ -505,7 +507,7 @@
     addAuditEntry('Rev. Daniel Mensah', 'create', `Assigned care task for ${memberName} to ${assignee}`);
     persistAll();
     closeModal('modal-assign-task');
-    toast(`Follow-up task assigned to ${assignee} ✓`);
+    const _t = window.t || ((k, p) => k); toast(_t('pastor.toast.task_assigned', { assignee }));
     renderPastoralCare();
     renderOverview();
   });
@@ -682,7 +684,7 @@
       persistAll();
       renderPastoralCare();
       renderOverview();
-      toast('Care task marked as completed ✓');
+      const _t = window.t || ((k) => k); toast(_t('pastor.toast.care_completed'));
     }
   }
 
@@ -693,7 +695,7 @@
       addAuditEntry('Rev. Daniel Mensah', 'edit', `Marked prayer request for ${p.memberName} as Answered`);
       persistAll();
       renderPastoralCare();
-      toast('Prayer request marked as Answered! 🙏');
+      const _t = window.t || ((k) => k); toast(_t('pastor.toast.prayer_answered'));
     }
   }
 
@@ -704,7 +706,7 @@
       addAuditEntry('Rev. Daniel Mensah', 'edit', `Approved new registration for ${a.memberName}`);
       persistAll();
       renderPastoralCare();
-      toast(`Registration for ${a.memberName} approved ✓`);
+      const _t = window.t || ((k, p) => k); toast(_t('pastor.toast.registration_approved', { name: a.memberName }));
     }
   }
 
@@ -715,7 +717,7 @@
       addAuditEntry('Rev. Daniel Mensah', 'edit', `Declined registration for ${a.memberName}`);
       persistAll();
       renderPastoralCare();
-      toast(`Registration for ${a.memberName} declined`);
+      const _t = window.t || ((k, p) => k); toast(_t('pastor.toast.registration_declined', { name: a.memberName }));
     }
   }
 
@@ -809,7 +811,7 @@
     summaryConfig.time = document.getElementById('summary-time').value;
 
     persistAll();
-    toast('Weekly Summary preferences saved ✓');
+    const _t = window.t || ((k) => k); toast(_t('pastor.toast.summary_saved'));
   });
 
   /* ---------------------------------------------------

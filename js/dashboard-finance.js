@@ -30,15 +30,20 @@
   function today() { return new Date().toISOString().slice(0, 10); }
   function now() { return new Date().toISOString().replace('T', ' ').slice(0, 19); }
 
-  function toast(message, type = 'success') {
+  function toast(message, type = 'success', params) {
+    const _t = window.t || ((k) => k);
+    const text = typeof message === 'string' && _t(message, params) !== message ? _t(message, params) : message;
     const el = document.createElement('div');
     el.className = `toast toast--${type}`;
-    el.textContent = message;
+    el.textContent = text;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3200);
   }
 
   function formatGHC(amount) {
+    if (window.ChurchOS && window.ChurchOS.i18n && window.ChurchOS.i18n.formatCurrency) {
+      return window.ChurchOS.i18n.formatCurrency(amount);
+    }
     return 'GH₵ ' + parseFloat(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
@@ -186,7 +191,7 @@
     if (alertBanner) {
       if (disputedCount > 0) {
         alertBanner.style.display = 'flex';
-        document.getElementById('disputed-count-text').textContent = `${disputedCount} Member Disputed Transaction${disputedCount > 1 ? 's' : ''}`;
+        const _t = window.t || ((k, p) => k); document.getElementById('disputed-count-text').textContent = _t('finance.alert.disputed_text', { count: disputedCount });
       } else {
         alertBanner.style.display = 'none';
       }
@@ -281,7 +286,7 @@
     persistAll();
     addAuditEntry(AUTHOR_NAME, 'create', `Recorded ${category} of ${formatGHC(amount)} for ${memberName}`);
 
-    toast(`Transaction saved! Receipt #${ref} generated ✓`);
+    const _t = window.t || ((k, p) => k); toast(_t('finance.toast.tx_saved', { ref }));
     document.getElementById('form-record-tx').reset();
     document.getElementById('tx-date').value = today();
     renderRecentTransactions();
@@ -330,7 +335,7 @@
     persistAll();
     addAuditEntry(AUTHOR_NAME, 'create', `Recorded Bulk Offering of ${formatGHC(amount)} for ${service}`);
 
-    toast(`Bulk offering of ${formatGHC(amount)} recorded against ${service} ✓`);
+    const _t = window.t || ((k, p) => k); toast(_t('finance.toast.bulk_recorded', { amount: formatGHC(amount), service }));
     document.getElementById('form-bulk-entry').reset();
     document.getElementById('bulk-date').value = today();
     renderBulkEntries();
@@ -471,7 +476,7 @@
       t.status = 'voided';
       persistAll();
       addAuditEntry(AUTHOR_NAME, 'delete', `Voided/soft-deleted transaction Ref #${t.ref} (${formatGHC(t.amount)})`);
-      toast(`Transaction Ref #${t.ref} voided (soft-deleted, preserved in audit log)`);
+      const _t = window.t || ((k, p) => k); toast(_t('finance.toast.tx_voided', { ref: t.ref }));
       if (memberId) openMemberGivingModal(memberId);
       renderMemberGivingRecords();
       renderOverview();
@@ -486,7 +491,7 @@
     t.status = 'normal';
     persistAll();
     addAuditEntry(AUTHOR_NAME, 'edit', `Restored voided transaction Ref #${t.ref} (${formatGHC(t.amount)})`);
-    toast(`Transaction Ref #${t.ref} restored ✓`);
+    const _t = window.t || ((k, p) => k); toast(_t('finance.toast.tx_restored', { ref: t.ref }));
     if (memberId) openMemberGivingModal(memberId);
     renderMemberGivingRecords();
     renderOverview();
@@ -499,7 +504,7 @@
       t.disputeReason = '';
       persistAll();
       addAuditEntry(AUTHOR_NAME, 'edit', `Resolved transaction dispute for Receipt #${t.ref}`);
-      toast('Transaction marked as reviewed & resolved ✓');
+      const _t = window.t || ((k, p) => k); toast(_t('finance.toast.tx_resolved'));
       openMemberGivingModal(memberId);
       renderMemberGivingRecords();
       renderOverview();
@@ -788,3 +793,7 @@
   });
 
 })();
+
+  document.addEventListener('languageChanged', () => {
+    if (typeof renderOverview === 'function') renderOverview();
+  });

@@ -84,10 +84,12 @@
   function _today() { return new Date().toISOString().slice(0, 10); }
   // localStorage helpers removed — data now persists via Firestore (see db.js)
 
-  function _toast(message, type) {
+  function _toast(message, type, params) {
+    const _t = window.t || ((k) => k);
+    const text = typeof message === 'string' && _t(message, params) !== message ? _t(message, params) : message;
     const el = document.createElement('div');
     el.className = `toast toast--${type || 'success'}`;
-    el.textContent = message;
+    el.textContent = text;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3200);
   }
@@ -95,6 +97,9 @@
   function _formatDate(dateStr) {
     if (!dateStr) return '—';
     const d = new Date(dateStr.replace(' ', 'T'));
+    if (window.ChurchOS && window.ChurchOS.i18n && window.ChurchOS.i18n.formatDate) {
+      return window.ChurchOS.i18n.formatDate(d, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) +
       ', ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   }
@@ -336,8 +341,8 @@
     const isScheduled = document.getElementById('comm-sched-later')?.checked;
     const scheduledAt = document.getElementById('comm-sched-datetime')?.value || '';
 
-    if (!title || !body) { _toast('Title and message body are required', 'error'); return; }
-    if (!pushEnabled && !smsEnabled) { _toast('Select at least one delivery channel', 'error'); return; }
+    if (!title || !body) { const _t = window.t || ((k) => k); _toast(_t('comms.toast.req_fields'), 'error'); return; }
+    if (!pushEnabled && !smsEnabled) { const _t = window.t || ((k) => k); _toast(_t('comms.toast.req_channel'), 'error'); return; }
     if (isScheduled && !scheduledAt) { _toast('Please select a date and time for scheduling', 'error'); return; }
 
     // Determine audience
@@ -697,7 +702,7 @@
     if (countEl) countEl.textContent = '0';
     const badge = document.getElementById('notif-badge');
     if (badge) badge.textContent = '';
-    _toast('All announcements marked as read ✓');
+    const _t = window.t || ((k) => k); _toast(_t('comms.toast.all_read'));
   }
 
   function getUnreadCount() {

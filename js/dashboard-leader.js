@@ -30,10 +30,12 @@
   function today() { return new Date().toISOString().slice(0, 10); }
   function now() { return new Date().toISOString().replace('T', ' ').slice(0, 19); }
 
-  function toast(message, type = 'success') {
+  function toast(message, type = 'success', params) {
+    const _t = window.t || ((k) => k);
+    const text = typeof message === 'string' && _t(message, params) !== message ? _t(message, params) : message;
     const el = document.createElement('div');
     el.className = `toast toast--${type}`;
-    el.textContent = message;
+    el.textContent = text;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3200);
   }
@@ -322,7 +324,7 @@
 
     persistMembers();
     addAuditEntry(LEADER_NAME, 'create', `Recorded Youth Ministry attendance for ${date} (${presentCount}/${youthRoster.length} present)`);
-    toast(`Attendance saved! (${presentCount} present) — Queued & synchronized ✓`);
+    const _t = window.t || ((k, p) => k); toast(_t('leader.toast.att_saved', { count: presentCount }));
     renderOverview();
   });
 
@@ -387,7 +389,7 @@
       t.status = newStatus;
       save(KEYS.careTasks, careTasks);
       addAuditEntry(LEADER_NAME, 'edit', `Updated task status for ${t.memberName} to ${newStatus}`);
-      toast(`Task marked as ${newStatus} ✓`);
+      const _t = window.t || ((k, p) => k); toast(_t('leader.toast.task_status', { status: newStatus }));
       renderFollowupTasks();
       renderOverview();
     }
@@ -427,7 +429,7 @@
     save(KEYS.careTasks, careTasks);
     addAuditEntry(LEADER_NAME, 'create', `Flagged ${m.name} for follow-up: "${reason}"`);
     closeModal('modal-flag-group-member');
-    toast(`Follow-up task created for ${m.name} ✓`);
+    const _t = window.t || ((k, p) => k); toast(_t('leader.toast.task_created', { name: m.name }));
     renderFollowupTasks();
     renderOverview();
   });
@@ -493,7 +495,7 @@
 
     addAuditEntry(LEADER_NAME, 'create', `Registered visitor: ${name} (${phone})`);
     document.getElementById('form-register-visitor').reset();
-    toast(`Visitor added — follow-up task created ✓`);
+    const _t = window.t || ((k) => k); toast(_t('leader.toast.visitor_added'));
     renderVisitors();
     renderRoster();
     renderOverview();
@@ -554,7 +556,7 @@
     save(KEYS.sentMessages, sentMessages);
     addAuditEntry(LEADER_NAME, 'system', `Broadcasted message to Youth Ministry: "${subject}"`);
     document.getElementById('form-leader-message').reset();
-    toast('Broadcast message delivered to Youth Ministry members ✓');
+    const _t = window.t || ((k) => k); toast(_t('leader.toast.broadcast_sent'));
     renderGroupMessages();
   });
 

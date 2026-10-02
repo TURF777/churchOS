@@ -60,7 +60,7 @@
           <div class="sidebar__avatar js-user-initials">SP</div>
           <div>
             <div class="sidebar__user-name js-user-name">Rev. Daniel Mensah</div>
-            <div class="sidebar__user-role js-user-role">Senior Pastor</div>
+            <div class="sidebar__user-role js-user-role" data-i18n="signup.role.pastor_name">Senior Pastor</div>
           </div>
         </div>
       </div>
@@ -85,17 +85,8 @@
               <span class="lang-switcher__current">EN</span>
             </button>
             <div class="lang-switcher__dropdown">
-              <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
               <button type="button" data-lang="en">English</button>
               <button type="button" data-lang="fr">Français</button>
-              <button type="button" data-lang="es">Español</button>
-              <button type="button" data-lang="pt">Português</button>
-              <button type="button" data-lang="zh">中文</button>
-              <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
-              <button type="button" data-lang="tw">Twi</button>
-              <button type="button" data-lang="ga">Ga</button>
-              <button type="button" data-lang="ee">Eʋegbe</button>
-              <button type="button" data-lang="fat">Mfantse</button>
             </div>
           </div>
           <div class="topbar__notification" title="Notifications">
@@ -114,12 +105,12 @@
         <div class="dashboard-section active" id="section-overview">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Church Health Overview</h2>
-              <p class="section-header__subtitle">Real-time attendance, giving trends, and pastoral care status</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.overview">Church Health Overview</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.overview_subtitle">Real-time attendance, giving trends, and pastoral care status</p>
             </div>
             <div style="display: flex; align-items: center; gap: var(--space-sm);">
-              <span style="font-size: 0.75rem; color: var(--color-gray-500);">Last updated: <span id="refresh-time">Just now</span></span>
-              <button class="btn btn--ghost btn--sm" id="btn-manual-refresh"><i data-lucide="refresh-cw" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Refresh Data</button>
+              <span style="font-size: 0.75rem; color: var(--color-gray-500);">Last updated: <span id="refresh-time" data-i18n="common.just_now">Just now</span></span>
+              <button class="btn btn--ghost btn--sm" id="btn-manual-refresh" data-i18n="common.refresh_data"><i data-lucide="refresh-cw" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Refresh Data</button>
             </div>
           </div>
 
@@ -128,7 +119,7 @@
               <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="church"></i></div>
               <div>
                 <div class="stat-card__value" id="pastor-stat-attendance">892</div>
-                <div class="stat-card__label">Last Sunday Attendance</div>
+                <div class="stat-card__label" data-i18n="pastor.stat.last_sunday">Last Sunday Attendance</div>
                 <div class="stat-card__trend stat-card__trend--up">↑ 5.2% vs prior week</div>
               </div>
             </div>
@@ -136,7 +127,7 @@
               <div class="stat-card__icon stat-card__icon--info"><i data-lucide="user-plus"></i></div>
               <div>
                 <div class="stat-card__value" id="pastor-stat-visitors">3</div>
-                <div class="stat-card__label">Visitors This Month</div>
+                <div class="stat-card__label" data-i18n="pastor.stat.visitors_month">Visitors This Month</div>
                 <div class="stat-card__trend stat-card__trend--up">↑ 2 converted</div>
               </div>
             </div>
@@ -144,7 +135,7 @@
               <div class="stat-card__icon stat-card__icon--warning"><i data-lucide="banknote"></i></div>
               <div>
                 <div class="stat-card__value" id="pastor-stat-giving">GH₵ 45.2K</div>
-                <div class="stat-card__label">Giving This Month</div>
+                <div class="stat-card__label" data-i18n="pastor.stat.giving_month">Giving This Month</div>
                 <div class="stat-card__trend stat-card__trend--up">↑ 8% vs last month</div>
               </div>
             </div>
@@ -152,8 +143,8 @@
               <div class="stat-card__icon stat-card__icon--success"><i data-lucide="flag"></i></div>
               <div>
                 <div class="stat-card__value" id="pastor-stat-flagged">4</div>
-                <div class="stat-card__label">Flagged for Follow-Up</div>
-                <div class="stat-card__trend stat-card__trend--down" style="cursor: pointer;" data-goto="pastoral-care">View Care Tasks →</div>
+                <div class="stat-card__label" data-i18n="pastor.stat.flagged">Flagged for Follow-Up</div>
+                <div class="stat-card__trend stat-card__trend--down" style="cursor: pointer;" data-goto="pastoral-care" data-i18n="pastor.stat.view_care">View Care Tasks →</div>
               </div>
             </div>
           </div>
@@ -162,8 +153,8 @@
             <!-- Attendance Summary chart -->
             <div class="widget">
               <div class="widget__header">
-                <h3 class="widget__title">Recent Sunday Attendance</h3>
-                <button class="btn btn--ghost btn--sm" data-goto="attendance-reports">Full Report</button>
+                <h3 class="widget__title" data-i18n="pastor.widget.recent_attendance">Recent Sunday Attendance</h3>
+                <button class="btn btn--ghost btn--sm" data-goto="attendance-reports" data-i18n="common.full_report">Full Report</button>
               </div>
               <div class="widget__body">
                 <div class="bar-chart" id="overview-attendance-chart">
@@ -175,8 +166,8 @@
             <!-- Giving Summary chart -->
             <div class="widget">
               <div class="widget__header">
-                <h3 class="widget__title">Recent Weekly Giving (GH₵)</h3>
-                <button class="btn btn--ghost btn--sm" data-goto="giving-reports">Financial Insights</button>
+                <h3 class="widget__title" data-i18n="pastor.widget.recent_giving">Recent Weekly Giving (GH₵)</h3>
+                <button class="btn btn--ghost btn--sm" data-goto="giving-reports" data-i18n="pastor.widget.financial_insights">Financial Insights</button>
               </div>
               <div class="widget__body">
                 <div class="bar-chart" id="overview-giving-chart">
@@ -193,8 +184,8 @@
         <div class="dashboard-section" id="section-members">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Congregation Directory</h2>
-              <p class="section-header__subtitle">Browse members, review full giving history, and record confidential pastoral care notes</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.members">Congregation Directory</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.members_subtitle">Browse members, review full giving history, and record confidential pastoral care notes</p>
             </div>
             <div class="confidential-badge">
               <span>🔒</span> Pastoral Access Only
@@ -202,15 +193,15 @@
           </div>
 
           <div class="filter-bar">
-            <input type="text" class="form-input form-input--search" id="pastor-member-search" placeholder="Search member by name or phone...">
+            <input type="text" class="form-input form-input--search" id="pastor-member-search" placeholder="Search member by name or phone..." data-i18n-placeholder="pastor.search.members">
             <select class="form-select" id="pastor-member-filter-status">
-              <option value="">All Statuses</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-              <option value="Visitor">Visitor</option>
+              <option value="" data-i18n="common.all_statuses">All Statuses</option>
+              <option value="Active" data-i18n="admin.table.active">Active</option>
+              <option value="Inactive" data-i18n="admin.table.inactive">Inactive</option>
+              <option value="Visitor" data-i18n="admin.table.visitor">Visitor</option>
             </select>
             <select class="form-select" id="pastor-member-filter-dept">
-              <option value="">All Departments</option>
+              <option value="" data-i18n="admin.table.all_departments">All Departments</option>
             </select>
           </div>
 
@@ -220,12 +211,12 @@
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Phone</th>
-                      <th>Status</th>
-                      <th>Department</th>
-                      <th>Pastoral Notes</th>
-                      <th>Actions</th>
+                      <th data-i18n="common.name">Name</th>
+                      <th data-i18n="common.phone">Phone</th>
+                      <th data-i18n="member.table.status">Status</th>
+                      <th data-i18n="common.department">Department</th>
+                      <th data-i18n="pastor.table.pastoral_notes">Pastoral Notes</th>
+                      <th data-i18n="common.actions">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="pastor-members-tbody">
@@ -243,15 +234,15 @@
         <div class="dashboard-section" id="section-attendance-reports">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Attendance Analytics & Absence Reports</h2>
-              <p class="section-header__subtitle">Identify inactive members, track weekly trends, and assign follow-up tasks</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.attendance">Attendance Analytics &amp; Absence Reports</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.attendance_subtitle">Identify inactive members, track weekly trends, and assign follow-up tasks</p>
             </div>
           </div>
 
           <!-- Inactive Members Report (4+ weeks) -->
           <div class="widget" style="margin-bottom: var(--space-2xl);">
             <div class="widget__header">
-              <h3 class="widget__title">⚠️ Inactive Members (No Attendance 4+ Weeks)</h3>
+              <h3 class="widget__title" data-i18n="pastor.widget.inactive_members">⚠️ Inactive Members (No Attendance 4+ Weeks)</h3>
               <span class="badge badge--warning" id="inactive-count-badge">0 Members</span>
             </div>
             <div class="widget__body widget__body--flush">
@@ -259,12 +250,12 @@
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Member Name</th>
-                      <th>Phone</th>
-                      <th>Department</th>
-                      <th>Last Attended</th>
-                      <th>Weeks Absent</th>
-                      <th>Actions</th>
+                      <th data-i18n="pastor.table.member_name">Member Name</th>
+                      <th data-i18n="common.phone">Phone</th>
+                      <th data-i18n="common.department">Department</th>
+                      <th data-i18n="pastor.table.last_attended">Last Attended</th>
+                      <th data-i18n="pastor.table.weeks_absent">Weeks Absent</th>
+                      <th data-i18n="common.actions">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="inactive-members-tbody">
@@ -278,12 +269,12 @@
           <!-- Attendance Trends Breakdown -->
           <div class="widget">
             <div class="widget__header">
-              <h3 class="widget__title">Service Attendance Breakdown</h3>
+              <h3 class="widget__title" data-i18n="pastor.widget.service_breakdown">Service Attendance Breakdown</h3>
               <select class="form-select" id="pastor-attendance-service-filter" style="max-width: 200px; padding: 0.4rem 0.8rem; font-size: 0.8125rem;">
-                <option value="">All Services</option>
-                <option value="1st Service">1st Service (7:00 AM)</option>
-                <option value="2nd Service">2nd Service (9:30 AM)</option>
-                <option value="3rd Service">3rd Service (12:00 PM)</option>
+                <option value="" data-i18n="pastor.table.all_services">All Services</option>
+                <option value="1st Service" data-i18n="signup.step2.service_1st">1st Service (7:00 AM)</option>
+                <option value="2nd Service" data-i18n="signup.step2.service_2nd">2nd Service (9:30 AM)</option>
+                <option value="3rd Service" data-i18n="signup.step2.service_3rd">3rd Service (12:00 PM)</option>
                 <option value="Mid-Week Service">Mid-Week Service</option>
               </select>
             </div>
@@ -301,16 +292,16 @@
         <div class="dashboard-section" id="section-giving-reports">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Giving & Financial Insights</h2>
-              <p class="section-header__subtitle">12-month category trends, giving summaries, and financial reports</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.giving">Giving &amp; Financial Insights</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.giving_subtitle">12-month category trends, giving summaries, and financial reports</p>
             </div>
           </div>
 
           <div class="filter-bar">
-            <label class="form-label" style="margin: 0; align-self: center;">Date Range:</label>
+            <label class="form-label" style="margin: 0; align-self: center;" data-i18n="pastor.filter.date_range">Date Range:</label>
             <select class="form-select" id="giving-range-filter">
-              <option value="6m">Last 6 Months</option>
-              <option value="12m" selected>Last 12 Months</option>
+              <option value="6m" data-i18n="pastor.filter.last_6m">Last 6 Months</option>
+              <option value="12m" selected data-i18n="pastor.filter.last_12m">Last 12 Months</option>
               <option value="ytd">Year to Date (2026)</option>
             </select>
           </div>
@@ -318,7 +309,7 @@
           <!-- 12-Month Giving Chart -->
           <div class="widget" style="margin-bottom: var(--space-2xl);">
             <div class="widget__header">
-              <h3 class="widget__title">Monthly Giving Trend (12-Month View)</h3>
+              <h3 class="widget__title" data-i18n="pastor.widget.monthly_giving_trend">Monthly Giving Trend (12-Month View)</h3>
               <span class="badge badge--success">GH₵ Total</span>
             </div>
             <div class="widget__body">
@@ -331,17 +322,17 @@
           <!-- Category Breakdown Table -->
           <div class="widget">
             <div class="widget__header">
-              <h3 class="widget__title">Giving Summary by Category</h3>
+              <h3 class="widget__title" data-i18n="pastor.widget.giving_by_category">Giving Summary by Category</h3>
             </div>
             <div class="widget__body widget__body--flush">
               <div class="table-responsive">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Category</th>
-                      <th>Total Collected</th>
-                      <th>% of Total</th>
-                      <th>Transactions</th>
+                      <th data-i18n="member.table.category">Category</th>
+                      <th data-i18n="pastor.table.total_collected">Total Collected</th>
+                      <th data-i18n="pastor.table.pct_of_total">% of Total</th>
+                      <th data-i18n="admin.table.transactions">Transactions</th>
                     </tr>
                   </thead>
                   <tbody id="pastor-giving-categories-tbody">
@@ -359,21 +350,21 @@
         <div class="dashboard-section" id="section-pastoral-care">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Pastoral Care & Follow-Up Tasks</h2>
-              <p class="section-header__subtitle">Manage care assignments, prayer requests, and member registration approvals</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.pastoral_care">Pastoral Care &amp; Follow-Up Tasks</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.pastoral_care_subtitle">Manage care assignments, prayer requests, and member registration approvals</p>
             </div>
-            <button class="btn btn--primary btn--sm" id="btn-flag-member">+ Flag Member for Care</button>
+            <button class="btn btn--primary btn--sm" id="btn-flag-member" data-i18n="pastor.btn.flag_member">+ Flag Member for Care</button>
           </div>
 
           <!-- Care Task List -->
           <div class="widget" style="margin-bottom: var(--space-2xl);">
             <div class="widget__header">
-              <h3 class="widget__title">Follow-Up Task Board</h3>
+              <h3 class="widget__title" data-i18n="pastor.widget.follow_up_board">Follow-Up Task Board</h3>
               <select class="form-select" id="care-task-filter-status" style="max-width: 180px; padding: 0.4rem 0.8rem; font-size: 0.8125rem;">
-                <option value="">All Statuses</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
+                <option value="" data-i18n="leader.filter.all_statuses">All Statuses</option>
+                <option value="Pending" data-i18n="pastor.filter.pending">Pending</option>
+                <option value="In Progress" data-i18n="pastor.filter.in_progress">In Progress</option>
+                <option value="Completed" data-i18n="pastor.filter.completed">Completed</option>
               </select>
             </div>
             <div class="widget__body widget__body--flush">
@@ -381,12 +372,12 @@
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Member</th>
-                      <th>Reason / Note</th>
-                      <th>Assigned Leader</th>
-                      <th>Due Date</th>
-                      <th>Status</th>
-                      <th>Action</th>
+                      <th data-i18n="common.member">Member</th>
+                      <th data-i18n="pastor.table.reason_note">Reason / Note</th>
+                      <th data-i18n="pastor.table.assigned_leader">Assigned Leader</th>
+                      <th data-i18n="pastor.table.due_date">Due Date</th>
+                      <th data-i18n="member.table.status">Status</th>
+                      <th data-i18n="common.action">Action</th>
                     </tr>
                   </thead>
                   <tbody id="care-tasks-tbody">
@@ -401,7 +392,7 @@
             <!-- Prayer Requests Feed -->
             <div class="widget">
               <div class="widget__header">
-                <h3 class="widget__title">Member Prayer Requests</h3>
+                <h3 class="widget__title" data-i18n="pastor.widget.prayer_requests">Member Prayer Requests</h3>
                 <span class="badge badge--info" id="prayer-count-badge">0 Active</span>
               </div>
               <div class="widget__body" id="prayer-requests-container" style="max-height: 400px; overflow-y: auto;">
@@ -412,7 +403,7 @@
             <!-- Pending Registration Approvals -->
             <div class="widget">
               <div class="widget__header">
-                <h3 class="widget__title">Pending Registration Approvals</h3>
+                <h3 class="widget__title" data-i18n="pastor.widget.pending_approvals">Pending Registration Approvals</h3>
               </div>
               <div class="widget__body" id="approvals-container" style="max-height: 400px; overflow-y: auto;">
                 <!-- Populated by JS -->
@@ -427,8 +418,8 @@
         <div class="dashboard-section" id="section-communication">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Congregation Communication</h2>
-              <p class="section-header__subtitle">Broadcast SMS and push notifications to your entire church family or specific departments</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.communication">Congregation Communication</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.communication_subtitle">Broadcast SMS and push notifications to your entire church family or specific departments</p>
             </div>
           </div>
 
@@ -441,7 +432,7 @@
               <div id="comm-delivery-status" style="margin-bottom: var(--space-lg);"></div>
               <div class="widget">
                 <div class="widget__header">
-                  <h3 class="widget__title">Sent History</h3>
+                  <h3 class="widget__title" data-i18n="admin.widget.sent_history">Sent History</h3>
                 </div>
                 <div class="widget__body" style="max-height: 500px; overflow-y: auto;">
                   <div id="comm-history-container"></div>
@@ -457,8 +448,8 @@
         <div class="dashboard-section" id="section-standard-reports">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Standard Reports Library</h2>
-              <p class="section-header__subtitle">Generate official reports with inline filters and export to PDF or CSV</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.reports">Standard Reports Library</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.reports_subtitle">Generate official reports with inline filters and export to PDF or CSV</p>
             </div>
           </div>
 
@@ -472,54 +463,54 @@
         <div class="dashboard-section" id="section-weekly-summary">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">My Weekly Summary Settings</h2>
-              <p class="section-header__subtitle">Configure automated executive health reports delivered straight to your inbox</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.weekly_summary">My Weekly Summary Settings</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.weekly_summary_subtitle">Configure automated executive health reports delivered straight to your inbox</p>
             </div>
           </div>
 
           <div class="grid grid--2">
             <div class="summary-config-card">
-              <h4 style="margin-bottom: var(--space-md);">Delivery Preferences</h4>
+              <h4 style="margin-bottom: var(--space-md);" data-i18n="pastor.widget.delivery_prefs">Delivery Preferences</h4>
               <form id="form-summary-config">
                 <div class="form-group">
                   <label class="form-checkbox">
                     <input type="checkbox" id="summary-enable-email" checked>
-                    <span>Receive Weekly Executive Summary via Email</span>
+                    <span><span data-i18n="pastor.form.email_summary">Receive Weekly Executive Summary via Email</span></span>
                   </label>
                 </div>
                 <div class="form-group">
                   <label class="form-checkbox">
                     <input type="checkbox" id="summary-enable-app" checked>
-                    <span>Receive In-App Notification Summary</span>
+                    <span><span data-i18n="pastor.form.app_summary">Receive In-App Notification Summary</span></span>
                   </label>
                 </div>
                 <div class="form-row">
                   <div class="form-group">
-                    <label for="summary-day" class="form-label">Delivery Day</label>
+                    <label for="summary-day" class="form-label" data-i18n="pastor.form.delivery_day">Delivery Day</label>
                     <select id="summary-day" class="form-select">
-                      <option value="Monday" selected>Monday Morning</option>
-                      <option value="Sunday">Sunday Evening</option>
-                      <option value="Friday">Friday Afternoon</option>
+                      <option value="Monday" selected data-i18n="pastor.form.monday_morning">Monday Morning</option>
+                      <option value="Sunday" data-i18n="pastor.form.sunday_evening">Sunday Evening</option>
+                      <option value="Friday" data-i18n="pastor.form.friday_afternoon">Friday Afternoon</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="summary-time" class="form-label">Delivery Time</label>
+                    <label for="summary-time" class="form-label" data-i18n="pastor.form.delivery_time">Delivery Time</label>
                     <input type="time" id="summary-time" class="form-input" value="07:00">
                   </div>
                 </div>
-                <button type="submit" class="btn btn--primary">Save Preferences</button>
+                <button type="submit" class="btn btn--primary" data-i18n="pastor.btn.save_prefs">Save Preferences</button>
               </form>
             </div>
 
             <!-- Summary Content Preview -->
             <div class="widget">
               <div class="widget__header">
-                <h3 class="widget__title">Weekly Summary Content Preview</h3>
-                <span class="badge badge--navy">Sample Email Layout</span>
+                <h3 class="widget__title" data-i18n="pastor.widget.summary_preview">Weekly Summary Content Preview</h3>
+                <span class="badge badge--navy" data-i18n="pastor.badge.sample_email">Sample Email Layout</span>
               </div>
               <div class="widget__body">
                 <div style="background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); padding: var(--space-lg); font-size: var(--fs-sm);">
-                  <div style="font-weight: 700; font-size: var(--fs-md); color: var(--color-navy); margin-bottom: var(--space-xs);">✝️ ChurchOS Executive Summary</div>
+                  <div style="font-weight: 700; font-size: var(--fs-md); color: var(--color-navy); margin-bottom: var(--space-xs);" data-i18n="pastor.summary.title">✝️ ChurchOS Executive Summary</div>
                   <div style="font-size: var(--fs-xs); color: var(--color-gray-500); margin-bottom: var(--space-md);">Week of July 20, 2026 — Grace Assembly International</div>
                   
                   <div style="margin-bottom: var(--space-md);">
@@ -546,8 +537,8 @@
         <div class="dashboard-section" id="section-activity-log">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Church Activity Feed</h2>
-              <p class="section-header__subtitle">Church-wide activity stream across all ministries and administrative actions</p>
+              <h2 class="section-header__title" data-i18n="pastor.section.activity">Church Activity Feed</h2>
+              <p class="section-header__subtitle" data-i18n="pastor.section.activity_subtitle">Church-wide activity stream across all ministries and administrative actions</p>
             </div>
           </div>
           <div id="activity-log-pastor"></div>
@@ -565,14 +556,14 @@
   <div class="modal-overlay" id="modal-pastor-member">
     <div class="modal modal--wide">
       <div class="modal__header">
-        <h3 class="modal__title">Member Profile & Pastoral Care</h3>
+        <h3 class="modal__title" data-i18n="pastor.widget.member_profile">Member Profile &amp; Pastoral Care</h3>
         <button class="modal__close" data-close="modal-pastor-member" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body" id="pastor-member-modal-body">
         <!-- Populated by JS -->
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-pastor-member">Close</button>
+        <button class="btn btn--ghost" data-close="modal-pastor-member" data-i18n="common.close">Close</button>
       </div>
     </div>
   </div>
@@ -581,20 +572,20 @@
   <div class="modal-overlay" id="modal-assign-task">
     <div class="modal">
       <div class="modal__header">
-        <h3 class="modal__title">Assign Follow-Up Task</h3>
+        <h3 class="modal__title" data-i18n="pastor.widget.assign_task">Assign Follow-Up Task</h3>
         <button class="modal__close" data-close="modal-assign-task" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body">
         <form id="form-assign-task">
           <input type="hidden" id="task-member-id">
           <div class="form-group">
-            <label for="task-member-name" class="form-label">Member</label>
+            <label for="task-member-name" class="form-label" data-i18n="common.member">Member</label>
             <input type="text" id="task-member-name" class="form-input" readonly>
           </div>
           <div class="form-group">
-            <label for="task-assignee" class="form-label">Assign To Leader / Dept Head <span class="required">*</span></label>
+            <label for="task-assignee" class="form-label">Assign To Leader / Dept Head <span class="required" data-i18n="common.required">*</span></label>
             <select id="task-assignee" class="form-select" required>
-              <option value="">— Select Leader —</option>
+              <option value="" data-i18n="pastor.form.select_leader">— Select Leader —</option>
               <option value="Kofi Darko (Youth Leader)">Kofi Darko (Youth Leader)</option>
               <option value="Akosua Mensah (Women's Leader)">Akosua Mensah (Women's Leader)</option>
               <option value="Kwame Asante (Ushering Head)">Kwame Asante (Ushering Head)</option>
@@ -602,18 +593,18 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="task-reason" class="form-label">Reason / Instructions <span class="required">*</span></label>
+            <label for="task-reason" class="form-label">Reason / Instructions <span class="required" data-i18n="common.required">*</span></label>
             <textarea id="task-reason" class="form-input" rows="3" placeholder="e.g. Absent 4 weeks, please call or visit to check on family." required></textarea>
           </div>
           <div class="form-group">
-            <label for="task-due-date" class="form-label">Due Date <span class="required">*</span></label>
+            <label for="task-due-date" class="form-label">Due Date <span class="required" data-i18n="common.required">*</span></label>
             <input type="date" id="task-due-date" class="form-input" required>
           </div>
         </form>
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-assign-task">Cancel</button>
-        <button class="btn btn--primary" id="btn-save-assign-task">Assign Task</button>
+        <button class="btn btn--ghost" data-close="modal-assign-task" data-i18n="common.cancel">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-assign-task" data-i18n="pastor.btn.assign_task">Assign Task</button>
       </div>
     </div>
   </div>
@@ -622,17 +613,17 @@
   <div class="modal-overlay" id="modal-life-event">
     <div class="modal">
       <div class="modal__header">
-        <h3 class="modal__title">Record Life Event</h3>
+        <h3 class="modal__title" data-i18n="pastor.widget.life_event">Record Life Event</h3>
         <button class="modal__close" data-close="modal-life-event" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body">
         <form id="form-life-event">
           <input type="hidden" id="event-member-id">
           <div class="form-group">
-            <label for="event-type" class="form-label">Event Type <span class="required">*</span></label>
+            <label for="event-type" class="form-label">Event Type <span class="required" data-i18n="common.required">*</span></label>
             <select id="event-type" class="form-select" required>
-              <option value="">— Select Type —</option>
-              <option value="Water Baptism">Water Baptism</option>
+              <option value="" data-i18n="pastor.form.select_type">— Select Type —</option>
+              <option value="Water Baptism" data-i18n="member.profile.water_baptism">Water Baptism</option>
               <option value="Baby Dedication">Baby Dedication</option>
               <option value="Marriage">Marriage</option>
               <option value="Bereavement">Bereavement</option>
@@ -641,18 +632,18 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="event-date" class="form-label">Date <span class="required">*</span></label>
+            <label for="event-date" class="form-label">Date <span class="required" data-i18n="common.required">*</span></label>
             <input type="date" id="event-date" class="form-input" required>
           </div>
           <div class="form-group">
-            <label for="event-notes" class="form-label">Notes / Details</label>
+            <label for="event-notes" class="form-label" data-i18n="pastor.form.notes_details">Notes / Details</label>
             <textarea id="event-notes" class="form-input" rows="3" placeholder="e.g. Officiated by Senior Pastor, witnessed by congregation."></textarea>
           </div>
         </form>
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-life-event">Cancel</button>
-        <button class="btn btn--primary" id="btn-save-life-event">Save Life Event</button>
+        <button class="btn btn--ghost" data-close="modal-life-event" data-i18n="common.cancel">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-life-event" data-i18n="pastor.btn.save_life_event">Save Life Event</button>
       </div>
     </div>
   </div>

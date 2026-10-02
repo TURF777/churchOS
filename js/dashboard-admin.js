@@ -29,10 +29,12 @@
   function today() { return new Date().toISOString().slice(0, 10); }
   function now() { return new Date().toISOString().replace('T', ' ').slice(0, 19); }
 
-  function toast(message, type = 'success') {
+  function toast(message, type = 'success', params) {
+    const _t = window.t || ((k) => k);
+    const text = typeof message === 'string' && _t(message, params) !== message ? _t(message, params) : message;
     const el = document.createElement('div');
     el.className = `toast toast--${type}`;
-    el.textContent = message;
+    el.textContent = text;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3200);
   }
@@ -513,11 +515,11 @@
       const idx = members.findIndex(m => String(m.id) === String(editId));
       if (idx !== -1) { members[idx] = { ...members[idx], ...data }; }
       addAuditEntry('Admin User', 'edit', `Updated member: ${name}`);
-      toast('Member updated successfully');
+      const _t = window.t || ((k) => k); toast(_t('admin.toast.member_updated'));
     } else {
       members.push({ id: uid(), ...data });
       addAuditEntry('Admin User', 'create', `Added new member: ${name}`);
-      toast('Member added successfully');
+      const _t = window.t || ((k) => k); toast(_t('admin.toast.member_added'));
     }
 
     persist();
@@ -621,7 +623,7 @@
         renderMembers();
         populateDeptFilter();
         renderOverview();
-        toast(`${m.name} deleted (can be restored from Deleted filter view)`);
+        const _t = window.t || ((k, p) => k); toast(_t('admin.toast.member_deleted', { name: m.name }));
       }
     );
   }
@@ -636,7 +638,7 @@
     renderMembers();
     populateDeptFilter();
     renderOverview();
-    toast(`${m.name} restored successfully`);
+    const _t = window.t || ((k, p) => k); toast(_t('admin.toast.member_restored', { name: m.name }));
   }
 
   // Member search and filters
@@ -687,11 +689,11 @@
       const idx = services.findIndex(s => s.id === editId);
       if (idx !== -1) services[idx] = { ...services[idx], ...data };
       addAuditEntry('Admin User', 'edit', `Updated service: ${name}`);
-      toast('Service updated');
+      const _t = window.t || ((k) => k); toast(_t('admin.toast.service_saved'));
     } else {
       services.push({ id: uid(), ...data });
       addAuditEntry('Admin User', 'create', `Added new service: ${name}`);
-      toast('Service added — recurring sessions will be generated automatically');
+      const _t = window.t || ((k) => k); toast(_t('admin.toast.service_added'));
     }
 
     persist();
@@ -898,7 +900,7 @@
         status: 'active',
       });
       addAuditEntry('Admin User', 'create', `Created user account: ${finalName} (${ROLE_LABELS[role] || role})`);
-      toast('Account created successfully');
+      const _t = window.t || ((k) => k); toast(_t('admin.toast.account_created'));
     }
 
     persist();

@@ -27,19 +27,27 @@
   function today() { return new Date().toISOString().slice(0, 10); }
   // localStorage helpers removed — data now persists via Firestore (see db.js)
 
-  function toast(message, type = 'success') {
+  function toast(message, type = 'success', params) {
+    const _t = window.t || ((k) => k);
+    const text = typeof message === 'string' && _t(message, params) !== message ? _t(message, params) : message;
     const el = document.createElement('div');
     el.className = `toast toast--${type}`;
-    el.textContent = message;
+    el.textContent = text;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3200);
   }
 
   function formatGHC(amount) {
+    if (window.ChurchOS && window.ChurchOS.i18n && window.ChurchOS.i18n.formatCurrency) {
+      return window.ChurchOS.i18n.formatCurrency(amount);
+    }
     return 'GH₵ ' + parseFloat(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   function formatDate(dateStr) {
+    if (window.ChurchOS && window.ChurchOS.i18n && window.ChurchOS.i18n.formatDate) {
+      return window.ChurchOS.i18n.formatDate(dateStr);
+    }
     const d = new Date(dateStr);
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
   }
@@ -195,14 +203,15 @@
 
     // Update topbar greeting
     const topGreeting = document.getElementById('topbar-greeting');
+    const _t = window.t || ((k, p) => k);
     if (topGreeting) {
-      if (sectionId === 'home') topGreeting.textContent = `Welcome back, ${profile.preferredName} 👋`;
-      else if (sectionId === 'profile') topGreeting.textContent = 'My Profile';
-      else if (sectionId === 'attendance') topGreeting.textContent = 'My Attendance';
-      else if (sectionId === 'giving') topGreeting.textContent = 'My Giving';
-      else if (sectionId === 'announcements') topGreeting.textContent = 'Announcements';
-      else if (sectionId === 'prayer') topGreeting.textContent = 'Prayer Requests';
-      else if (sectionId === 'groups') topGreeting.textContent = 'My Groups';
+      if (sectionId === 'home') topGreeting.textContent = _t('dashboard.member.welcome', { name: profile.preferredName }) + ' 👋';
+      else if (sectionId === 'profile') topGreeting.textContent = _t('member.section.profile');
+      else if (sectionId === 'attendance') topGreeting.textContent = _t('member.section.attendance');
+      else if (sectionId === 'giving') topGreeting.textContent = _t('member.section.giving');
+      else if (sectionId === 'announcements') topGreeting.textContent = _t('member.section.announcements');
+      else if (sectionId === 'prayer') topGreeting.textContent = _t('member.section.prayer');
+      else if (sectionId === 'groups') topGreeting.textContent = _t('member.section.groups');
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -229,7 +238,7 @@
   function renderHome() {
     // Greeting
     const greetEl = document.getElementById('home-greeting');
-    if (greetEl) greetEl.textContent = `Welcome back, ${profile.preferredName}! 🌻`;
+    const _t = window.t || ((k, p) => k); if (greetEl) greetEl.textContent = _t('dashboard.member.welcome', { name: profile.preferredName }) + '! 🌻';
 
     // Streak calculation
     let streak = 0;
@@ -337,7 +346,7 @@
     isEditing = false;
     persistAll();
     renderProfile();
-    toast('Profile updated successfully! ✓');
+    const _t = window.t || ((k) => k); toast(_t('member.toast.profile_updated'));
   }
 
   function cancelProfileEdit() {
@@ -454,7 +463,7 @@
     if (tx) {
       tx.status = 'flagged';
       persistAll();
-      toast('Transaction flagged for finance team review ✓');
+      const _t = window.t || ((k) => k); toast(_t('member.toast.tx_flagged'));
       renderGiving();
     }
   }
@@ -641,7 +650,7 @@
     });
 
     persistAll();
-    toast('Your prayer request has been sent to the pastoral team 🙏');
+    const _t = window.t || ((k) => k); toast(_t('member.toast.prayer_sent'));
     document.getElementById('form-prayer-request').reset();
     renderPrayers();
   });
@@ -651,7 +660,7 @@
     if (p) {
       p.status = 'Answered';
       persistAll();
-      toast('Marked as answered 🙏 Praise God!');
+      const _t = window.t || ((k) => k); toast(_t('member.toast.prayer_answered'));
       renderPrayers();
     }
   }
@@ -714,3 +723,7 @@
   });
 
 })();
+
+  document.addEventListener('languageChanged', () => {
+    if (typeof renderHome === 'function') renderHome();
+  });

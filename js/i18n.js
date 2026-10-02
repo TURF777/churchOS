@@ -15,23 +15,14 @@
      Supported Languages
      --------------------------------------------------- */
   const LANGUAGES = [
-    // International
-    { code: 'en',  name: 'English',   group: 'international' },
-    { code: 'fr',  name: 'Français',  group: 'international' },
-    { code: 'es',  name: 'Español',   group: 'international' },
-    { code: 'pt',  name: 'Português', group: 'international' },
-    { code: 'zh',  name: '中文',      group: 'international' },
-    // Ghanaian
-    { code: 'tw',  name: 'Twi',       group: 'ghanaian' },
-    { code: 'ga',  name: 'Ga',        group: 'ghanaian' },
-    { code: 'ee',  name: 'Eʋegbe',    group: 'ghanaian' },
-    { code: 'fat', name: 'Mfantse',   group: 'ghanaian' },
+    { code: 'en', name: 'English' },
+    { code: 'fr', name: 'Français' },
   ];
 
   /* Map language codes to BCP-47 locale tags for Intl APIs */
   const LOCALE_MAP = {
-    en: 'en-GH', fr: 'fr-FR', es: 'es-ES', pt: 'pt-PT',
-    zh: 'zh-CN', tw: 'ak-GH', ga: 'gaa', ee: 'ee-GH', fat: 'ak-GH',
+    en: 'en-GH',
+    fr: 'fr-FR',
   };
 
   const STORAGE_KEY = 'preferredLanguage';

@@ -161,7 +161,7 @@
         pt.setAttribute('r', '7.5');
         const val = parseInt(e.target.dataset.val).toLocaleString();
         const label = e.target.dataset.label;
-        tt.innerHTML = `<strong>${label}:</strong> ${val} ${opts.unit || 'attendees'}`;
+        const _t = window.t || ((k) => k); tt.innerHTML = `<strong>${label}:</strong> ${val} ${opts.unit || _t('charts.attendees')}`;
         tt.style.left = `${(e.target.dataset.x / width) * 100}%`;
         tt.style.top = `${(e.target.dataset.y / height) * 100}%`;
         tt.classList.add('visible');
@@ -279,8 +279,11 @@
     container.querySelectorAll('.bar-group').forEach(bg => {
       bg.addEventListener('mouseenter', (e) => {
         const month = bg.dataset.month;
-        const total = parseFloat(bg.dataset.total).toLocaleString('en-US', { minimumFractionDigits: 2 });
-        tt.innerHTML = `<strong>${month} Total:</strong> GH₵ ${total}`;
+        const _t = window.t || ((k) => k);
+        const formattedTotal = (window.ChurchOS && window.ChurchOS.i18n && window.ChurchOS.i18n.formatCurrency)
+          ? window.ChurchOS.i18n.formatCurrency(bg.dataset.total)
+          : 'GH₵ ' + parseFloat(bg.dataset.total).toLocaleString('en-US', { minimumFractionDigits: 2 });
+        tt.innerHTML = `<strong>${month} ${_t('charts.total')}:</strong> ${formattedTotal}`;
         tt.style.left = `${(e.clientX - container.getBoundingClientRect().left)}px`;
         tt.style.top = `${(e.clientY - container.getBoundingClientRect().top - 20)}px`;
         tt.classList.add('visible');
@@ -353,7 +356,7 @@
         const dDate = cell.dataset.date;
         const dName = cell.dataset.name;
         const attended = cell.dataset.attended === 'true';
-        tt.innerHTML = `<strong>${dDate}:</strong> ${dName} (${attended ? 'Attended ✓' : 'Missed'})`;
+        const _t = window.t || ((k) => k); const statusStr = attended ? _t('charts.attended') : _t('charts.missed'); tt.innerHTML = `<strong>${dDate}:</strong> ${dName} (${statusStr})`;
         const rect = cell.getBoundingClientRect();
         const parentRect = container.getBoundingClientRect();
         tt.style.left = `${rect.left - parentRect.left + rect.width / 2}px`;

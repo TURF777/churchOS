@@ -417,17 +417,17 @@
     dropdownEl.innerHTML = `
       <div class="notif-dropdown__header">
         <div class="notif-dropdown__title-group">
-          <h3 class="notif-dropdown__title">Notifications</h3>
+          <h3 class="notif-dropdown__title" data-i18n="dashboard.notifications.title">Notifications</h3>
           <span class="notif-dropdown__count-pill" style="${count > 0 ? '' : 'display:none;'}">${count} unread</span>
         </div>
         <div class="notif-dropdown__actions">
-          <button type="button" class="notif-btn-text js-mark-all-read" title="Mark all as read">Mark all read</button>
+          <button type="button" class="notif-btn-text js-mark-all-read" data-i18n="common.mark_all_read" title="Mark all as read">Mark all read</button>
           <button type="button" class="notif-btn-icon js-close-panel" title="Close">✕</button>
         </div>
       </div>
       <div class="notif-dropdown__filters">
-        <button type="button" class="notif-filter-chip active" data-filter="all">All</button>
-        <button type="button" class="notif-filter-chip" data-filter="unread">Unread</button>
+        <button type="button" class="notif-filter-chip active" data-filter="all" data-i18n="common.all">All</button>
+        <button type="button" class="notif-filter-chip" data-filter="unread" data-i18n="dashboard.notifications.unread">Unread</button>
         <button type="button" class="notif-filter-chip" data-filter="announcement"><i data-lucide="megaphone" style="width:14px;height:14px;"></i> Announcements</button>
         <button type="button" class="notif-filter-chip" data-filter="followup">📌 Tasks</button>
         <button type="button" class="notif-filter-chip" data-filter="pastoral"><i data-lucide="hand-heart" style="width:14px;height:14px;"></i> Pastoral</button>
@@ -437,7 +437,7 @@
         <!-- Rendered via JS -->
       </div>
       <div class="notif-dropdown__footer">
-        <button type="button" class="notif-footer-link js-view-all">View Notification Center →</button>
+        <button type="button" class="notif-footer-link js-view-all" data-i18n="dashboard.notifications.view_center">View Notification Center →</button>
       </div>
     `;
 
@@ -646,14 +646,14 @@
         <div class="notif-modal__header">
           <div style="display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 20px;">🔔</span>
-            <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--color-navy, #0F172A);">Notification Center</h3>
+            <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--color-navy, #0F172A);" data-i18n="dashboard.notifications.center_title">Notification Center</h3>
           </div>
           <button type="button" class="notif-btn-text js-modal-close" style="font-size: 16px;">✕</button>
         </div>
         <div class="notif-modal__toolbar">
-          <input type="text" id="notif-search" class="notif-search-input" placeholder="🔍 Search notifications...">
-          <button type="button" class="notif-btn-text js-modal-mark-all">Mark all read</button>
-          <button type="button" class="notif-btn-text js-modal-clear" style="color: var(--color-danger, #EF4444);">Clear read</button>
+          <input type="text" id="notif-search" class="notif-search-input" placeholder="🔍 Search notifications..." data-i18n-placeholder="dashboard.notifications.search_placeholder">
+          <button type="button" class="notif-btn-text js-modal-mark-all" data-i18n="common.mark_all_read">Mark all read</button>
+          <button type="button" class="notif-btn-text js-modal-clear" style="color: var(--color-danger, #EF4444);" data-i18n="dashboard.notifications.clear_read">Clear read</button>
         </div>
         <div class="notif-dropdown__filters" style="padding: 10px 24px;">
           <button type="button" class="notif-filter-chip active" data-modal-cat="all">All</button>

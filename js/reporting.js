@@ -15,15 +15,20 @@
   function nowStr() { return new Date().toISOString().replace('T', ' ').slice(0, 16); }
   // localStorage helpers removed — data now persists via Firestore (see db.js)
 
-  function toast(message, type = 'success') {
+  function toast(message, type = 'success', params) {
+    const _t = window.t || ((k) => k);
+    const text = typeof message === 'string' && _t(message, params) !== message ? _t(message, params) : message;
     const el = document.createElement('div');
     el.className = `toast toast--${type}`;
-    el.textContent = message;
+    el.textContent = text;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3200);
   }
 
   function formatGHC(amount) {
+    if (window.ChurchOS && window.ChurchOS.i18n && window.ChurchOS.i18n.formatCurrency) {
+      return window.ChurchOS.i18n.formatCurrency(amount);
+    }
     return 'GH₵ ' + parseFloat(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 

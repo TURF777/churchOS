@@ -80,17 +80,8 @@
               <span class="lang-switcher__current">EN</span>
             </button>
             <div class="lang-switcher__dropdown">
-              <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
               <button type="button" data-lang="en">English</button>
               <button type="button" data-lang="fr">Français</button>
-              <button type="button" data-lang="es">Español</button>
-              <button type="button" data-lang="pt">Português</button>
-              <button type="button" data-lang="zh">中文</button>
-              <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
-              <button type="button" data-lang="tw">Twi</button>
-              <button type="button" data-lang="ga">Ga</button>
-              <button type="button" data-lang="ee">Eʋegbe</button>
-              <button type="button" data-lang="fat">Mfantse</button>
             </div>
           </div>
           <div class="topbar__notification" title="Notifications">
@@ -112,7 +103,7 @@
             <h1 style="font-family: var(--font-heading); color: var(--color-navy); font-size: var(--fs-2xl); margin-bottom: var(--space-xs);" id="home-greeting">
               Welcome back, Efua!
             </h1>
-            <p style="color: var(--color-gray-500); font-size: var(--fs-sm);">Here's a quick look at your church life this week.</p>
+            <p style="color: var(--color-gray-500); font-size: var(--fs-sm);" data-i18n="member.section.home_subtitle">Here's a quick look at your church life this week.</p>
           </div>
 
           <!-- Quick Stats Row -->
@@ -120,17 +111,17 @@
             <div class="member-stat" data-goto="attendance">
               <div class="member-stat__icon"><i data-lucide="calendar-check"></i></div>
               <div class="member-stat__value" id="home-stat-streak">6 weeks</div>
-              <div class="member-stat__label">Attendance Streak</div>
+              <div class="member-stat__label" data-i18n="member.stat.attendance_streak">Attendance Streak</div>
             </div>
             <div class="member-stat" data-goto="giving">
               <div class="member-stat__icon"><i data-lucide="heart-handshake"></i></div>
               <div class="member-stat__value" id="home-stat-giving">GH₵ 3,450</div>
-              <div class="member-stat__label">Giving This Year</div>
+              <div class="member-stat__label" data-i18n="member.stat.giving_year">Giving This Year</div>
             </div>
             <div class="member-stat" data-goto="announcements">
               <div class="member-stat__icon"><i data-lucide="megaphone"></i></div>
               <div class="member-stat__value" id="home-stat-unread">3</div>
-              <div class="member-stat__label">Unread Announcements</div>
+              <div class="member-stat__label" data-i18n="member.stat.unread">Unread Announcements</div>
             </div>
           </div>
 
@@ -138,8 +129,8 @@
             <!-- Latest Announcement Preview -->
             <div class="widget">
               <div class="widget__header">
-                <h3 class="widget__title">Latest Announcement</h3>
-                <a href="#" class="btn btn--ghost btn--sm" data-goto="announcements">View All →</a>
+                <h3 class="widget__title" data-i18n="member.widget.latest_announcement">Latest Announcement</h3>
+                <a href="#" class="btn btn--ghost btn--sm" data-goto="announcements" data-i18n="common.view_all_arrow">View All →</a>
               </div>
               <div class="widget__body" id="home-latest-announcement">
                 <!-- Populated by JS -->
@@ -149,29 +140,29 @@
             <!-- Quick Links -->
             <div class="widget">
               <div class="widget__header">
-                <h3 class="widget__title">Quick Links</h3>
+                <h3 class="widget__title" data-i18n="member.widget.quick_links">Quick Links</h3>
               </div>
               <div class="widget__body">
                 <div style="display: flex; flex-direction: column; gap: var(--space-md);">
                   <div class="quick-action" data-goto="profile">
                     <div class="quick-action__icon" style="background: rgba(212,168,67,0.12); color: var(--color-gold-dark);"><i data-lucide="user"></i></div>
                     <div>
-                      <div class="quick-action__title">Update My Profile</div>
-                      <div class="quick-action__desc">Edit your phone, email, or address</div>
+                      <div class="quick-action__title" data-i18n="member.quick.update_profile">Update My Profile</div>
+                      <div class="quick-action__desc" data-i18n="member.quick.update_profile_desc">Edit your phone, email, or address</div>
                     </div>
                   </div>
                   <div class="quick-action" data-goto="giving">
                     <div class="quick-action__icon" style="background: var(--color-success-bg); color: var(--color-success);"><i data-lucide="heart-handshake"></i></div>
                     <div>
-                      <div class="quick-action__title">My Giving History</div>
-                      <div class="quick-action__desc">View all your contributions</div>
+                      <div class="quick-action__title" data-i18n="member.quick.giving_history">My Giving History</div>
+                      <div class="quick-action__desc" data-i18n="member.quick.giving_history_desc">View all your contributions</div>
                     </div>
                   </div>
                   <div class="quick-action" data-goto="prayer">
                     <div class="quick-action__icon" style="background: var(--color-info-bg); color: var(--color-info);"><i data-lucide="hand-heart"></i></div>
                     <div>
-                      <div class="quick-action__title">Submit a Prayer Request</div>
-                      <div class="quick-action__desc">Share a need with the pastoral team</div>
+                      <div class="quick-action__title" data-i18n="member.quick.prayer_request">Submit a Prayer Request</div>
+                      <div class="quick-action__desc" data-i18n="member.quick.prayer_request_desc">Share a need with the pastoral team</div>
                     </div>
                   </div>
                 </div>
@@ -186,12 +177,12 @@
         <div class="dashboard-section" id="section-profile">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">My Profile</h2>
-              <p class="section-header__subtitle">View and update your personal information</p>
+              <h2 class="section-header__title" data-i18n="member.section.profile">My Profile</h2>
+              <p class="section-header__subtitle" data-i18n="member.section.profile_subtitle">View and update your personal information</p>
             </div>
             <button class="btn btn--primary btn--sm" id="btn-edit-profile" style="display: none;"><i data-lucide="pencil" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Edit My Info</button>
             <button class="btn btn--primary btn--sm" id="btn-save-profile" style="display: none;"><i data-lucide="save" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Save Changes</button>
-            <button class="btn btn--ghost btn--sm" id="btn-cancel-profile" style="display: none;">Cancel</button>
+            <button class="btn btn--ghost btn--sm" id="btn-cancel-profile" style="display: none;" data-i18n="common.cancel">Cancel</button>
           </div>
 
           <!-- Profile Header -->
@@ -201,31 +192,31 @@
               <div>
                 <h3 style="color: var(--color-navy); margin-bottom: 4px;" id="profile-full-name">Efua Amoako</h3>
                 <div style="font-size: var(--fs-xs); color: var(--color-gray-500);" id="profile-preferred">"Efua"</div>
-                <span class="badge badge--navy" style="margin-top: 6px;">Active Member</span>
+                <span class="badge badge--navy" style="margin-top: 6px;" data-i18n="leader.filter.active_member">Active Member</span>
               </div>
             </div>
 
             <!-- Editable Fields -->
-            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="phone" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Contact Information <span style="font-size: var(--fs-xs); color: var(--color-gray-400); font-weight: 400;">— You can edit these</span></h4>
+            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="phone" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Contact Information <span style="font-size: var(--fs-xs); color: var(--color-gray-400); font-weight: 400;" data-i18n="member.profile.contact_editable">— You can edit these</span></h4>
             <div class="grid grid--2" style="margin-bottom: var(--space-xl);">
               <div class="profile-field" id="field-phone">
-                <span class="profile-field__label">Phone Number</span>
+                <span class="profile-field__label" data-i18n="member.profile.phone_number">Phone Number</span>
                 <span class="profile-field__value">024 555 0188</span>
               </div>
               <div class="profile-field" id="field-email">
-                <span class="profile-field__label">Email Address</span>
+                <span class="profile-field__label" data-i18n="member.profile.email_address">Email Address</span>
                 <span class="profile-field__value">efua.amoako@gmail.com</span>
               </div>
               <div class="profile-field" id="field-address">
-                <span class="profile-field__label">Address / Neighbourhood</span>
+                <span class="profile-field__label" data-i18n="member.profile.address">Address / Neighbourhood</span>
                 <span class="profile-field__value">East Legon, Accra</span>
               </div>
               <div class="profile-field" id="field-occupation">
-                <span class="profile-field__label">Occupation</span>
+                <span class="profile-field__label" data-i18n="member.profile.occupation">Occupation</span>
                 <span class="profile-field__value">Graphic Designer</span>
               </div>
               <div class="profile-field" id="field-emergency">
-                <span class="profile-field__label">Emergency Contact</span>
+                <span class="profile-field__label" data-i18n="member.profile.emergency_contact">Emergency Contact</span>
                 <span class="profile-field__value">Kwame Amoako — 024 555 0199</span>
               </div>
             </div>
@@ -234,61 +225,61 @@
             <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="clipboard-list" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Personal Details</h4>
             <div class="grid grid--3" style="margin-bottom: var(--space-xl);">
               <div class="profile-field">
-                <span class="profile-field__label">Date of Birth</span>
+                <span class="profile-field__label" data-i18n="member.profile.dob">Date of Birth</span>
                 <span class="profile-field__value">15 Mar 1994</span>
               </div>
               <div class="profile-field">
-                <span class="profile-field__label">Gender</span>
+                <span class="profile-field__label" data-i18n="member.profile.gender">Gender</span>
                 <span class="profile-field__value">Female</span>
               </div>
               <div class="profile-field">
-                <span class="profile-field__label">Marital Status</span>
+                <span class="profile-field__label" data-i18n="member.profile.marital_status">Marital Status</span>
                 <span class="profile-field__value">Single</span>
               </div>
             </div>
 
             <!-- Church Info (Locked / Read-Only — requires leader to update) -->
-            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="church" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Church Information <span style="font-size: var(--fs-xs); color: var(--color-gray-400); font-weight: 400;">— Managed by church leadership</span></h4>
+            <h4 style="color: var(--color-navy); margin-bottom: var(--space-md); font-size: var(--fs-sm);"><i data-lucide="church" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i> Church Information <span style="font-size: var(--fs-xs); color: var(--color-gray-400); font-weight: 400;" data-i18n="member.profile.church_info_managed">— Managed by church leadership</span></h4>
             <div class="grid grid--2" style="margin-bottom: var(--space-xl);">
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Membership Status</span>
-                <span class="profile-field__value">Active Member</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__value" data-i18n="leader.filter.active_member">Active Member</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Date of First Attendance</span>
                 <span class="profile-field__value">12 Jan 2019</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Water Baptism</span>
                 <span class="profile-field__value">Baptised — 25 Dec 2019</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Holy Spirit Baptism</span>
                 <span class="profile-field__value">Received — 14 Feb 2020</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Membership Class</span>
                 <span class="profile-field__value">Completed — May 2019</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Department / Group</span>
                 <span class="profile-field__value">Choir, Young Adults</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Church Role / Title</span>
-                <span class="profile-field__value">Member</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__value" data-i18n="common.member">Member</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Preferred Service</span>
-                <span class="profile-field__value">2nd Service (9:30 AM)</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__value" data-i18n="signup.step2.service_2nd">2nd Service (9:30 AM)</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
             </div>
 
@@ -298,7 +289,7 @@
               <div class="profile-field profile-field--locked">
                 <span class="profile-field__label"><i data-lucide="lock" style="width:13px;height:13px;vertical-align:middle;margin-right:3px;"></i> Family Members (Linked)</span>
                 <span class="profile-field__value">Kwame Amoako (Father), Abena Amoako (Mother)</span>
-                <span class="profile-field__hint">Contact your leader to update this</span>
+                <span class="profile-field__hint" data-i18n="member.profile.contact_leader">Contact your leader to update this</span>
               </div>
             </div>
 
@@ -313,8 +304,8 @@
         <div class="dashboard-section" id="section-attendance">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">My Attendance</h2>
-              <p class="section-header__subtitle">Your personal attendance record & consistency journey — keep up the great work!</p>
+              <h2 class="section-header__title" data-i18n="member.section.attendance">My Attendance</h2>
+              <p class="section-header__subtitle" data-i18n="member.section.attendance_subtitle">Your personal attendance record & consistency journey — keep up the great work!</p>
             </div>
           </div>
 
@@ -323,25 +314,25 @@
 
           <div class="filter-bar">
             <input type="date" class="form-input" id="att-filter-from" style="max-width: 170px;">
-            <span style="color: var(--color-gray-400);">to</span>
+            <span style="color: var(--color-gray-400);" data-i18n="common.to">to</span>
             <input type="date" class="form-input" id="att-filter-to" style="max-width: 170px;">
-            <button class="btn btn--primary btn--sm" id="btn-filter-attendance">Apply Filter</button>
-            <button class="btn btn--ghost btn--sm" id="btn-clear-att-filter">Clear</button>
+            <button class="btn btn--primary btn--sm" id="btn-filter-attendance" data-i18n="common.apply_filter">Apply Filter</button>
+            <button class="btn btn--ghost btn--sm" id="btn-clear-att-filter" data-i18n="common.clear">Clear</button>
           </div>
 
           <div class="widget">
             <div class="widget__header">
-              <h3 class="widget__title">Services You Attended</h3>
-              <span style="font-size: var(--fs-xs); color: var(--color-gray-500);" id="att-summary-text">Showing all records</span>
+              <h3 class="widget__title" data-i18n="member.widget.services_attended">Services You Attended</h3>
+              <span style="font-size: var(--fs-xs); color: var(--color-gray-500);" id="att-summary-text" data-i18n="member.widget.showing_all">Showing all records</span>
             </div>
             <div class="widget__body widget__body--flush">
               <div class="table-responsive">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Date</th>
-                      <th>Service</th>
-                      <th>Status</th>
+                      <th data-i18n="member.table.date">Date</th>
+                      <th data-i18n="member.table.service">Service</th>
+                      <th data-i18n="member.table.status">Status</th>
                     </tr>
                   </thead>
                   <tbody id="attendance-tbody">
@@ -359,8 +350,8 @@
         <div class="dashboard-section" id="section-giving">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">My Giving History</h2>
-              <p class="section-header__subtitle">Every contribution you've made — thank you for your generosity</p>
+              <h2 class="section-header__title" data-i18n="member.quick.giving_history">My Giving History</h2>
+              <p class="section-header__subtitle" data-i18n="member.section.giving_subtitle">Every contribution you've made — thank you for your generosity</p>
             </div>
           </div>
 
@@ -372,14 +363,14 @@
             <div class="widget__body">
               <div style="display: flex; gap: var(--space-md); align-items: flex-end; flex-wrap: wrap;">
                 <div class="form-group" style="margin-bottom: 0;">
-                  <label for="my-stmt-year" class="form-label">Year</label>
+                  <label for="my-stmt-year" class="form-label" data-i18n="member.form.year">Year</label>
                   <select id="my-stmt-year" class="form-select">
                     <option value="2026">2026 (Year to Date)</option>
                     <option value="2025" selected>2025</option>
                     <option value="2024">2024</option>
                   </select>
                 </div>
-                <button class="btn btn--primary btn--sm" id="btn-my-generate-stmt">Generate Statement</button>
+                <button class="btn btn--primary btn--sm" id="btn-my-generate-stmt" data-i18n="member.btn.generate_statement">Generate Statement</button>
               </div>
             </div>
           </div>
@@ -387,18 +378,18 @@
           <!-- Giving Transactions -->
           <div class="widget">
             <div class="widget__header">
-              <h3 class="widget__title">All Giving Transactions</h3>
+              <h3 class="widget__title" data-i18n="member.widget.all_transactions">All Giving Transactions</h3>
             </div>
             <div class="widget__body widget__body--flush">
               <div class="table-responsive">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Date</th>
-                      <th>Category</th>
-                      <th>Amount</th>
-                      <th>Method</th>
-                      <th>Status</th>
+                      <th data-i18n="member.table.date">Date</th>
+                      <th data-i18n="member.table.category">Category</th>
+                      <th data-i18n="member.table.amount">Amount</th>
+                      <th data-i18n="member.table.method">Method</th>
+                      <th data-i18n="member.table.status">Status</th>
                     </tr>
                   </thead>
                   <tbody id="giving-tbody">
@@ -416,10 +407,10 @@
         <div class="dashboard-section" id="section-announcements">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Church Announcements</h2>
-              <p class="section-header__subtitle">Stay in the loop with the latest from Grace Assembly</p>
+              <h2 class="section-header__title" data-i18n="member.section.announcements">Church Announcements</h2>
+              <p class="section-header__subtitle" data-i18n="member.section.announcements_subtitle">Stay in the loop with the latest from Grace Assembly</p>
             </div>
-            <button class="btn btn--ghost btn--sm" onclick="ChurchComms.markAllRead()">Mark All as Read</button>
+            <button class="btn btn--ghost btn--sm" onclick="ChurchComms.markAllRead()" data-i18n="common.mark_all_read">Mark All as Read</button>
           </div>
 
           <div id="comm-announcements-feed">
@@ -433,20 +424,20 @@
         <div class="dashboard-section" id="section-prayer">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Prayer Requests</h2>
-              <p class="section-header__subtitle">Share your needs — our pastoral team is praying with you</p>
+              <h2 class="section-header__title" data-i18n="member.section.prayer">Prayer Requests</h2>
+              <p class="section-header__subtitle" data-i18n="member.section.prayer_subtitle">Share your needs — our pastoral team is praying with you</p>
             </div>
           </div>
 
           <!-- Submit Prayer Request Form -->
           <div class="widget" style="margin-bottom: var(--space-2xl);">
             <div class="widget__header">
-              <h3 class="widget__title">Submit a New Prayer Request</h3>
+              <h3 class="widget__title" data-i18n="member.widget.submit_prayer">Submit a New Prayer Request</h3>
             </div>
             <div class="widget__body">
               <form id="form-prayer-request">
                 <div class="form-group">
-                  <label for="prayer-description" class="form-label">What would you like prayer for?</label>
+                  <label for="prayer-description" class="form-label" data-i18n="member.form.prayer_label">What would you like prayer for?</label>
                   <textarea id="prayer-description" class="form-input" rows="3" placeholder="Share your prayer need here — this will only be seen by the pastoral team..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn--primary"><i data-lucide="hand-heart" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i> Submit Prayer Request</button>
@@ -457,7 +448,7 @@
           <!-- My Submitted Prayer Requests -->
           <div class="widget">
             <div class="widget__header">
-              <h3 class="widget__title">My Prayer Requests</h3>
+              <h3 class="widget__title" data-i18n="member.widget.my_prayers">My Prayer Requests</h3>
             </div>
             <div class="widget__body" id="prayer-requests-list">
               <!-- Populated by JS -->
@@ -471,8 +462,8 @@
         <div class="dashboard-section" id="section-groups">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">My Groups & Departments</h2>
-              <p class="section-header__subtitle">The groups you belong to at Grace Assembly</p>
+              <h2 class="section-header__title" data-i18n="member.section.groups">My Groups & Departments</h2>
+              <p class="section-header__subtitle" data-i18n="member.section.groups_subtitle">The groups you belong to at Grace Assembly</p>
             </div>
           </div>
 
@@ -487,8 +478,8 @@
         <div class="dashboard-section" id="section-activity-log">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Church Activity & Community Updates</h2>
-              <p class="section-header__subtitle">Warm updates, announcements, group milestones, and prayer request updates</p>
+              <h2 class="section-header__title" data-i18n="member.section.activity">Church Activity & Community Updates</h2>
+              <p class="section-header__subtitle" data-i18n="member.section.activity_subtitle">Warm updates, announcements, group milestones, and prayer request updates</p>
             </div>
           </div>
 
@@ -505,31 +496,31 @@
       <li class="bottom-nav__item">
         <a href="#" class="bottom-nav__link active" data-section="home">
           <span class="bottom-nav__icon"><i data-lucide="home"></i></span>
-          Home
+          <span data-i18n="member.nav.home">Home</span>
         </a>
       </li>
       <li class="bottom-nav__item">
         <a href="#" class="bottom-nav__link" data-section="profile">
           <span class="bottom-nav__icon"><i data-lucide="user"></i></span>
-          Profile
+          <span data-i18n="member.nav.profile">Profile</span>
         </a>
       </li>
       <li class="bottom-nav__item">
         <a href="#" class="bottom-nav__link" data-section="giving">
           <span class="bottom-nav__icon"><i data-lucide="heart-handshake"></i></span>
-          Giving
+          <span data-i18n="member.nav.giving">Giving</span>
         </a>
       </li>
       <li class="bottom-nav__item">
         <a href="#" class="bottom-nav__link" data-section="announcements">
           <span class="bottom-nav__icon"><i data-lucide="megaphone"></i></span>
-          News
+          <span data-i18n="member.nav.news">News</span>
         </a>
       </li>
       <li class="bottom-nav__item">
         <a href="#" class="bottom-nav__link" data-section="prayer">
           <span class="bottom-nav__icon"><i data-lucide="hand-heart"></i></span>
-          Prayer
+          <span data-i18n="member.nav.prayer">Prayer</span>
         </a>
       </li>
     </ul>
@@ -543,15 +534,15 @@
   <div class="modal-overlay" id="modal-my-statement">
     <div class="modal modal--wide">
       <div class="modal__header">
-        <h3 class="modal__title">My Annual Giving Statement</h3>
+        <h3 class="modal__title" data-i18n="member.widget.my_statement">My Annual Giving Statement</h3>
         <button class="modal__close" data-close="modal-my-statement" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body" id="modal-my-statement-body">
         <!-- Populated by JS -->
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-my-statement">Close</button>
-        <button class="btn btn--primary" id="btn-download-my-stmt">Download PDF</button>
+        <button class="btn btn--ghost" data-close="modal-my-statement" data-i18n="common.close">Close</button>
+        <button class="btn btn--primary" id="btn-download-my-stmt" data-i18n="common.download_pdf">Download PDF</button>
       </div>
     </div>
   </div>

@@ -86,17 +86,8 @@
               <span class="lang-switcher__current">EN</span>
             </button>
             <div class="lang-switcher__dropdown">
-              <div class="lang-switcher__group-label" data-i18n="lang_switcher.international">International</div>
               <button type="button" data-lang="en">English</button>
               <button type="button" data-lang="fr">Français</button>
-              <button type="button" data-lang="es">Español</button>
-              <button type="button" data-lang="pt">Português</button>
-              <button type="button" data-lang="zh">中文</button>
-              <div class="lang-switcher__group-label" data-i18n="lang_switcher.ghanaian">Ghanaian Languages</div>
-              <button type="button" data-lang="tw">Twi</button>
-              <button type="button" data-lang="ga">Ga</button>
-              <button type="button" data-lang="ee">Eʋegbe</button>
-              <button type="button" data-lang="fat">Mfantse</button>
             </div>
           </div>
           <div class="topbar__notification" title="Notifications">
@@ -118,7 +109,7 @@
               <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="users"></i></div>
               <div>
                 <div class="stat-card__value" id="stat-members">0</div>
-                <div class="stat-card__label">Total Members</div>
+                <div class="stat-card__label" data-i18n="dashboard.stat.total_members">Total Members</div>
                 <div class="stat-card__trend stat-card__trend--up">↑ 12% this month</div>
               </div>
             </div>
@@ -126,7 +117,7 @@
               <div class="stat-card__icon stat-card__icon--info"><i data-lucide="user-plus"></i></div>
               <div>
                 <div class="stat-card__value" id="stat-visitors">0</div>
-                <div class="stat-card__label">Visitors This Month</div>
+                <div class="stat-card__label" data-i18n="dashboard.stat.visitors_this_month">Visitors This Month</div>
                 <div class="stat-card__trend stat-card__trend--up">↑ 5 new</div>
               </div>
             </div>
@@ -134,14 +125,14 @@
               <div class="stat-card__icon stat-card__icon--success"><i data-lucide="church"></i></div>
               <div>
                 <div class="stat-card__value" id="stat-services">0</div>
-                <div class="stat-card__label">Services Configured</div>
+                <div class="stat-card__label" data-i18n="dashboard.stat.services_configured">Services Configured</div>
               </div>
             </div>
             <div class="stat-card">
               <div class="stat-card__icon stat-card__icon--warning"><i data-lucide="banknote"></i></div>
               <div>
                 <div class="stat-card__value" id="stat-giving">GH₵ 0</div>
-                <div class="stat-card__label">Monthly Giving</div>
+                <div class="stat-card__label" data-i18n="dashboard.stat.monthly_giving">Monthly Giving</div>
                 <div class="stat-card__trend stat-card__trend--up">↑ 8% vs last month</div>
               </div>
             </div>
@@ -152,7 +143,7 @@
               <div class="stat-card__icon stat-card__icon--primary"><i data-lucide="clipboard-list"></i></div>
               <div>
                 <div class="stat-card__value" id="stat-attendance">0</div>
-                <div class="stat-card__label">Avg. Sunday Attendance</div>
+                <div class="stat-card__label" data-i18n="dashboard.stat.avg_sunday_attendance">Avg. Sunday Attendance</div>
                 <div class="stat-card__trend stat-card__trend--up">↑ 3% vs last month</div>
               </div>
             </div>
@@ -160,7 +151,7 @@
               <div class="stat-card__icon stat-card__icon--success"><i data-lucide="key-round"></i></div>
               <div>
                 <div class="stat-card__value" id="stat-accounts">0</div>
-                <div class="stat-card__label">Active User Accounts</div>
+                <div class="stat-card__label" data-i18n="dashboard.stat.active_user_accounts">Active User Accounts</div>
               </div>
             </div>
           </div>
@@ -168,8 +159,8 @@
           <!-- Recent Audit Mini Feed -->
           <div class="widget">
             <div class="widget__header">
-              <h3 class="widget__title">Recent Activity</h3>
-              <button class="btn btn--ghost btn--sm" data-goto="audit">View Full Log</button>
+              <h3 class="widget__title" data-i18n="admin.widget.recent_activity">Recent Activity</h3>
+              <button class="btn btn--ghost btn--sm" data-goto="audit" data-i18n="common.view_full_log">View Full Log</button>
             </div>
             <div class="widget__body">
               <div class="activity-list" id="overview-audit-feed">
@@ -185,23 +176,23 @@
         <div class="dashboard-section" id="section-members">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Members</h2>
-              <p class="section-header__subtitle">Manage all member profiles, visitors, and departments</p>
+              <h2 class="section-header__title" data-i18n="admin.section.members">Members</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.members_subtitle">Manage all member profiles, visitors, and departments</p>
             </div>
-            <button class="btn btn--primary btn--sm" id="btn-add-member">+ Add Member</button>
+            <button class="btn btn--primary btn--sm" id="btn-add-member" data-i18n="admin.btn.add_member">+ Add Member</button>
           </div>
 
           <div class="filter-bar">
-            <input type="text" class="form-input form-input--search" id="member-search" placeholder="Search by name or phone...">
+            <input type="text" class="form-input form-input--search" id="member-search" placeholder="Search by name or phone..." data-i18n-placeholder="admin.table.search_members">
             <select class="form-select" id="member-filter-status">
-              <option value="">All Statuses</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-              <option value="Visitor">Visitor</option>
-              <option value="Deleted"><i data-lucide="trash-2"></i> Deleted / Archived</option>
+              <option value="" data-i18n="admin.table.all_statuses">All Statuses</option>
+              <option value="Active" data-i18n="common.active">Active</option>
+              <option value="Inactive" data-i18n="common.inactive">Inactive</option>
+              <option value="Visitor" data-i18n="admin.table.visitor">Visitor</option>
+              <option value="Deleted" data-i18n="admin.table.deleted_archived"><i data-lucide="trash-2"></i> Deleted / Archived</option>
             </select>
             <select class="form-select" id="member-filter-dept">
-              <option value="">All Departments</option>
+              <option value="" data-i18n="admin.table.all_departments">All Departments</option>
             </select>
           </div>
 
@@ -211,11 +202,11 @@
                 <table class="data-table" id="members-table">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Phone</th>
-                      <th>Status</th>
-                      <th>Department</th>
-                      <th>Actions</th>
+                      <th data-i18n="common.name">Name</th>
+                      <th data-i18n="common.phone">Phone</th>
+                      <th data-i18n="common.status">Status</th>
+                      <th data-i18n="common.department">Department</th>
+                      <th data-i18n="common.actions">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="members-tbody">
@@ -233,31 +224,31 @@
         <div class="dashboard-section" id="section-services">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Services & Attendance</h2>
-              <p class="section-header__subtitle">Configure your church services and track attendance analytics</p>
+              <h2 class="section-header__title" data-i18n="admin.section.services">Services & Attendance</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.services_subtitle">Configure your church services and track attendance analytics</p>
             </div>
-            <button class="btn btn--primary btn--sm" id="btn-add-service">+ Add Service</button>
+            <button class="btn btn--primary btn--sm" id="btn-add-service" data-i18n="admin.btn.add_service">+ Add Service</button>
           </div>
 
           <div class="info-box">
             <span><i data-lucide="info" style="width:16px;height:16px;"></i></span>
-            <span>Editing a service's schedule only affects future sessions. Past attendance records are preserved.</span>
+            <span data-i18n="admin.info.service_edit">Editing a service's schedule only affects future sessions. Past attendance records are preserved.</span>
           </div>
 
           <div class="widget" style="margin-bottom: var(--space-2xl);">
             <div class="widget__header">
-              <h3 class="widget__title">Configured Services</h3>
+              <h3 class="widget__title" data-i18n="admin.widget.configured_services">Configured Services</h3>
             </div>
             <div class="widget__body widget__body--flush">
               <div class="table-responsive">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Service Name</th>
-                      <th>Day</th>
-                      <th>Time</th>
-                      <th>Frequency</th>
-                      <th>Actions</th>
+                      <th data-i18n="admin.table.service_name">Service Name</th>
+                      <th data-i18n="admin.table.day">Day</th>
+                      <th data-i18n="common.time">Time</th>
+                      <th data-i18n="admin.table.frequency">Frequency</th>
+                      <th data-i18n="common.actions">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="services-tbody">
@@ -271,26 +262,26 @@
           <!-- Attendance Analytics Preview -->
           <div class="widget">
             <div class="widget__header">
-              <h3 class="widget__title">Attendance Analytics</h3>
+              <h3 class="widget__title" data-i18n="admin.widget.attendance_analytics">Attendance Analytics</h3>
               <select class="form-select" id="attendance-period" style="max-width: 180px; padding: 0.4rem 0.8rem; font-size: 0.8125rem;">
-                <option value="week">This Week</option>
-                <option value="month" selected>This Month</option>
-                <option value="quarter">This Quarter</option>
+                <option value="week" data-i18n="admin.period.this_week">This Week</option>
+                <option value="month" selected data-i18n="admin.period.this_month">This Month</option>
+                <option value="quarter" data-i18n="admin.period.this_quarter">This Quarter</option>
               </select>
             </div>
             <div class="widget__body">
               <div class="grid grid--3">
                 <div style="text-align: center;">
                   <div style="font-size: 2rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-navy);" id="analytics-avg">892</div>
-                  <div style="font-size: 0.875rem; color: var(--color-gray-500);">Avg. Attendance</div>
+                  <div style="font-size: 0.875rem; color: var(--color-gray-500);" data-i18n="admin.widget.avg_attendance">Avg. Attendance</div>
                 </div>
                 <div style="text-align: center;">
                   <div style="font-size: 2rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-success);" id="analytics-trend">+5.2%</div>
-                  <div style="font-size: 0.875rem; color: var(--color-gray-500);">Trend</div>
+                  <div style="font-size: 0.875rem; color: var(--color-gray-500);" data-i18n="admin.widget.trend">Trend</div>
                 </div>
                 <div style="text-align: center;">
                   <div style="font-size: 2rem; font-family: var(--font-heading); font-weight: 700; color: var(--color-gold-dark);" id="analytics-retention">71%</div>
-                  <div style="font-size: 0.875rem; color: var(--color-gray-500);">Retention Rate</div>
+                  <div style="font-size: 0.875rem; color: var(--color-gray-500);" data-i18n="admin.widget.retention_rate">Retention Rate</div>
                 </div>
               </div>
             </div>
@@ -303,10 +294,10 @@
         <div class="dashboard-section" id="section-giving">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Giving Categories</h2>
-              <p class="section-header__subtitle">Set up and manage tithes, offerings, and other contribution types</p>
+              <h2 class="section-header__title" data-i18n="admin.section.giving">Giving Categories</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.giving_subtitle">Set up and manage tithes, offerings, and other contribution types</p>
             </div>
-            <button class="btn btn--primary btn--sm" id="btn-add-category">+ Add Category</button>
+            <button class="btn btn--primary btn--sm" id="btn-add-category" data-i18n="admin.btn.add_category">+ Add Category</button>
           </div>
 
           <div class="widget">
@@ -315,11 +306,11 @@
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Category Name</th>
-                      <th>Description</th>
-                      <th>Transactions</th>
-                      <th>Status</th>
-                      <th>Actions</th>
+                      <th data-i18n="admin.table.category_name">Category Name</th>
+                      <th data-i18n="common.description">Description</th>
+                      <th data-i18n="admin.table.transactions">Transactions</th>
+                      <th data-i18n="common.status">Status</th>
+                      <th data-i18n="common.actions">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="categories-tbody">
@@ -337,10 +328,10 @@
         <div class="dashboard-section" id="section-users">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">User Accounts & Roles</h2>
-              <p class="section-header__subtitle">Manage system access, assign roles, and control permissions</p>
+              <h2 class="section-header__title" data-i18n="admin.section.users">User Accounts & Roles</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.users_subtitle">Manage system access, assign roles, and control permissions</p>
             </div>
-            <button class="btn btn--primary btn--sm" id="btn-create-account">+ Create Account</button>
+            <button class="btn btn--primary btn--sm" id="btn-create-account" data-i18n="admin.btn.create_account">+ Create Account</button>
           </div>
 
           <div class="widget">
@@ -349,12 +340,12 @@
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Phone / Email</th>
-                      <th>Role</th>
-                      <th>Department</th>
-                      <th>Status</th>
-                      <th>Actions</th>
+                      <th data-i18n="common.name">Name</th>
+                      <th data-i18n="admin.table.phone_email">Phone / Email</th>
+                      <th data-i18n="common.role">Role</th>
+                      <th data-i18n="common.department">Department</th>
+                      <th data-i18n="common.status">Status</th>
+                      <th data-i18n="common.actions">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="users-tbody">
@@ -372,15 +363,15 @@
         <div class="dashboard-section" id="section-custom-fields">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Custom Fields</h2>
-              <p class="section-header__subtitle">Define extra fields that appear on every member profile</p>
+              <h2 class="section-header__title" data-i18n="admin.section.custom_fields">Custom Fields</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.custom_fields_subtitle">Define extra fields that appear on every member profile</p>
             </div>
-            <button class="btn btn--primary btn--sm" id="btn-add-field">+ Add Custom Field</button>
+            <button class="btn btn--primary btn--sm" id="btn-add-field" data-i18n="admin.btn.add_field">+ Add Custom Field</button>
           </div>
 
           <div class="info-box">
             <span><i data-lucide="info" style="width:16px;height:16px;"></i></span>
-            <span>Newly added fields will appear as blank on existing member profiles. Members can fill them in themselves or an admin can update them.</span>
+            <span data-i18n="admin.info.custom_field">Newly added fields will appear as blank on existing member profiles. Members can fill them in themselves or an admin can update them.</span>
           </div>
 
           <div class="widget">
@@ -389,10 +380,10 @@
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Field Name</th>
-                      <th>Data Type</th>
-                      <th>Created</th>
-                      <th>Actions</th>
+                      <th data-i18n="admin.table.field_name">Field Name</th>
+                      <th data-i18n="admin.table.data_type">Data Type</th>
+                      <th data-i18n="admin.table.created">Created</th>
+                      <th data-i18n="common.actions">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="fields-tbody">
@@ -410,8 +401,8 @@
         <div class="dashboard-section" id="section-templates">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Communications & Notification Templates</h2>
-              <p class="section-header__subtitle">Compose broadcasts, manage automated messages, and edit system templates</p>
+              <h2 class="section-header__title" data-i18n="admin.section.templates">Communications & Notification Templates</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.templates_subtitle">Compose broadcasts, manage automated messages, and edit system templates</p>
             </div>
           </div>
 
@@ -424,7 +415,7 @@
               <div id="comm-delivery-status" style="margin-bottom: var(--space-lg);"></div>
               <div class="widget" style="margin-bottom: var(--space-lg);">
                 <div class="widget__header">
-                  <h3 class="widget__title">Sent History</h3>
+                  <h3 class="widget__title" data-i18n="admin.widget.sent_history">Sent History</h3>
                 </div>
                 <div class="widget__body" style="max-height: 400px; overflow-y: auto;">
                   <div id="comm-history-container"></div>
@@ -459,30 +450,30 @@
         <div class="dashboard-section" id="section-export">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Data Export & Backup</h2>
-              <p class="section-header__subtitle">Download your church data for reporting or safekeeping</p>
+              <h2 class="section-header__title" data-i18n="admin.section.export">Data Export & Backup</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.export_subtitle">Download your church data for reporting or safekeeping</p>
             </div>
           </div>
 
           <div class="grid grid--2" style="margin-bottom: var(--space-2xl);">
             <div class="export-card" id="export-members-card">
               <div class="export-card__icon"><i data-lucide="file-down"></i></div>
-              <h4 class="export-card__title">Export Members</h4>
-              <p class="export-card__desc">Download a CSV file containing all member profiles, contact details, and department assignments.</p>
-              <button class="btn btn--primary btn--sm" id="btn-export-members">Export Members CSV</button>
+              <h4 class="export-card__title" data-i18n="admin.export.members_title">Export Members</h4>
+              <p class="export-card__desc" data-i18n="admin.export.members_desc">Download a CSV file containing all member profiles, contact details, and department assignments.</p>
+              <button class="btn btn--primary btn--sm" id="btn-export-members" data-i18n="admin.export.members_btn">Export Members CSV</button>
               <div class="progress-bar-container" id="export-progress" style="display: none;">
                 <div class="progress-bar"><div class="progress-bar__fill" id="export-fill"></div></div>
-                <div class="progress-bar__label" id="export-label">Preparing export...</div>
+                <div class="progress-bar__label" id="export-label" data-i18n="admin.export.preparing">Preparing export...</div>
               </div>
             </div>
             <div class="export-card" id="export-backup-card">
               <div class="export-card__icon"><i data-lucide="hard-drive-download"></i></div>
-              <h4 class="export-card__title">Full Data Backup</h4>
-              <p class="export-card__desc">Create a complete backup of all church data including members, attendance, giving, and settings.</p>
-              <button class="btn btn--secondary btn--sm" id="btn-full-backup">Create Full Backup</button>
+              <h4 class="export-card__title" data-i18n="admin.export.backup_title">Full Data Backup</h4>
+              <p class="export-card__desc" data-i18n="admin.export.backup_desc">Create a complete backup of all church data including members, attendance, giving, and settings.</p>
+              <button class="btn btn--secondary btn--sm" id="btn-full-backup" data-i18n="admin.export.backup_btn">Create Full Backup</button>
               <div class="progress-bar-container" id="backup-progress" style="display: none;">
                 <div class="progress-bar"><div class="progress-bar__fill" id="backup-fill"></div></div>
-                <div class="progress-bar__label" id="backup-label">Creating backup...</div>
+                <div class="progress-bar__label" id="backup-label" data-i18n="admin.export.creating_backup">Creating backup...</div>
               </div>
             </div>
           </div>
@@ -497,8 +488,8 @@
         <div class="dashboard-section" id="section-audit">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Activity & Audit Log</h2>
-              <p class="section-header__subtitle">Church-wide real-time record of all system actions — searchable & exportable</p>
+              <h2 class="section-header__title" data-i18n="admin.section.audit">Activity & Audit Log</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.audit_subtitle">Church-wide real-time record of all system actions — searchable & exportable</p>
             </div>
           </div>
 
@@ -511,8 +502,8 @@
         <div class="dashboard-section" id="section-settings">
           <div class="section-header">
             <div>
-              <h2 class="section-header__title">Church Profile</h2>
-              <p class="section-header__subtitle">Update your church's public information and branding</p>
+              <h2 class="section-header__title" data-i18n="admin.section.settings">Church Profile</h2>
+              <p class="section-header__subtitle" data-i18n="admin.section.settings_subtitle">Update your church's public information and branding</p>
             </div>
           </div>
 
@@ -520,45 +511,45 @@
             <div class="widget__body">
               <form id="church-profile-form">
                 <div style="margin-bottom: var(--space-xl);">
-                  <label class="form-label">Church Logo</label>
+                  <label class="form-label" data-i18n="admin.settings.church_logo">Church Logo</label>
                   <div class="logo-upload" id="logo-upload" title="Click to upload logo"><i data-lucide="camera"></i></div>
                   <p style="font-size: 0.75rem; color: var(--color-gray-500);">Click to upload. Recommended: 200×200px, PNG or JPG.</p>
                 </div>
 
                 <div class="settings-grid">
                   <div class="form-group">
-                    <label for="church-name" class="form-label">Church Name <span class="required">*</span></label>
+                    <label for="church-name" class="form-label"><span data-i18n="admin.settings.church_name">Church Name</span> <span class="required">*</span></label>
                     <input type="text" id="church-name" class="form-input" placeholder="e.g. Grace Assembly International">
                   </div>
                   <div class="form-group">
-                    <label for="church-denomination" class="form-label">Denomination</label>
+                    <label for="church-denomination" class="form-label" data-i18n="admin.settings.denomination">Denomination</label>
                     <input type="text" id="church-denomination" class="form-input" placeholder="e.g. Pentecostal, Methodist">
                   </div>
                   <div class="form-group">
-                    <label for="church-address" class="form-label">Address <span class="required">*</span></label>
+                    <label for="church-address" class="form-label"><span data-i18n="admin.settings.address">Address</span> <span class="required">*</span></label>
                     <input type="text" id="church-address" class="form-input" placeholder="e.g. 15 Liberation Road, Accra">
                   </div>
                   <div class="form-group">
-                    <label for="church-city" class="form-label">City / Region</label>
+                    <label for="church-city" class="form-label" data-i18n="admin.settings.city_region">City / Region</label>
                     <input type="text" id="church-city" class="form-input" placeholder="e.g. Accra, Greater Accra">
                   </div>
                   <div class="form-group">
-                    <label for="church-phone" class="form-label">Contact Phone</label>
+                    <label for="church-phone" class="form-label" data-i18n="admin.settings.contact_phone">Contact Phone</label>
                     <input type="tel" id="church-phone" class="form-input" placeholder="e.g. 030 200 0000">
                   </div>
                   <div class="form-group">
-                    <label for="church-email" class="form-label">Contact Email</label>
+                    <label for="church-email" class="form-label" data-i18n="admin.settings.contact_email">Contact Email</label>
                     <input type="email" id="church-email" class="form-input" placeholder="e.g. info@graceassembly.org">
                   </div>
                 </div>
 
                 <div class="form-group" style="margin-top: var(--space-lg);">
-                  <label for="church-description" class="form-label">About / Welcome Message</label>
+                  <label for="church-description" class="form-label" data-i18n="admin.settings.about">About / Welcome Message</label>
                   <textarea id="church-description" class="form-input" rows="4" placeholder="A brief description of your church..." style="resize: vertical;"></textarea>
                 </div>
 
                 <div style="margin-top: var(--space-xl);">
-                  <button type="submit" class="btn btn--primary">Save Changes</button>
+                  <button type="submit" class="btn btn--primary" data-i18n="common.save_changes">Save Changes</button>
                 </div>
               </form>
             </div>
@@ -577,7 +568,7 @@
   <div class="modal-overlay" id="modal-member">
     <div class="modal modal--wide">
       <div class="modal__header">
-        <h3 class="modal__title" id="modal-member-title">Add Member</h3>
+        <h3 class="modal__title" id="modal-member-title" data-i18n="admin.modal.add_member">Add Member</h3>
         <button class="modal__close" data-close="modal-member" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body">
@@ -585,31 +576,31 @@
           <input type="hidden" id="member-edit-id">
           <div class="form-row">
             <div class="form-group">
-              <label for="m-name" class="form-label">Full Name <span class="required">*</span></label>
+              <label for="m-name" class="form-label"><span data-i18n="admin.form.full_name">Full Name</span> <span class="required">*</span></label>
               <input type="text" id="m-name" class="form-input" placeholder="e.g. Kwame Asante" required>
             </div>
             <div class="form-group">
-              <label for="m-phone" class="form-label">Phone <span class="required">*</span></label>
+              <label for="m-phone" class="form-label"><span data-i18n="common.phone">Phone</span> <span class="required">*</span></label>
               <input type="tel" id="m-phone" class="form-input" placeholder="e.g. 024 123 4567" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="m-email" class="form-label">Email</label>
+              <label for="m-email" class="form-label" data-i18n="common.email">Email</label>
               <input type="email" id="m-email" class="form-input" placeholder="e.g. kwame@email.com">
             </div>
             <div class="form-group">
-              <label for="m-dob" class="form-label">Date of Birth</label>
+              <label for="m-dob" class="form-label" data-i18n="admin.form.date_of_birth">Date of Birth</label>
               <input type="date" id="m-dob" class="form-input">
             </div>
           </div>
           <div class="form-group">
-            <label for="m-address" class="form-label">Address</label>
+            <label for="m-address" class="form-label" data-i18n="admin.form.address">Address</label>
             <input type="text" id="m-address" class="form-input" placeholder="e.g. 5 Adjei Kojo Road, Tema">
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="m-department" class="form-label">Department</label>
+              <label for="m-department" class="form-label" data-i18n="common.department">Department</label>
               <select id="m-department" class="form-select">
                 <option value="">— Select —</option>
                 <option>Ushering</option>
@@ -624,7 +615,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="m-status" class="form-label">Status</label>
+              <label for="m-status" class="form-label" data-i18n="common.status">Status</label>
               <select id="m-status" class="form-select">
                 <option>Active</option>
                 <option>Inactive</option>
@@ -633,7 +624,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="m-family" class="form-label">Household / Family Link</label>
+            <label for="m-family" class="form-label" data-i18n="admin.form.household">Household / Family Link</label>
             <input type="text" id="m-family" class="form-input" placeholder="e.g. Asante Family">
           </div>
           <!-- Custom fields appended here by JS -->
@@ -641,8 +632,8 @@
         </form>
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-member">Cancel</button>
-        <button class="btn btn--primary" id="btn-save-member">Save Member</button>
+        <button class="btn btn--ghost" data-close="modal-member" data-i18n="common.cancel">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-member" data-i18n="admin.modal.save_member">Save Member</button>
       </div>
     </div>
   </div>
@@ -651,14 +642,14 @@
   <div class="modal-overlay" id="modal-view-member">
     <div class="modal modal--wide">
       <div class="modal__header">
-        <h3 class="modal__title">Member Details</h3>
+        <h3 class="modal__title" data-i18n="admin.modal.member_details">Member Details</h3>
         <button class="modal__close" data-close="modal-view-member" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body" id="view-member-body">
         <!-- Populated by JS -->
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-view-member">Close</button>
+        <button class="btn btn--ghost" data-close="modal-view-member" data-i18n="common.close">Close</button>
       </div>
     </div>
   </div>
@@ -667,7 +658,7 @@
   <div class="modal-overlay" id="modal-service">
     <div class="modal">
       <div class="modal__header">
-        <h3 class="modal__title">Add Service</h3>
+        <h3 class="modal__title" data-i18n="admin.modal.add_service">Add Service</h3>
         <button class="modal__close" data-close="modal-service" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body">
@@ -711,8 +702,8 @@
         </form>
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-service">Cancel</button>
-        <button class="btn btn--primary" id="btn-save-service">Save Service</button>
+        <button class="btn btn--ghost" data-close="modal-service" data-i18n="common.cancel">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-service" data-i18n="admin.modal.save_service">Save Service</button>
       </div>
     </div>
   </div>
@@ -721,7 +712,7 @@
   <div class="modal-overlay" id="modal-category">
     <div class="modal">
       <div class="modal__header">
-        <h3 class="modal__title">Add Giving Category</h3>
+        <h3 class="modal__title" data-i18n="admin.modal.add_category">Add Giving Category</h3>
         <button class="modal__close" data-close="modal-category" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body">
@@ -737,8 +728,8 @@
         </form>
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-category">Cancel</button>
-        <button class="btn btn--primary" id="btn-save-category">Save Category</button>
+        <button class="btn btn--ghost" data-close="modal-category" data-i18n="common.cancel">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-category" data-i18n="admin.modal.save_category">Save Category</button>
       </div>
     </div>
   </div>
@@ -747,7 +738,7 @@
   <div class="modal-overlay" id="modal-user">
     <div class="modal modal--wide">
       <div class="modal__header">
-        <h3 class="modal__title" id="modal-user-title">Create User Account</h3>
+        <h3 class="modal__title" id="modal-user-title" data-i18n="admin.modal.create_user">Create User Account</h3>
         <button class="modal__close" data-close="modal-user" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body">
@@ -803,8 +794,8 @@
         </form>
       </div>
       <div class="modal__footer">
-        <button type="button" class="btn btn--ghost" data-close="modal-user">Cancel</button>
-        <button type="button" class="btn btn--primary" id="btn-save-user">Create Account</button>
+        <button type="button" class="btn btn--ghost" data-close="modal-user" data-i18n="common.cancel">Cancel</button>
+        <button type="button" class="btn btn--primary" id="btn-save-user" data-i18n="admin.modal.create_account_btn">Create Account</button>
       </div>
     </div>
   </div>
@@ -813,7 +804,7 @@
   <div class="modal-overlay" id="modal-field">
     <div class="modal modal--narrow">
       <div class="modal__header">
-        <h3 class="modal__title">Add Custom Field</h3>
+        <h3 class="modal__title" data-i18n="admin.modal.add_field">Add Custom Field</h3>
         <button class="modal__close" data-close="modal-field" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
       <div class="modal__body">
@@ -838,8 +829,8 @@
         </form>
       </div>
       <div class="modal__footer">
-        <button class="btn btn--ghost" data-close="modal-field">Cancel</button>
-        <button class="btn btn--primary" id="btn-save-field">Add Field</button>
+        <button class="btn btn--ghost" data-close="modal-field" data-i18n="common.cancel">Cancel</button>
+        <button class="btn btn--primary" id="btn-save-field" data-i18n="admin.modal.add_field_btn">Add Field</button>
       </div>
     </div>
   </div>
@@ -848,11 +839,11 @@
   <div class="modal-overlay" id="modal-confirm">
     <div class="modal modal--narrow">
       <div class="confirm-dialog__icon" id="confirm-icon"><i data-lucide="alert-triangle"></i></div>
-      <h3 class="modal__title" style="text-align: center; margin-bottom: var(--space-md);" id="confirm-title">Are you sure?</h3>
-      <p class="confirm-dialog__text" id="confirm-text">This action cannot be undone.</p>
+      <h3 class="modal__title" style="text-align: center; margin-bottom: var(--space-md);" id="confirm-title" data-i18n="common.are_you_sure">Are you sure?</h3>
+      <p class="confirm-dialog__text" id="confirm-text" data-i18n="common.cannot_be_undone">This action cannot be undone.</p>
       <div class="confirm-dialog__actions">
-        <button class="btn btn--ghost" data-close="modal-confirm">Cancel</button>
-        <button class="btn btn--danger" id="confirm-action-btn">Confirm</button>
+        <button class="btn btn--ghost" data-close="modal-confirm" data-i18n="common.cancel">Cancel</button>
+        <button class="btn btn--danger" id="confirm-action-btn" data-i18n="common.confirm">Confirm</button>
       </div>
     </div>
   </div>
